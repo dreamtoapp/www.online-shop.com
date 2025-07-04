@@ -1,0 +1,84 @@
+// DEPRECATED: This file is no longer used. Use UserInfoCard directly in /checkout/page.tsx.
+
+"use client";
+
+import { useState, useTransition, useEffect } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
+import {
+    ChevronLeft,
+    ChevronRight,
+    CreditCard,
+    CheckCircle,
+    User,
+    Phone,
+    FileText,
+    LogIn
+} from "lucide-react";
+
+import { createDraftOrder } from "../actions/orderActions";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
+import BackButton from "@/components/BackButton";
+import { ShiftSelector } from "./ShiftSelector";
+import TermsDialog from "./TermsDialog";
+import UserInfoCard from "./UserInfoCard";
+
+// Enhanced validation schema matching backend
+const checkoutSchema = z.object({
+    fullName: z.string()
+        .min(2, "الاسم يجب أن يكون حرفين على الأقل")
+        .max(50, "الاسم طويل جداً"),
+    phone: z.string()
+        .min(10, "رقم الهاتف يجب أن يكون 10 أرقام على الأقل")
+        .regex(/^[+]?[0-9\s\-\(\)]+$/, "رقم الهاتف غير صحيح"),
+    city: z.string().min(2, "اسم المدينة مطلوب"),
+    street: z.string().min(5, "عنوان الشارع يجب أن يكون 5 أحرف على الأقل"),
+    district: z.string().min(2, "اسم الحي مطلوب"),
+    postalCode: z.string()
+        .min(5, "الرمز البريدي مطلوب")
+        .regex(/^[0-9]+$/, "الرمز البريدي يجب أن يحتوي على أرقام فقط"),
+    buildingNumber: z.string().min(1, "رقم المبنى مطلوب"),
+    floor: z.string().optional(),
+    apartmentNumber: z.string().optional(),
+    landmark: z.string().optional(),
+    deliveryInstructions: z.string().optional(),
+    shiftId: z.string().min(1, "يرجى اختيار وقت التوصيل"),
+    paymentMethod: z.enum(["CASH", "CARD", "WALLET"]),
+    termsAccepted: z.boolean().refine(val => val === true, {
+        message: "يجب الموافقة على الشروط والأحكام"
+    })
+});
+
+type CheckoutFormValues = z.infer<typeof checkoutSchema>;
+
+const STEPS = [
+    { id: 1, title: "معلومات التوصيل", icon: User },
+    { id: 2, title: "طريقة الدفع والتوصيل", icon: CreditCard },
+    { id: 3, title: "مراجعة الطلب", icon: CheckCircle }
+];
+
+interface UserData {
+    id: string;
+    name: string | null;
+    phone: string | null;
+    address: string | null;
+    email: string | null;
+}
+
+export default function CheckoutForm() {
+    return <UserInfoCard />;
+} 
