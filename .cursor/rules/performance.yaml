@@ -1,0 +1,25 @@
+description: Enforce performance best practices for React/Next.js codebase
+
+globs:
+  - app/**/*.tsx
+  - app/**/*.ts
+  - app/**/*.jsx
+  - app/**/*.js
+alwaysApply: true
+
+rules:
+  - mustNotInclude: ".map((item) => { return <Component /> })"
+    severity: warning
+    message: "⚠️ Use a key prop when rendering lists."
+
+  - mustNotInclude: "inline-style"
+    severity: warning
+    message: "⚠️ Avoid excessive inline styles for better performance."
+
+  - mustNotInclude: "JSON.parse(localStorage.getItem("
+    severity: warning
+    message: "⚠️ Avoid synchronous localStorage access in render. Use useEffect."
+
+  - mustMatch: "React.memo"
+    severity: warning
+    message: "⚠️ Use React.memo for performance optimization of pure components." 
