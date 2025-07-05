@@ -1,6 +1,6 @@
 // app/dashboard/contact/actions.ts
 'use server';
-import db from '../../../../lib/prisma';
+import db from '../../../../../lib/prisma';
 
 export async function fetchContactSubmissions() {
   try {

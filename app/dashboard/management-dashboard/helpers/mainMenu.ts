@@ -151,7 +151,7 @@ export const menuGroups = [
     label: 'العملاء',
     items: [
       { title: 'العملاء', url: '/dashboard/management-users/customer', icon: Users },
-      { title: 'الدعم', url: '/dashboard/clientsubmission', icon: Headset },
+      { title: 'الدعم', url: '/dashboard/management/client-submission', icon: Headset },
     ],
   },
   {
@@ -167,7 +167,7 @@ export const menuGroups = [
     label: 'التسويق',
     items: [
       { title: 'العروض', url: '/dashboard/management-offer', icon: Tag },
-      { title: 'البريد الإلكتروني', url: '/dashboard/clientnews', icon: Mailbox },
+      { title: 'البريد الإلكتروني', url: '/dashboard/management/client-news', icon: Mailbox },
     ],
   },
   {
