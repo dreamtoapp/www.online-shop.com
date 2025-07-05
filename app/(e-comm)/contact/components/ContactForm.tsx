@@ -4,7 +4,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
+import { submitContactForm } from '../actions/contact';
+import SuccessMessage from './SuccessMessage';
 
 const schema = z.object({
     name: z.string().min(1, 'الاسم مطلوب'),
@@ -27,20 +29,34 @@ const ContactForm: React.FC = () => {
     const [submitted, setSubmitted] = React.useState(false);
     const [serverMessage, setServerMessage] = React.useState('');
 
-    const onSubmit = async () => {
-        // TODO: Replace with actual submit logic (e.g., call an API or action)
-        // Simulate async submit
+    const onSubmit = async (data: ContactFormValues) => {
         try {
-            // Example: await submitContactForm(data);
-            setServerMessage('تم إرسال رسالتك بنجاح!');
-            setSubmitted(true);
-            reset();
-            toast.success('تم إرسال رسالتك بنجاح!');
+            const formData = new FormData();
+            formData.append('name', data.name);
+            formData.append('email', data.email);
+            formData.append('subject', data.subject);
+            formData.append('message', data.message);
+            const result = await submitContactForm({ success: false, message: '' }, formData);
+            if (result.success) {
+                setServerMessage(result.message || 'تم إرسال رسالتك بنجاح!');
+                setSubmitted(true);
+                reset();
+                toast.success(result.message || 'تم إرسال رسالتك بنجاح!');
+            } else {
+                setServerMessage(result.message || 'حدث خطأ أثناء إرسال الرسالة.');
+                toast.error(result.message || 'حدث خطأ أثناء إرسال الرسالة.');
+            }
         } catch (error: any) {
             setServerMessage('حدث خطأ أثناء إرسال الرسالة.');
             toast.error('حدث خطأ أثناء إرسال الرسالة.');
         }
     };
+
+    React.useEffect(() => {
+        if (submitted) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [submitted]);
 
     return (
         <div className='mx-auto max-w-2xl rounded-lg border bg-background p-6 shadow-xl dark:border-gray-800'>
@@ -49,20 +65,7 @@ const ContactForm: React.FC = () => {
                 نحن هنا لمساعدتك. يرجى ملء النموذج أدناه للتواصل معنا، وسنرد عليك في أقرب وقت ممكن.
             </p>
             {submitted ? (
-                <div className='flex flex-col items-center justify-center gap-2 py-8' role='alert'>
-                    <CheckCircle2 className='h-12 w-12 text-green-500 mb-2 animate-bounce' />
-                    <h2 className='text-2xl font-bold text-green-600'>شكراً لتواصلك معنا!</h2>
-                    <p className='mt-2 text-foreground'>{serverMessage}</p>
-                    <button
-                        onClick={() => {
-                            setSubmitted(false);
-                            setServerMessage('');
-                        }}
-                        className='mt-6 rounded-md border border-primary bg-background px-6 py-2 text-primary font-semibold shadow-sm transition hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
-                    >
-                        إرسال رسالة أخرى
-                    </button>
-                </div>
+                <SuccessMessage message={serverMessage} />
             ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className='space-y-6 animate-fade-in' noValidate>
                     <div className='grid gap-4'>
