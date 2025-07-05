@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Eye, Edit3, BarChart2, Package, DollarSign, Info, CheckCircle, XCircle, Images } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -160,53 +160,51 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* Action Buttons Footer */}
       <CardFooter className="mt-auto p-3 border-t border-border/30 bg-gradient-to-r from-card/80 to-card/60 rounded-b-xl">
-        <TooltipProvider>
-          <div className="flex items-center justify-between w-full gap-2">
-            {/* View Actions */}
-            <div className="flex items-center gap-1">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={`/dashboard/management-products/view/${product.id}`}
-                    className="btn-view-outline p-2 h-8 rounded-md border border-feature-analytics/20 text-feature-analytics hover:bg-feature-analytics/10 hover:border-feature-analytics/40 transition-all duration-200"
-                  >
-                    <Eye className="h-4 w-4 icon-enhanced" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent>عرض التفاصيل</TooltipContent>
-              </Tooltip>
+        <div className="flex items-center justify-between w-full gap-2">
+          {/* View Actions */}
+          <div className="flex items-center gap-1">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href={`/dashboard/management-products/view/${product.id}`}
+                  className="btn-view-outline p-2 h-8 rounded-md border border-feature-analytics/20 text-feature-analytics hover:bg-feature-analytics/10 hover:border-feature-analytics/40 transition-all duration-200"
+                >
+                  <Eye className="h-4 w-4 icon-enhanced" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>عرض التفاصيل</TooltipContent>
+            </Tooltip>
 
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={`/dashboard/management-products/analytics/${product.id}`}
-                    className="p-2 h-8 rounded-md border border-feature-analytics/20 text-feature-analytics hover:bg-feature-analytics/10 hover:border-feature-analytics/40 transition-all duration-200"
-                  >
-                    <BarChart2 className="h-4 w-4 icon-enhanced" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent>تحليلات المنتج</TooltipContent>
-              </Tooltip>
-            </div>
-
-            {/* Edit Actions */}
-            <div className="flex items-center gap-1">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={`/dashboard/management-products/edit/${product.id}`}
-                    className="btn-edit p-2 h-8 rounded-md border border-feature-settings/20 text-feature-settings hover:bg-feature-settings/10 hover:border-feature-settings/40 transition-all duration-200"
-                  >
-                    <Edit3 className="h-4 w-4 icon-enhanced" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent>تعديل المنتج</TooltipContent>
-              </Tooltip>
-
-              <ProductDeleteButton productId={product.id} />
-            </div>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href={`/dashboard/management-products/analytics/${product.id}`}
+                  className="p-2 h-8 rounded-md border border-feature-analytics/20 text-feature-analytics hover:bg-feature-analytics/10 hover:border-feature-analytics/40 transition-all duration-200"
+                >
+                  <BarChart2 className="h-4 w-4 icon-enhanced" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>تحليلات المنتج</TooltipContent>
+            </Tooltip>
           </div>
-        </TooltipProvider>
+
+          {/* Edit Actions */}
+          <div className="flex items-center gap-1">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href={`/dashboard/management-products/edit/${product.id}`}
+                  className="btn-edit p-2 h-8 rounded-md border border-feature-settings/20 text-feature-settings hover:bg-feature-settings/10 hover:border-feature-settings/40 transition-all duration-200"
+                >
+                  <Edit3 className="h-4 w-4 icon-enhanced" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>تعديل المنتج</TooltipContent>
+            </Tooltip>
+
+            <ProductDeleteButton productId={product.id} />
+          </div>
+        </div>
       </CardFooter>
     </Card>
   );

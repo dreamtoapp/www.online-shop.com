@@ -9,6 +9,7 @@ import { Directions } from '../constant/enums';
 import NextAuthSessionProvider from '../provider/session-provider';
 import { ThemeProvider } from '../provider/theme-provider';
 import WebVitalsCollector from '@/components/seo/WebVitalsCollector';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 export const metadata: Metadata = {
   title: 'Dream To App',
@@ -39,9 +40,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             enableSystem
             disableTransitionOnChange
           >
-            <NextTopLoader />
-            <main className='min-h-screen'>{children}</main>
-            <Toaster position='top-center' />
+            <TooltipProvider>
+              <NextTopLoader />
+              <main className='min-h-screen'>{children}</main>
+              <Toaster position='top-center' />
+            </TooltipProvider>
           </ThemeProvider>
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || ''} />
         </NextAuthSessionProvider>

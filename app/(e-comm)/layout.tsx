@@ -3,67 +3,33 @@ import Header from '../../components/ecomm/Header/DesktopHeader';
 import MobileBottomNav from '../../components/ecomm/Header/MobileBottomNav';
 import MobileHeader from '../../components/ecomm/Header/MobileHeader';
 // app/(ecommerce)/layout.tsx
-import { TooltipProvider } from '../../components/ui/tooltip';
-import getSession from '../../lib/getSession';
 import { CartProvider } from '../../providers/cart-provider';
 import { WishlistProvider } from '@/providers/wishlist-provider';
-import db from '@/lib/prisma';
-import { companyInfo } from './homepage/actions/companyDetail';
-import { userProfile } from './user/profile/action/action';
-import { getUnreadNotificationCount } from './user/notifications/actions/getUserNotifications';
+import { fetchEcommLayoutData } from './helpers/layoutData';
 
+// Server component: fetch all layout data via helper
 export default async function EcommerceLayout({ children }: { children: React.ReactNode }) {
-  const companyData = await companyInfo();
-  const session = await getSession();
-  const user = session?.user;
+  try {
+    // Use helper to fetch and prepare all layout data
+    const {
+      companyData,
+      session,
+      user,
+      userSummary,
+      notificationCount,
+      wishlistIds,
+      alerts,
+      fullUser,
+    } = await fetchEcommLayoutData();
 
-  let fullUser = null;
-  let notificationCount = 0;
-  let wishlistIds: string[] = [];
-  let hasAddresses = false;
-
-  if (user?.id) {
-    fullUser = await userProfile(user.id);
-    notificationCount = await getUnreadNotificationCount(user.id);
-    const items = await db.wishlistItem.findMany({ where: { userId: user.id }, select: { productId: true } });
-    wishlistIds = items.map((i) => i.productId);
-
-    // Check if user has addresses in AddressBook
-    const addressCount = await db.address.count({ where: { userId: user.id } });
-    hasAddresses = addressCount > 0;
-  }
-
-  const alerts = [];
-  if (fullUser) {
-    if (!hasAddresses) {
-      alerts.push({
-        id: 'address-alert',
-        type: 'warning' as const,
-        title: 'أضف عنوانك الأول',
-        description: 'الرجاء إضافة عنوان لتسهيل عملية التوصيل.',
-        href: '/user/addresses',
-      });
-    }
-    if (!fullUser.emailVerified) {
-      alerts.push({
-        id: 'activation-alert',
-        type: 'destructive' as const,
-        title: 'تفعيل الحساب',
-        description: 'الرجاء تفعيل حسابك للاستفادة من جميع الميزات.',
-        href: '/auth/verify',
-      });
-    }
-  }
-
-  return (
-    <TooltipProvider>
+    return (
       <WishlistProvider initialIds={wishlistIds}>
         <CartProvider>
           <div className="flex flex-col min-h-screen">
             {/* Desktop Header */}
             <div className="hidden md:block">
               <Header
-                user={fullUser}
+                user={userSummary}
                 userId={user?.id}
                 unreadCount={notificationCount}
                 defaultAlerts={alerts}
@@ -75,14 +41,7 @@ export default async function EcommerceLayout({ children }: { children: React.Re
             {/* Mobile Header */}
             <div className="md:hidden">
               <MobileHeader
-                user={fullUser ? {
-                  id: fullUser.id,
-                  name: fullUser.name,
-                  email: fullUser.email,
-                  image: fullUser.image,
-                  role: fullUser.role as any,
-                  emailVerified: fullUser.emailVerified,
-                } : null}
+                user={userSummary}
                 logo={companyData?.logo || ''}
                 logoAlt={companyData?.fullName || 'Dream to app'}
                 isLoggedIn={!!session}
@@ -118,6 +77,9 @@ export default async function EcommerceLayout({ children }: { children: React.Re
           </div>
         </CartProvider>
       </WishlistProvider>
-    </TooltipProvider>
-  );
+    );
+  } catch (e) {
+    // Show fallback UI on error
+    return <div>حدث خطأ أثناء تحميل الصفحة. الرجاء المحاولة لاحقًا.</div>;
+  }
 }

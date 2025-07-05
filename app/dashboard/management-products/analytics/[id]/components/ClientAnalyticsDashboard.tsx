@@ -7,7 +7,7 @@ import {
 
 import { useRouter } from 'next/navigation';
 
-import { fetchCompany } from '@/app/dashboard/settings/actions/fetchCompany';
+import { fetchCompany } from '@/app/dashboard/management/settings/actions/fetchCompany';
 import { Button } from '@/components/ui/button';
 import ExportAnalyticsPdfButton from '@/components/ui/ExportAnalyticsPdfButton';
 import {

@@ -185,7 +185,7 @@ export const menuGroups = [
   {
     label: 'الإعدادات',
     items: [
-      { title: 'الإعدادات', url: '/dashboard/settings', icon: Settings },
+      { title: 'الإعدادات', url: '/dashboard/management/settings', icon: Settings },
       { title: 'التنبيهات', url: '/dashboard/management-notification', icon: Bell },
       { title: 'الصيانة', url: '/dashboard/management-maintinance', icon: LifeBuoy },
       { title: 'الدليل', url: '/dashboard/guidelines', icon: BookOpen },

@@ -50,61 +50,51 @@ export default function ProductListWithScroll({
     // Memoized product IDs for efficient duplicate checking
     const productIds = useMemo(() => new Set(products.map(p => p.id)), [products]);
 
-    // Optimized fetch function with better error handling
-    const fetchMoreProducts = useCallback(async (isRetry = false) => {
-        const now = Date.now();
+    // --- Load More pattern state ---
+    const [autoLoadCount, setAutoLoadCount] = useState(0); // Track auto-loads
+    const AUTO_LOAD_LIMIT = 3; // Max auto-loads before showing button
 
+    // Optimized fetch function with better error handling
+    const fetchMoreProducts = useCallback(async (isManual = false) => {
+        const now = Date.now();
         // Enhanced debounce logic
-        if (!isRetry && now - lastFetchTimeRef.current < FETCH_DEBOUNCE_MS) {
+        if (!isManual && now - lastFetchTimeRef.current < FETCH_DEBOUNCE_MS) {
             return;
         }
-
         if (loading) return;
-
         // Cancel previous request if still pending
         if (abortControllerRef.current) {
             abortControllerRef.current.abort();
         }
-
         abortControllerRef.current = new AbortController();
         lastFetchTimeRef.current = now;
-
         setLoading(true);
         setError(null);
-
         try {
             const result = await fetchProductsPage(categorySlug, page, pageSize);
-
             if (result.products && result.products.length > 0) {
                 setProducts((prev) => {
-                    // More efficient duplicate filtering using Set lookup
                     const uniqueNewProducts = result.products.filter((p) => !productIds.has(p.id));
-
                     if (uniqueNewProducts.length === 0) {
                         setHasMore(false);
                         return prev;
                     }
-
                     return [...prev, ...uniqueNewProducts];
                 });
                 setPage((prev) => prev + 1);
                 setRetryCount(0); // Reset retry count on success
+                // Only increment autoLoadCount if not manual (button)
+                if (!isManual) setAutoLoadCount((c) => c + 1);
             } else {
                 setHasMore(false);
             }
-
             setHasMore(result.hasMore);
         } catch (err: any) {
             console.error('Failed to fetch products:', err);
-
-            // Don't show error for aborted requests
             if (err.name === 'AbortError') return;
-
             setError('فشل في تحميل المنتجات. يرجى المحاولة مرة أخرى.');
-
-            // Optimized auto-retry with shorter delays
             if (retryCount < MAX_RETRY_ATTEMPTS) {
-                const retryDelay = Math.pow(1.5, retryCount) * 1000; // 1s, 1.5s, 2.25s
+                const retryDelay = Math.pow(1.5, retryCount) * 1000;
                 setTimeout(() => {
                     setRetryCount(prev => prev + 1);
                     fetchMoreProducts(true);
@@ -125,18 +115,17 @@ export default function ProductListWithScroll({
         fetchMoreProducts(true);
     }, [fetchMoreProducts]);
 
-    // Optimized effect with better conditions
+    // --- Only auto-load if under limit ---
     useEffect(() => {
-        // Skip initial load to prevent immediate fetching
         if (isInitialLoadRef.current) {
             isInitialLoadRef.current = false;
             return;
         }
-
-        if (inView && hasMore && !loading && !error) {
+        // After 3 auto-loads, stop auto infinite scroll and show Load More button
+        if (inView && hasMore && !loading && !error && autoLoadCount < AUTO_LOAD_LIMIT) {
             fetchMoreProducts();
         }
-    }, [inView, hasMore, loading, error, fetchMoreProducts]);
+    }, [inView, hasMore, loading, error, fetchMoreProducts, autoLoadCount]);
 
     // Fetch cart from server and listen for cart-changed events
     useEffect(() => {
@@ -159,104 +148,121 @@ export default function ProductListWithScroll({
     }, []);
 
     return (
-        <div className="container mx-auto">
-            {/* Products Grid with Performance Optimizations */}
-            <div
-                className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-                role="grid"
-                aria-label="قائمة المنتجات"
-            >
-                {products.map((product, index) => (
-                    <div
-                        key={`${product.id}_${index}`}
-                        className="product-card"
-                        role="gridcell"
-                        style={{
-                            contentVisibility: 'auto',
-                            containIntrinsicSize: '0 520px',
-                        }}
-                    >
-                        <ProductCardAdapter
-                            product={product}
-                            className="h-full w-full"
-                            index={index}
-                            quantity={cart?.items?.find(item => item.productId === product.id)?.quantity ?? 0}
-                        />
-                    </div>
-                ))}
+        <>
+            {/*
+            <div style={{position: 'fixed', top: 10, left: '50%', transform: 'translateX(-50%)', background: '#ff0', color: '#000', padding: '6px 18px', borderRadius: 8, fontWeight: 'bold', fontSize: 18, border: '2px solid #333', zIndex: 9999, boxShadow: '0 2px 8px rgba(0,0,0,0.15)'}}>
+                autoLoadCount: {autoLoadCount}
             </div>
+            */}
+            <div className="container mx-auto">
+                {/* Products Grid with Performance Optimizations */}
+                <div
+                    className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                    role="grid"
+                    aria-label="قائمة المنتجات"
+                >
+                    {products.map((product, index) => (
+                        <div
+                            key={`${product.id}_${index}`}
+                            className="product-card"
+                            role="gridcell"
+                            style={{
+                                contentVisibility: 'auto',
+                                containIntrinsicSize: '0 520px',
+                            }}
+                        >
+                            <ProductCardAdapter
+                                product={product}
+                                className="h-full w-full"
+                                index={index}
+                                quantity={cart?.items?.find(item => item.productId === product.id)?.quantity ?? 0}
+                            />
+                        </div>
+                    ))}
+                </div>
 
-            {/* Loading/Error/End States */}
-            <div
-                ref={ref}
-                className="mt-8 flex w-full flex-col items-center py-6"
-                role="status"
-                aria-live="polite"
-            >
-                {loading && (
-                    <div className="w-full">
-                        <div className="mb-4 text-center">
-                            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-6 py-3 text-blue-600 shadow-sm">
-                                <RefreshCw className="h-4 w-4 animate-spin" />
-                                جاري تحميل المزيد من المنتجات...
+                {/* Loading/Error/End States */}
+                <div
+                    ref={ref}
+                    className="mt-8 flex w-full flex-col items-center py-6"
+                    role="status"
+                    aria-live="polite"
+                >
+                    {loading && (
+                        <div className="w-full">
+                            <div className="mb-4 text-center">
+                                <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-6 py-3 text-blue-600 shadow-sm">
+                                    <RefreshCw className="h-4 w-4 animate-spin" />
+                                    جاري تحميل المزيد من المنتجات...
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                {Array.from({ length: pageSize }).map((_, i) => (
+                                    <ProductCardSkeleton key={`skeleton_${i}`} />
+                                ))}
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                            {Array.from({ length: pageSize }).map((_, i) => (
-                                <ProductCardSkeleton key={`skeleton_${i}`} />
-                            ))}
-                        </div>
-                    </div>
-                )}
+                    )}
 
-                {error && (
-                    <div className="flex flex-col items-center gap-4 rounded-xl bg-red-50 p-6 text-center shadow-sm">
-                        <div className="flex items-center gap-2 text-red-600">
-                            <AlertCircle className="h-5 w-5" />
-                            <span className="font-medium">{error}</span>
+                    {error && (
+                        <div className="flex flex-col items-center gap-4 rounded-xl bg-red-50 p-6 text-center shadow-sm">
+                            <div className="flex items-center gap-2 text-red-600">
+                                <AlertCircle className="h-5 w-5" />
+                                <span className="font-medium">{error}</span>
+                            </div>
+                            {retryCount < MAX_RETRY_ATTEMPTS ? (
+                                <p className="text-sm text-red-500">
+                                    محاولة {retryCount + 1} من {MAX_RETRY_ATTEMPTS}...
+                                </p>
+                            ) : (
+                                <Button
+                                    onClick={handleRetry}
+                                    variant="outline"
+                                    size="sm"
+                                    className="border-red-200 text-red-600 hover:bg-red-50"
+                                >
+                                    <RefreshCw className="mr-2 h-4 w-4" />
+                                    إعادة المحاولة
+                                </Button>
+                            )}
                         </div>
-                        {retryCount < MAX_RETRY_ATTEMPTS ? (
-                            <p className="text-sm text-red-500">
-                                محاولة {retryCount + 1} من {MAX_RETRY_ATTEMPTS}...
-                            </p>
-                        ) : (
-                            <Button
-                                onClick={handleRetry}
-                                variant="outline"
-                                size="sm"
-                                className="border-red-200 text-red-600 hover:bg-red-50"
-                            >
-                                <RefreshCw className="mr-2 h-4 w-4" />
-                                إعادة المحاولة
-                            </Button>
-                        )}
-                    </div>
-                )}
+                    )}
 
-                {!loading && hasMore && !error && (
-                    <div className="rounded-full bg-blue-50 px-6 py-3 text-center text-blue-600 shadow-sm transition-colors hover:bg-blue-100">
-                        قم بالتمرير لتحميل المزيد من المنتجات...
-                    </div>
-                )}
+                    {/* Show Load More button after auto-load limit */}
+                    {autoLoadCount >= AUTO_LOAD_LIMIT && hasMore && !loading && !error && (
+                        <Button
+                            onClick={() => fetchMoreProducts(true)}
+                            className="mt-4 bg-blue-600 text-white hover:bg-blue-700"
+                        >
+                            تحميل المزيد من المنتجات
+                        </Button>
+                    )}
 
-                {!hasMore && products.length > 0 && !error && (
-                    <div className="rounded-full bg-gray-50 px-6 py-3 text-center text-gray-600">
-                        تم عرض جميع المنتجات ({products.length} منتج)
-                    </div>
-                )}
-
-                {!hasMore && products.length === 0 && !loading && !error && (
-                    <div className="flex flex-col items-center gap-4 rounded-xl bg-gray-50 p-8 text-center">
-                        <div className="rounded-full bg-gray-100 p-4">
-                            <AlertCircle className="h-8 w-8 text-gray-400" />
+                    {!loading && hasMore && !error && autoLoadCount < AUTO_LOAD_LIMIT && (
+                        <div className="rounded-full bg-blue-50 px-6 py-3 text-center text-blue-600 shadow-sm transition-colors hover:bg-blue-100">
+                            قم بالتمرير لتحميل المزيد من المنتجات...
                         </div>
-                        <div>
-                            <h3 className="text-lg font-medium text-gray-900">لا توجد منتجات</h3>
-                            <p className="text-gray-500">لم يتم العثور على منتجات في هذه الفئة.</p>
+                    )}
+
+                    {!hasMore && products.length > 0 && !error && (
+                        <div className="rounded-full bg-gray-50 px-6 py-3 text-center text-gray-600">
+                            تم عرض جميع المنتجات ({products.length} منتج)
                         </div>
-                    </div>
-                )}
+                    )}
+
+                    {!hasMore && products.length === 0 && !loading && !error && (
+                        <div className="flex flex-col items-center gap-4 rounded-xl bg-gray-50 p-8 text-center">
+                            <div className="rounded-full bg-gray-100 p-4">
+                                <AlertCircle className="h-8 w-8 text-gray-400" />
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-medium text-gray-900">لا توجد منتجات</h3>
+                                <p className="text-gray-500">لم يتم العثور على منتجات في هذه الفئة.</p>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 } 

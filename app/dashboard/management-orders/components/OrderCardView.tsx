@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import { fetchOrdersAction } from '../../management-dashboard/action/fetchOrders';
 import OrderCard from './OrderCard';
@@ -256,22 +256,20 @@ export default function OrderCardView({ initialOrders = [], status }: OrderCardV
                             />
                         </div>
 
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Button
-                                        variant="outline"
-                                        size="icon"
-                                        onClick={handleRefresh}
-                                        disabled={isLoading}
-                                        className="btn-professional hover:bg-feature-analytics-soft"
-                                    >
-                                        <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>تحديث البيانات</TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    variant="outline"
+                                    size="icon"
+                                    onClick={handleRefresh}
+                                    disabled={isLoading}
+                                    className="btn-professional hover:bg-feature-analytics-soft"
+                                >
+                                    <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>تحديث البيانات</TooltipContent>
+                        </Tooltip>
                     </div>
 
                     {/* Search Results Info */}

@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { Info } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Chart = dynamic(() => import("@/components/seo/WebVitalsChart"), { ssr: false });
@@ -61,18 +61,16 @@ export default function PerformanceClient({ vitals }: { vitals: any[] }) {
               ))}
             </SelectContent>
           </Select>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className="ml-2 cursor-pointer text-muted-foreground">
-                  <Info size={16} />
-                </span>
-              </TooltipTrigger>
-              <TooltipContent>
-                <span>Select a page to filter metrics. &quot;All Pages&quot; shows aggregate data.</span>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="ml-2 cursor-pointer text-muted-foreground">
+                <Info size={16} />
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>
+              <span>Select a page to filter metrics. &quot;All Pages&quot; shows aggregate data.</span>
+            </TooltipContent>
+          </Tooltip>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

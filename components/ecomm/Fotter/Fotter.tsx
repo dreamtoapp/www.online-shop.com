@@ -1,6 +1,5 @@
-'use client';
+// 'use client'; // REMOVE THIS LINE to make the component a server component
 
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import {
   Building2,
@@ -27,12 +26,7 @@ import {
 
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-
-// Dynamic import for Newsletter (client-only, interactive)  
-const Newsletter = dynamic(() => import('@/components/ecomm/Fotter/Newsletter'), {
-  ssr: false,
-  loading: () => <div className="h-20 bg-muted/50 animate-pulse rounded"></div>,
-});
+import NewsletterClientWrapper from './NewsletterClientWrapper';
 
 interface FooterProps {
   aboutus?: string;
@@ -315,7 +309,7 @@ const Footer = ({
               twitter={twitter}
               linkedin={linkedin}
             />
-            <Newsletter />
+            <NewsletterClientWrapper />
           </div>
         </div>
       </div>

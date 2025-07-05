@@ -3,14 +3,10 @@
 import { useState } from 'react';
 import {
     Brain,
-    MapPin,
-    Clock,
-    TrendingUp,
     AlertTriangle,
     CheckCircle,
     Info,
     Target,
-    Lightbulb,
     ChevronDown,
     ChevronUp,
     Loader2
@@ -21,7 +17,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import { DriverDetails } from '../actions/get-drivers';
 
@@ -301,138 +297,58 @@ export default function SmartSuggestions({
                                                     </div>
                                                 </div>
 
-                                                <TooltipProvider>
-                                                    <Tooltip>
-                                                        <TooltipTrigger asChild>
-                                                            <div className={`text-lg px-4 py-2 font-bold rounded-xl border-2 transition-all ${getScoreColor(driver.smartScore)} hover:scale-105`}>
-                                                                <div className="flex items-center gap-2">
-                                                                    <Target className="h-4 w-4" />
-                                                                    {driver.smartScore}%
-                                                                </div>
+                                                <Tooltip>
+                                                    <TooltipTrigger asChild>
+                                                        <div className={`text-lg px-4 py-2 font-bold rounded-xl border-2 transition-all ${getScoreColor(driver.smartScore)} hover:scale-105`}>
+                                                            <div className="flex items-center gap-2">
+                                                                <Target className="h-4 w-4" />
+                                                                {driver.smartScore}%
                                                             </div>
-                                                        </TooltipTrigger>
-                                                        <TooltipContent>
-                                                            <p>النتيجة الذكية: {driver.smartScore}/100</p>
-                                                        </TooltipContent>
-                                                    </Tooltip>
-                                                </TooltipProvider>
+                                                        </div>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        <p>النتيجة الذكية: {driver.smartScore}/100</p>
+                                                    </TooltipContent>
+                                                </Tooltip>
                                             </div>
 
-                                            {/* Enhanced Quick Metrics */}
-                                            <div className="grid grid-cols-3 gap-3">
-                                                <div className="bg-background/70 rounded-lg p-3 text-center border border-feature-analytics/20">
-                                                    <div className="flex items-center justify-center gap-1 mb-1">
-                                                        <MapPin className="h-4 w-4 text-feature-analytics" />
-                                                        <span className="text-xs text-muted-foreground">للمتجر</span>
-                                                    </div>
-                                                    <p className="font-bold text-feature-analytics text-lg">
-                                                        {driver.distanceFromStore ? `${driver.distanceFromStore.toFixed(1)}` : '؟'}
-                                                    </p>
-                                                    <span className="text-xs text-muted-foreground">كم</span>
-                                                </div>
-
-                                                <div className="bg-background/70 rounded-lg p-3 text-center border border-feature-commerce/20">
-                                                    <div className="flex items-center justify-center gap-1 mb-1">
-                                                        <Clock className="h-4 w-4 text-feature-commerce" />
-                                                        <span className="text-xs text-muted-foreground">الوصول</span>
-                                                    </div>
-                                                    <p className="font-bold text-feature-commerce text-lg">
-                                                        {driver.estimatedArrival}
-                                                    </p>
-                                                    <span className="text-xs text-muted-foreground">دقيقة</span>
-                                                </div>
-
-                                                <div className="bg-background/70 rounded-lg p-3 text-center border border-feature-products/20">
-                                                    <div className="flex items-center justify-center gap-1 mb-1">
-                                                        <TrendingUp className="h-4 w-4 text-feature-products" />
-                                                        <span className="text-xs text-muted-foreground">الأداء</span>
-                                                    </div>
-                                                    <p className="font-bold text-feature-products text-lg">
-                                                        {driver.completionRate}%
-                                                    </p>
-                                                    <span className="text-xs text-muted-foreground">إنجاز</span>
-                                                </div>
+                                            {/* Recommendation Reason */}
+                                            <div className="mt-2 text-sm text-muted-foreground">
+                                                {getRecommendationText(driver)}
                                             </div>
 
-                                            {/* Enhanced Recommendation Reason */}
-                                            <div className="bg-gradient-to-r from-muted/30 to-muted/10 rounded-lg p-4 border border-border">
-                                                <div className="flex items-start gap-3">
-                                                    <div className="p-1.5 rounded-lg bg-status-pending/10">
-                                                        <Lightbulb className="h-4 w-4 text-status-pending" />
-                                                    </div>
-                                                    <div className="flex-1">
-                                                        <p className="text-sm font-semibold text-foreground mb-1">مميزات هذا السائق:</p>
-                                                        <p className="text-sm text-muted-foreground leading-relaxed">{getRecommendationText(driver)}</p>
-                                                    </div>
-                                                </div>
+                                            {/* Assign Button */}
+                                            <div className="mt-4">
+                                                <Button
+                                                    onClick={() => onAssignDriver(driver.id)}
+                                                    disabled={isAssigning || driver.status !== 'available'}
+                                                    className={`w-full h-12 text-base font-semibold transition-all duration-200 ${index === 0
+                                                        ? 'bg-gradient-to-r from-status-delivered to-status-delivered/80 hover:from-status-delivered/90 hover:to-status-delivered/70 shadow-lg hover:shadow-xl'
+                                                        : 'btn-professional hover:scale-[1.02]'
+                                                        }`}
+                                                    size="lg"
+                                                >
+                                                    {isAssigning ? (
+                                                        <>
+                                                            <Loader2 className="h-5 w-5 ml-2 animate-spin" />
+                                                            جاري التعيين...
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <CheckCircle className="h-5 w-5 ml-2" />
+                                                            {index === 0 ? 'تعيين السائق الأفضل' : 'تعيين هذا السائق'}
+                                                        </>
+                                                    )}
+                                                </Button>
                                             </div>
-
-                                            {/* Enhanced Action Button */}
-                                            <Button
-                                                onClick={() => onAssignDriver(driver.id)}
-                                                disabled={isAssigning || driver.status !== 'available'}
-                                                className={`w-full h-12 text-base font-semibold transition-all duration-200 ${index === 0
-                                                    ? 'bg-gradient-to-r from-status-delivered to-status-delivered/80 hover:from-status-delivered/90 hover:to-status-delivered/70 shadow-lg hover:shadow-xl'
-                                                    : 'btn-professional hover:scale-[1.02]'
-                                                    }`}
-                                                size="lg"
-                                            >
-                                                {isAssigning ? (
-                                                    <>
-                                                        <Loader2 className="h-5 w-5 ml-2 animate-spin" />
-                                                        جاري التعيين...
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <CheckCircle className="h-5 w-5 ml-2" />
-                                                        {index === 0 ? 'تعيين السائق الأفضل' : 'تعيين هذا السائق'}
-                                                    </>
-                                                )}
-                                            </Button>
                                         </div>
                                     </div>
                                 ))}
                             </div>
-
-                            {/* Enhanced Tips Section */}
-                            <div className="bg-gradient-to-r from-status-pending/10 via-status-pending/5 to-status-pending/10 border-2 border-status-pending/20 rounded-xl p-4">
-                                <div className="flex items-start gap-3">
-                                    <div className="p-2 rounded-lg bg-status-pending/10">
-                                        <AlertTriangle className="h-5 w-5 text-status-pending" />
-                                    </div>
-                                    <div className="flex-1">
-                                        <h4 className="text-status-pending font-bold mb-2 flex items-center gap-2">
-                                            نصائح ذكية للتعيين
-                                            <Badge className="bg-status-pending/20 text-status-pending text-xs">Pro Tips</Badge>
-                                        </h4>
-                                        <div className="grid grid-cols-1 gap-2">
-                                            <div className="flex items-start gap-2 p-2 bg-background/50 rounded-lg">
-                                                <div className="w-2 h-2 bg-status-pending rounded-full mt-2"></div>
-                                                <span className="text-status-pending text-sm">اختر السائق الأقرب للمتجر لتوفير الوقت والوقود</span>
-                                            </div>
-                                            <div className="flex items-start gap-2 p-2 bg-background/50 rounded-lg">
-                                                <div className="w-2 h-2 bg-status-pending rounded-full mt-2"></div>
-                                                <span className="text-status-pending text-sm">تأكد من توفر السائق قبل التعيين</span>
-                                            </div>
-                                            <div className="flex items-start gap-2 p-2 bg-background/50 rounded-lg">
-                                                <div className="w-2 h-2 bg-status-pending rounded-full mt-2"></div>
-                                                <span className="text-status-pending text-sm">راعي توزيع الطلبات بالعدل بين السائقين</span>
-                                            </div>
-                                            {drivers.some(d => d.rating === 0) && (
-                                                <div className="flex items-start gap-2 p-2 bg-status-pending/10 rounded-lg border border-status-pending/30">
-                                                    <div className="w-2 h-2 bg-status-pending rounded-full mt-2"></div>
-                                                    <span className="text-status-pending text-sm font-medium">قم بتقييم السائقين بعد التوصيل لتحسين دقة النظام</span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </CardContent>
                 </CollapsibleContent>
             </Collapsible>
         </Card>
     );
-} 
+}

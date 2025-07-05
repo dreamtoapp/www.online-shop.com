@@ -8,8 +8,6 @@ import {
     Calendar,
     CheckCircle,
     List,
-    MapPin,
-    MapPinX,
     Phone,
     ReceiptText,
     RefreshCw,
@@ -36,7 +34,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import {
     ORDER_STATUS,
     OrderStatus,
@@ -103,33 +101,29 @@ const OrderHeader = ({ order, statusStyle }: { order: Order, statusStyle: string
             </div>
 
             <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <div className="flex items-center gap-2 cursor-help">
-                                <Calendar className="h-3 w-3" />
-                                <span>{createdAt}</span>
-                            </div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>تاريخ الإنشاء: {new Date(order.createdAt).toLocaleDateString('ar-SA')}</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <div className="flex items-center gap-2 cursor-help">
+                            <Calendar className="h-3 w-3" />
+                            <span>{createdAt}</span>
+                        </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>تاريخ الإنشاء: {new Date(order.createdAt).toLocaleDateString('ar-SA')}</p>
+                    </TooltipContent>
+                </Tooltip>
 
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <div className="flex items-center gap-2 cursor-help">
-                                <RefreshCw className="h-3 w-3" />
-                                <span>{updatedAt}</span>
-                            </div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>آخر تحديث: {new Date(order.updatedAt).toLocaleDateString('ar-SA')}</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <div className="flex items-center gap-2 cursor-help">
+                            <RefreshCw className="h-3 w-3" />
+                            <span>{updatedAt}</span>
+                        </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>آخر تحديث: {new Date(order.updatedAt).toLocaleDateString('ar-SA')}</p>
+                    </TooltipContent>
+                </Tooltip>
             </div>
         </CardHeader>
     );
@@ -138,77 +132,25 @@ const OrderHeader = ({ order, statusStyle }: { order: Order, statusStyle: string
 // Enhanced customer actions with better tooltips and accessibility
 const CustomerCardAction = ({
     phone,
-    address,
-    latitude,
-    longitude,
 }: {
     phone: string;
-    address: string;
-    latitude: string;
-    longitude: string;
 }) => (
     <div className="flex items-center gap-2">
-        <TooltipProvider>
-            <Tooltip>
-                <TooltipTrigger asChild>
-                    <Button
-                        variant="outline"
-                        size="icon"
-                        className="btn-professional h-8 w-8 hover:bg-feature-users-soft"
-                        disabled={!phone}
-                    >
-                        <Phone className="h-3 w-3" />
-                    </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                    <p>{phone || 'رقم الهاتف غير متوفر'}</p>
-                </TooltipContent>
-            </Tooltip>
-        </TooltipProvider>
-
-        <TooltipProvider>
-            <Tooltip>
-                <TooltipTrigger asChild>
-                    <Button
-                        variant="outline"
-                        size="icon"
-                        className="btn-professional h-8 w-8 relative hover:bg-feature-settings-soft"
-                        disabled={!latitude || !longitude}
-                        asChild={!(!latitude || !longitude)}
-                    >
-                        {!latitude || !longitude ? (
-                            <div>
-                                <MapPinX className="h-3 w-3 text-red-500" />
-                                {!address && latitude && longitude && (
-                                    <div className="absolute -left-1 -top-1">
-                                        <AlertCircle className="h-3 w-3 text-red-500" />
-                                    </div>
-                                )}
-                            </div>
-                        ) : (
-                            <a
-                                href={`https://www.google.com/maps?q=${latitude},${longitude}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <MapPin className="h-3 w-3 text-feature-analytics" />
-                            </a>
-                        )}
-                    </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                    <div className="max-w-48">
-                        {address ? (
-                            <p>{address}</p>
-                        ) : latitude && longitude ? (
-                            <p>الإحداثيات متوفرة ولكن العنوان غير متوفر</p>
-                        ) : (
-                            <p>معلومات الموقع غير متوفرة</p>
-                        )}
-                    </div>
-                </TooltipContent>
-            </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+            <TooltipTrigger asChild>
+                <Button
+                    variant="outline"
+                    size="icon"
+                    className="btn-professional h-8 w-8 hover:bg-feature-users-soft"
+                    disabled={!phone}
+                >
+                    <Phone className="h-3 w-3" />
+                </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+                <p>{phone || 'رقم الهاتف غير متوفر'}</p>
+            </TooltipContent>
+        </Tooltip>
     </div>
 );
 
@@ -222,23 +164,21 @@ const OrderContent = ({ order }: { order: Order }) => (
                     {order.orderNumber}
                 </CardTitle>
             </div>
-            <TooltipProvider>
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <Link
-                            href={`/dashboard/show-invoice/${order.id}`}
-                            className={buttonVariants({
-                                variant: 'outline',
-                                size: 'icon',
-                                className: 'btn-view-outline h-8 w-8',
-                            })}
-                        >
-                            <ReceiptText className="h-3 w-3" />
-                        </Link>
-                    </TooltipTrigger>
-                    <TooltipContent>عرض الفاتورة</TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
+            <Tooltip>
+                <TooltipTrigger asChild>
+                    <Link
+                        href={`/dashboard/show-invoice/${order.id}`}
+                        className={buttonVariants({
+                            variant: 'outline',
+                            size: 'icon',
+                            className: 'btn-view-outline h-8 w-8',
+                        })}
+                    >
+                        <ReceiptText className="h-3 w-3" />
+                    </Link>
+                </TooltipTrigger>
+                <TooltipContent>عرض الفاتورة</TooltipContent>
+            </Tooltip>
         </div>
 
         <div className="flex items-center justify-between">
@@ -248,9 +188,6 @@ const OrderContent = ({ order }: { order: Order }) => (
             </CardDescription>
             <CustomerCardAction
                 phone={order.customer.phone || ''}
-                address={order.address?.label || ''}
-                latitude={order.address?.latitude || ''}
-                longitude={order.address?.longitude || ''}
             />
         </div>
 

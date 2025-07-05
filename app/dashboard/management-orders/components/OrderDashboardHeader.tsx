@@ -18,7 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface OrderDashboardHeaderProps {
     initialFilter: string;
@@ -159,69 +159,67 @@ const OrderDashboardHeader = function OrderDashboardHeader({
                 <CardContent className="pt-0">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
                         {statusCards.map((card) => (
-                            <TooltipProvider key={card.filter}>
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        <Link href={card.href}>
-                                            <Card
-                                                className={`
-                                                    cursor-pointer shadow-md border-l-4 ${card.borderColor} 
-                                                                                                                                                                ${initialFilter === card.filter ? `${card.bgColor} shadow-xl` : ''}
-                                                `}
-                                            >
-                                                <CardContent className={cardStyle}>
-                                                    <div className="flex items-center gap-2 w-full">
-                                                        <div className={`p-2 rounded-lg ${card.bgColor}`}>
-                                                            <card.icon className={`h-4 w-4 ${card.iconColor} icon-enhanced`} />
-                                                        </div>
-                                                        <div className="flex-1">
-                                                            <p className="text-xs font-medium text-muted-foreground">
-                                                                {card.title}
-                                                            </p>
-                                                            <p className={`text-xl font-bold ${card.textColor}`}>
-                                                                {card.value}
-                                                            </p>
-                                                        </div>
+                            <Tooltip key={card.filter}>
+                                <TooltipTrigger asChild>
+                                    <Link href={card.href}>
+                                        <Card
+                                            className={`
+                                                cursor-pointer shadow-md border-l-4 ${card.borderColor} 
+                                                ${initialFilter === card.filter ? `${card.bgColor} shadow-xl` : ''}
+                                            `}
+                                        >
+                                            <CardContent className={cardStyle}>
+                                                <div className="flex items-center gap-2 w-full">
+                                                    <div className={`p-2 rounded-lg ${card.bgColor}`}>
+                                                        <card.icon className={`h-4 w-4 ${card.iconColor} icon-enhanced`} />
                                                     </div>
+                                                    <div className="flex-1">
+                                                        <p className="text-xs font-medium text-muted-foreground">
+                                                            {card.title}
+                                                        </p>
+                                                        <p className={`text-xl font-bold ${card.textColor}`}>
+                                                            {card.value}
+                                                        </p>
+                                                    </div>
+                                                </div>
 
-                                                    {card.filter !== 'All' && totalOrders > 0 && (
-                                                        <div className="w-full space-y-1">
-                                                            <div className="flex items-center justify-between text-xs">
-                                                                <span className="text-muted-foreground">النسبة</span>
-                                                                <span className={`font-semibold ${card.textColor}`}>
-                                                                    {card.percentage}%
-                                                                </span>
-                                                            </div>
-                                                            <Progress
-                                                                value={card.percentage}
-                                                                className="h-1"
-                                                            />
+                                                {card.filter !== 'All' && totalOrders > 0 && (
+                                                    <div className="w-full space-y-1">
+                                                        <div className="flex items-center justify-between text-xs">
+                                                            <span className="text-muted-foreground">النسبة</span>
+                                                            <span className={`font-semibold ${card.textColor}`}>
+                                                                {card.percentage}%
+                                                            </span>
                                                         </div>
-                                                    )}
+                                                        <Progress
+                                                            value={card.percentage}
+                                                            className="h-1"
+                                                        />
+                                                    </div>
+                                                )}
 
-                                                    {initialFilter === card.filter && (
-                                                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                                                            <div className={`h-1.5 w-1.5 rounded-full ${card.iconColor.replace('text-', 'bg-')} animate-pulse`} />
-                                                            <span>العرض الحالي</span>
-                                                        </div>
-                                                    )}
-                                                </CardContent>
-                                            </Card>
-                                        </Link>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                        <div className="text-center">
-                                            <p className="font-semibold">{card.title}</p>
-                                            <p className="text-sm text-muted-foreground">{card.description}</p>
-                                            {card.filter !== 'All' && (
-                                                <p className="text-xs text-muted-foreground mt-1">
-                                                    {card.percentage}% من إجمالي الطلبات
-                                                </p>
-                                            )}
-                                        </div>
-                                    </TooltipContent>
-                                </Tooltip>
-                            </TooltipProvider>
+                                                {initialFilter === card.filter && (
+                                                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                                                        <div className={`h-1.5 w-1.5 rounded-full ${card.iconColor.replace('text-', 'bg-')} animate-pulse`} />
+                                                        <span>العرض الحالي</span>
+                                                    </div>
+                                                )}
+                                            </CardContent>
+                                        </Card>
+                                    </Link>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <div className="text-center">
+                                        <p className="font-semibold">{card.title}</p>
+                                        <p className="text-sm text-muted-foreground">{card.description}</p>
+                                        {card.filter !== 'All' && (
+                                            <p className="text-xs text-muted-foreground mt-1">
+                                                {card.percentage}% من إجمالي الطلبات
+                                            </p>
+                                        )}
+                                    </div>
+                                </TooltipContent>
+                            </Tooltip>
                         ))}
                     </div>
                 </CardContent>
