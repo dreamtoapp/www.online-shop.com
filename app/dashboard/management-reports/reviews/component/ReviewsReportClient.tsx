@@ -5,7 +5,6 @@ import {
   useState,
 } from 'react';
 
-import { Star } from 'lucide-react';
 import {
   Bar,
   BarChart,
@@ -40,6 +39,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { Icon } from '@/components/icons/Icon';
 
 import {
   RatingDistributionChartItem,
@@ -60,9 +60,10 @@ const renderStars = (rating: number) => {
   const stars = [];
   for (let i = 1; i <= 5; i++) {
     stars.push(
-      <Star
+      <Icon
         key={i}
-        size={16}
+        name="Star"
+        size="sm"
         className={i <= rating ? 'fill-primary text-primary' : 'fill-muted text-muted-foreground'}
       />
     );

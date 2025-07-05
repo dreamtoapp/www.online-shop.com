@@ -1,9 +1,9 @@
 'use client';
 // app/dashboard/orders-management/components/OrderStatusTabs.tsx
-import React from 'react';
+// import React from 'react';
 import Link from '@/components/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Package, Clock, CheckCircle, Truck, XCircle } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { cn } from '@/lib/utils';
 // Order status constants to match database values
 const ORDER_STATUS = {
@@ -17,7 +17,7 @@ const ORDER_STATUS = {
 interface OrderStatusTab {
   label: string;
   value: string | undefined;
-  icon: React.ElementType;
+  icon: string;
   color: string;
   activeColor: string;
   hoverColor: string;
@@ -66,7 +66,7 @@ export default function OrderStatusTabs({ activeStatus }: OrderStatusTabsProps) 
     {
       label: 'جميع الطلبات', // TODO: Add badge showing total orders count
       value: undefined,
-      icon: Package,
+      icon: 'Package',
       color: 'text-gray-600',
       activeColor: 'bg-gray-100 text-gray-900',
       hoverColor: 'hover:bg-gray-50',
@@ -74,7 +74,7 @@ export default function OrderStatusTabs({ activeStatus }: OrderStatusTabsProps) 
     {
       label: 'قيد الانتظار', // TODO: Add badge showing pending orders count
       value: ORDER_STATUS.PENDING,
-      icon: Clock,
+      icon: 'Clock',
       color: 'text-amber-600',
       activeColor: 'bg-amber-100 text-amber-900',
       hoverColor: 'hover:bg-amber-50',
@@ -82,7 +82,7 @@ export default function OrderStatusTabs({ activeStatus }: OrderStatusTabsProps) 
     {
       label: 'في الطريق', // TODO: Add badge showing in-transit orders count
       value: ORDER_STATUS.IN_WAY,
-      icon: Truck,
+      icon: 'Truck',
       color: 'text-indigo-600',
       activeColor: 'bg-indigo-100 text-indigo-900',
       hoverColor: 'hover:bg-indigo-50',
@@ -90,7 +90,7 @@ export default function OrderStatusTabs({ activeStatus }: OrderStatusTabsProps) 
     {
       label: 'تم التسليم', // TODO: Add badge showing delivered orders count
       value: ORDER_STATUS.DELIVERED,
-      icon: CheckCircle,
+      icon: 'CheckCircle',
       color: 'text-green-600',
       activeColor: 'bg-green-100 text-green-900',
       hoverColor: 'hover:bg-green-50',
@@ -98,7 +98,7 @@ export default function OrderStatusTabs({ activeStatus }: OrderStatusTabsProps) 
     {
       label: 'ملغي', // TODO: Add badge showing canceled orders count
       value: ORDER_STATUS.CANCELED,
-      icon: XCircle,
+      icon: 'XCircle',
       color: 'text-red-600',
       activeColor: 'bg-red-100 text-red-900',
       hoverColor: 'hover:bg-red-50',
@@ -106,7 +106,7 @@ export default function OrderStatusTabs({ activeStatus }: OrderStatusTabsProps) 
     {
       label: 'في السيارة',
       value: ORDER_STATUS.ASSIGNED,
-      icon: Truck,
+      icon: 'Truck',
       color: 'text-blue-600',
       activeColor: 'bg-blue-100 text-blue-900',
       hoverColor: 'hover:bg-blue-50',
@@ -132,7 +132,7 @@ export default function OrderStatusTabs({ activeStatus }: OrderStatusTabsProps) 
                   : `${tab.color} ${tab.hoverColor}`,
               )}
             >
-              <tab.icon className="h-4 w-4" />
+              <Icon name={tab.icon} className="h-4 w-4" />
               <span>{tab.label}</span>
               {/* TODO: Add badge component here to show order count */}
               {/* TODO: Example: <Badge variant="secondary" className="ml-2">{orderCount}</Badge> */}

@@ -1,8 +1,6 @@
 import Link from 'next/link';
-import { PackageX } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import { Button } from '@/components/ui/button';
 
 export default function ProductNotFound() {
@@ -10,7 +8,7 @@ export default function ProductNotFound() {
     <div className='container py-16'>
       <div className='mx-auto max-w-md text-center'>
         <div className='mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-muted/30'>
-          <PackageX className={iconVariants({ size: 'xl', className: 'text-muted-foreground' })} /> {/* Use direct import + CVA (adjust size if needed) */}
+          <Icon name="PackageX" size="xl" className={iconVariants({ size: 'xl', className: 'text-muted-foreground' })} />
         </div>
 
         <h1 className='mb-4 text-2xl font-bold'>المنتج غير موجود</h1>

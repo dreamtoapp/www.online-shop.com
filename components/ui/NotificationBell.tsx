@@ -1,4 +1,4 @@
-import { Bell } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import clsx from 'clsx';
 
 interface NotificationBellProps {
@@ -20,7 +20,7 @@ export default function NotificationBell({ count = 0, showNumber = false, label,
     const hasAlert = count > 0;
     return (
         <div className={clsx('relative cursor-pointer group', className)}>
-            <Bell className="h-6 w-6 text-feature-analytics icon-enhanced group-hover:scale-110 transition-transform" />
+            <Icon name="Bell" size="md" className="h-6 w-6 text-feature-analytics icon-enhanced group-hover:scale-110 transition-transform" />
             {label && <span className="ml-1 text-[10px] text-pink-400">{label}</span>}
             {hasAlert && (
                 showNumber ? (

@@ -1,24 +1,11 @@
 import Link from 'next/link';
-import {
-  TrendingUp,
-  BarChart2,
-  Activity,
-  UserCheck,
-  Gift,
-  Truck,
-  Star,
-  Award,
-  DollarSign,
-  ClipboardList,
-  LucideIcon,
-} from 'lucide-react';
-// Removed PageHeader imports as the component does not exist
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'; // CardDescription not used
+import { Icon } from '@/components/icons/Icon';
 
 interface ReportLink {
   title: string;
   url: string;
-  icon: LucideIcon;
+  iconName: string;
   description: string;
 }
 
@@ -34,19 +21,19 @@ const categorizedReportsList: ReportCategory[] = [
       {
         title: 'تقرير المبيعات',
         url: '/dashboard/reports/sales',
-        icon: TrendingUp,
+        iconName: 'TrendingUp',
         description: 'تحليل شامل للمبيعات والإيرادات والفترات الزمنية.',
       },
       {
         title: 'التقارير المالية',
         url: '/dashboard/reports/finance',
-        icon: DollarSign,
+        iconName: 'DollarSign',
         description: 'نظرة عامة على التدفقات النقدية، الأرباح، والمؤشرات المالية.',
       },
       {
         title: 'أداء المنتجات',
         url: '/dashboard/reports/product-performance',
-        icon: BarChart2,
+        iconName: 'BarChart2',
         description: 'تقييم المنتجات الأكثر مبيعًا، الأقل مبيعًا، وهوامش الربح.',
       },
     ],
@@ -57,19 +44,19 @@ const categorizedReportsList: ReportCategory[] = [
       {
         title: 'تحليلات الطلبات',
         url: '/dashboard/reports/orders',
-        icon: Activity,
+        iconName: 'Activity',
         description: 'تحليل اتجاهات الطلبات، متوسط قيمة الطلب، وحالات الطلب.',
       },
       {
         title: 'تقرير المخزون',
         url: '/dashboard/reports/inventory',
-        icon: ClipboardList,
+        iconName: 'ClipboardList',
         description: 'مراقبة مستويات المخزون، المنتجات بطيئة الحركة، وتنبيهات إعادة الطلب.',
       },
       {
         title: 'تقرير السائقين والتوصيل',
         url: '/dashboard/reports/drivers',
-        icon: Truck,
+        iconName: 'Truck',
         description: 'تحليل كفاءة التوصيل، أداء السائقين، ومناطق الخدمة.',
       },
     ],
@@ -80,19 +67,19 @@ const categorizedReportsList: ReportCategory[] = [
       {
         title: 'تقرير العملاء',
         url: '/dashboard/reports/customers',
-        icon: UserCheck,
+        iconName: 'UserCheck',
         description: 'فهم سلوك العملاء، التركيبة السكانية، وقيمة العميل.',
       },
       {
         title: 'تقرير العروض والتخفيضات',
         url: '/dashboard/reports/promotions',
-        icon: Gift,
+        iconName: 'Gift',
         description: 'تقييم أداء الحملات الترويجية وتأثيرها على المبيعات.',
       },
       {
         title: 'تقرير التقييمات والمراجعات',
         url: '/dashboard/reports/reviews',
-        icon: Star,
+        iconName: 'Star',
         description: 'متابعة تقييمات العملاء للمنتجات والخدمة.',
       },
     ],
@@ -103,7 +90,7 @@ const categorizedReportsList: ReportCategory[] = [
       {
         title: 'الإنجازات والأرقام القياسية',
         url: '/dashboard/reports/milestones',
-        icon: Award,
+        iconName: 'Award',
         description: 'تتبع أهم إنجازات المتجر ومؤشرات النمو الرئيسية.',
       },
     ],
@@ -136,7 +123,7 @@ export default function ReportsCenterPage() {
                       <CardTitle className="text-lg font-semibold text-primary">
                         {report.title}
                       </CardTitle>
-                      <report.icon className="h-6 w-6 text-muted-foreground" />
+                      <Icon name={report.iconName} className="h-6 w-6 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground">

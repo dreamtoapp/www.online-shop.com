@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import BackButton from '@/components/BackButton';
-import { Images } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import ProductGalleryManager from './components/ProductGalleryManager';
 import GalleryManagerSkeleton from './components/GalleryManagerSkeleton';
 import prisma from '@/lib/prisma';
@@ -44,7 +44,7 @@ export default async function ProductGalleryPage({ params }: PageProps) {
                     <BackButton variant="default" />
                     <div>
                         <h1 className="text-2xl font-bold flex items-center gap-2">
-                            <Images className="h-6 w-6 text-feature-products icon-enhanced" />
+                            <Icon name="Images" className="h-6 w-6 text-feature-products icon-enhanced" />
                             معرض صور المنتج
                         </h1>
                         <p className="text-muted-foreground">{product.name}</p>

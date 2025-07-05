@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
-import { Eye } from 'lucide-react';
 import { PageProps } from '@/types/commonTypes';
 import BackButton from '@/components/BackButton';
+import { Icon } from '@/components/icons/Icon';
 import db from '@/lib/prisma';
 import ProductViewContent from './product-view-content';
 
@@ -59,7 +59,7 @@ export default async function ProductViewPage({ params }: PageProps<{ id: string
           <div className="flex items-center gap-4">
             <BackButton variant="default" />
             <div className="flex items-center gap-3">
-              <Eye className="h-6 w-6 text-feature-analytics icon-enhanced" />
+              <Icon name="Eye" className="h-6 w-6 text-feature-analytics icon-enhanced" />
               <h1 className="text-2xl font-bold text-primary md:text-3xl">
                 تفاصيل المنتج: {product.name}
               </h1>
@@ -80,7 +80,7 @@ export default async function ProductViewPage({ params }: PageProps<{ id: string
           <div className="flex items-center gap-4">
             <BackButton variant="default" />
             <div className="flex items-center gap-3">
-              <Eye className="h-6 w-6 text-destructive icon-enhanced" />
+              <Icon name="Eye" className="h-6 w-6 text-destructive icon-enhanced" />
               <h1 className="text-2xl font-bold text-destructive">خطأ في تحميل المنتج</h1>
             </div>
           </div>

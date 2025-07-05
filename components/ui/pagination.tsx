@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import { ButtonProps, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -58,7 +57,7 @@ const PaginationPrevious = ({
     className={cn('gap-1 pl-2.5', className)}
     {...props}
   >
-    <ChevronLeft className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+    <Icon name="ChevronLeft" size="xs" className={iconVariants({ size: 'xs' })} />
     <span>{children || 'السابق'}</span>
   </PaginationLink>
 );
@@ -76,7 +75,7 @@ const PaginationNext = ({
     {...props}
   >
     <span>{children || 'التالي'}</span>
-    <ChevronRight className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+    <Icon name="ChevronRight" size="xs" className={iconVariants({ size: 'xs' })} />
   </PaginationLink>
 );
 PaginationNext.displayName = 'PaginationNext';
@@ -87,7 +86,7 @@ const PaginationEllipsis = ({ className, ...props }: React.ComponentProps<'span'
     className={cn('flex h-9 w-9 items-center justify-center', className)}
     {...props}
   >
-    <MoreHorizontal className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+    <Icon name="MoreHorizontal" size="xs" className={iconVariants({ size: 'xs' })} />
     <span className='sr-only'>More pages</span>
   </span>
 );

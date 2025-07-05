@@ -1,8 +1,8 @@
 // app/dashboard/orders-management/status/in-way/page.tsx
 
-import { Truck } from 'lucide-react';
 import { Metadata } from 'next';
 import BackButton from '@/components/BackButton';
+import { Icon } from '@/components/icons/Icon';
 
 import { ORDER_STATUS } from '@/constant/order-status';
 
@@ -29,7 +29,7 @@ function PageHeader({ analytics, showActions = false }: PageHeaderProps) {
     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-2 min-h-[80px] md:min-h-[60px]">
       <div className="space-y-1">
         <h2 className="flex items-center gap-2 text-2xl font-bold tracking-tight text-foreground">
-          <Truck className="h-6 w-6 text-feature-commerce" />
+          <Icon name="Truck" className="h-6 w-6 text-feature-commerce" />
           الطلبات في الطريق
         </h2>
         <p className="text-muted-foreground">إدارة الطلبات التي في طريقها للتسليم</p>
@@ -39,7 +39,7 @@ function PageHeader({ analytics, showActions = false }: PageHeaderProps) {
         <div className="flex items-center gap-3 flex-shrink-0">
           <SyncOrderInWayButton />
           <div className="flex items-center gap-2">
-            <Truck className="h-5 w-5 text-feature-commerce" />
+            <Icon name="Truck" className="h-5 w-5 text-feature-commerce" />
             <span className="rounded-lg bg-feature-commerce-soft border border-feature-commerce px-4 py-2 text-feature-commerce font-semibold text-sm shadow-sm whitespace-nowrap">
               في الطريق: <span className="font-bold">{analytics}</span>
             </span>

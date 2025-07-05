@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { List, Package, BarChart3 } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import BackButton from '@/components/BackButton';
 import Link from '@/components/link';
 import { Button } from '@/components/ui/button';
@@ -42,7 +42,7 @@ export default function OrderManagementView({
                     <div className="flex items-center gap-3">
                         <div className="h-8 w-1 bg-feature-commerce rounded-full"></div>
                         <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                            <Package className="h-6 w-6 text-feature-commerce" />
+                            <Icon name="Package" className="h-6 w-6 text-feature-commerce" />
                             إدارة الطلبات
                         </h1>
                     </div>
@@ -51,7 +51,7 @@ export default function OrderManagementView({
                 {/* Quick Action Button */}
                 <Link href="/dashboard/management-orders/analytics">
                     <Button variant="outline" className="gap-2">
-                        <BarChart3 className="h-4 w-4" />
+                        <Icon name="BarChart3" className="h-4 w-4" />
                         التحليلات التفصيلية
                     </Button>
                 </Link>
@@ -71,7 +71,7 @@ export default function OrderManagementView({
             <Card className="shadow-lg border-l-4 border-l-feature-commerce">
                 <CardHeader className="pb-3">
                     <CardTitle className="flex items-center gap-2 text-lg">
-                        <List className="h-5 w-5 text-feature-commerce" />
+                        <Icon name="List" className="h-5 w-5 text-feature-commerce" />
                         إدارة الطلبات اليومية
                     </CardTitle>
                 </CardHeader>

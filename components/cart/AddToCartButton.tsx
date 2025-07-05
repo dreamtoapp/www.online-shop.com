@@ -4,13 +4,10 @@ import { useState } from 'react'; // Keep only one import
 import { useRouter } from 'next/navigation';
 
 import { toast } from 'sonner';
-import { Check, ShoppingCart } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
 import { addItem } from '@/app/(e-comm)/cart/actions/cartServerActions';
-// Removed Icon import: import { Icon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 
 interface AddToCartButtonProps {
   productId: string;
@@ -85,15 +82,17 @@ export default function AddToCartButton({
     >
       {isAdded ? (
         <>
-          <Check // Use direct import
-            className={iconVariants({ size: size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm' })} // Map button size to icon size
+          <Icon
+            name="Check"
+            size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'}
           />
           {size !== 'icon' && <span className='mr-2'>تمت الإضافة</span>}
         </>
       ) : (
         <>
-          <ShoppingCart // Use direct import
-            className={iconVariants({ size: size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm' })} // Map button size to icon size
+          <Icon
+            name="ShoppingCart"
+            size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'}
           />
           {size !== 'icon' && (
             <span className='mr-2'>{!inStock ? 'غير متوفر' : 'إضافة إلى السلة'}</span>

@@ -4,10 +4,7 @@ import { useState } from 'react'; // Keep only one import
 
 import Image from 'next/image';
 import { toast } from 'sonner';
-import { Star } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { Icon } from '@/components/icons/Icon';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -109,16 +106,15 @@ export function RatingModal({
                   onMouseLeave={() => setHoverRating(0)}
                   className='focus:outline-none'
                 >
-                  <Star // Use direct import + CVA
-                    className={iconVariants({
-                      size: 'md',
-                      className: cn(
-                        'transition-all duration-150',
-                        (hoverRating || rating) >= star
-                          ? 'fill-amber-400 text-amber-400'
-                          : 'text-gray-300',
-                      ),
-                    })}
+                  <Icon
+                    name="Star"
+                    size="md"
+                    className={cn(
+                      'transition-all duration-150',
+                      (hoverRating || rating) >= star
+                        ? 'fill-amber-400 text-amber-400'
+                        : 'text-gray-300',
+                    )}
                   />
                 </button>
               ))}

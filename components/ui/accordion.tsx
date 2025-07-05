@@ -1,10 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { ChevronDown } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import { cn } from '@/lib/utils';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 
@@ -32,7 +30,9 @@ const AccordionTrigger = React.forwardRef<
       {...props}
     >
       {children}
-      <ChevronDown // Use direct import + CVA
+      <Icon
+        name="ChevronDown"
+        size="xs"
         className={iconVariants({ size: 'xs', className: 'shrink-0 text-muted-foreground transition-transform duration-200' })}
       />
     </AccordionPrimitive.Trigger>

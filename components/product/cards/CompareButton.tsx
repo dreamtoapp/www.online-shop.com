@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { ArrowLeftRight } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { Button } from '@/components/ui/button';
 
 interface CompareButtonProps {
@@ -32,7 +32,7 @@ export default function CompareButton({ productId }: CompareButtonProps) {
             onClick={toggleCompare}
             data-analytics="compare-toggle"
         >
-            <ArrowLeftRight className="h-4 w-4" />
+            <Icon name="ArrowLeftRight" size="sm" />
         </Button>
     );
 } 

@@ -1,9 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { Star, Package, Tag, Truck, Info } from 'lucide-react';
 import { Badge } from '@/components/ui/badge'; // Assuming you have a Badge component
 import { Separator } from '@/components/ui/separator'; // Assuming Separator
+import { Icon } from '@/components/icons/Icon';
 import { Product as FullProductType } from '@prisma/client'; // For full product type with relations
 import { User as PrismaUser } from '@prisma/client';
 import { Review as PrismaReview } from '@prisma/client';
@@ -81,8 +81,9 @@ export default function ProductViewContent({ product }: ProductViewContentProps)
           )}
           <div className="flex items-center gap-2 mb-3">
             {[1, 2, 3, 4, 5].map((star) => (
-              <Star
+              <Icon
                 key={star}
+                name="Star"
                 className={`w-5 h-5 ${star <= product.averageRating ? filledStarColor : emptyStarColor}`}
               />
             ))}
@@ -138,12 +139,12 @@ export default function ProductViewContent({ product }: ProductViewContentProps)
           <Separator className="my-4" />
 
           <div className="space-y-3">
-            <InfoPill icon={<Package size={18} />} label="حالة المخزون" value={product.outOfStock ? 'غير متوفر' : 'متوفر'} valueClass={product.outOfStock ? 'text-destructive' : 'text-emerald-600'} />
+            <InfoPill icon={<Icon name="Package" size="lg" />} label="حالة المخزون" value={product.outOfStock ? 'غير متوفر' : 'متوفر'} valueClass={product.outOfStock ? 'text-destructive' : 'text-emerald-600'} />
             {product.manageInventory && product.stockQuantity !== null && (
-              <InfoPill icon={<Info size={18} />} label="الكمية المتاحة" value={product.stockQuantity.toString()} />
+              <InfoPill icon={<Icon name="Info" size="lg" />} label="الكمية المتاحة" value={product.stockQuantity.toString()} />
             )}
-            <InfoPill icon={<Tag size={18} />} label="الحالة" value={product.published ? 'منشور' : 'غير منشور'} valueClass={product.published ? 'text-emerald-600' : 'text-amber-600'} />
-            <InfoPill icon={<Truck size={18} />} label="يتطلب شحن" value={product.requiresShipping ? 'نعم' : 'لا'} />
+            <InfoPill icon={<Icon name="Tag" size="lg" />} label="الحالة" value={product.published ? 'منشور' : 'غير منشور'} valueClass={product.published ? 'text-emerald-600' : 'text-amber-600'} />
+            <InfoPill icon={<Icon name="Truck" size="lg" />} label="يتطلب شحن" value={product.requiresShipping ? 'نعم' : 'لا'} />
           </div>
 
           {/* Placeholder for Add to Cart or other actions if this were a public page */}

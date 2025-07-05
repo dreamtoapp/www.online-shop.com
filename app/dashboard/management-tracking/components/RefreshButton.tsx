@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { RefreshCw } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -28,7 +28,7 @@ export default function RefreshButton() {
             onClick={handleRefresh}
             disabled={isRefreshing}
         >
-            <RefreshCw className={`h-4 w-4 mr-1 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <Icon name="RefreshCw" className={`h-4 w-4 mr-1 ${isRefreshing ? 'animate-spin' : ''}`} />
             تحديث
         </Button>
     );

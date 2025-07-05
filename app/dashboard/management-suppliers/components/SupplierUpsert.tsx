@@ -1,6 +1,5 @@
 'use client';
 
-import { Edit, Plus } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,14 +8,14 @@ import AppDialog from '@/components/app-dialog';
 import FormError from '@/components/form-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 
 import {
   SupplierFormData,
   SupplierSchema,
   getSupplierFields,
 } from '../helper/supplierZodAndInputs';
-import { upsertSupplier } from '../actions/upsertSupplier'; // You’ll need to rename this accordingly
+import { upsertSupplier } from '../actions/upsertSupplier'; // You'll need to rename this accordingly
 
 interface AddSupplierProps {
   mode: 'new' | 'update';
@@ -69,12 +68,12 @@ export default function AddSupplier({
         >
           {mode === 'new' ? (
             <>
-              <Plus className={iconVariants({ size: 'xs' })} />
+              <Icon name="Plus" size="xs" />
               <span>إضافة</span>
             </>
           ) : (
             <>
-              <Edit className={iconVariants({ size: 'xs' })} />
+              <Icon name="Edit" size="xs" />
               <span>تعديل</span>
             </>
           )}

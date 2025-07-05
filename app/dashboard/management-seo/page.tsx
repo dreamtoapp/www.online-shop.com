@@ -1,12 +1,7 @@
-import {
-  AlertTriangle,
-  CheckCircle,
-  Info,
-} from 'lucide-react';
-
 import BackButton from '@/components/BackButton';
 import InfoTooltip from '@/components/InfoTooltip';
 import { Button } from '@/components/ui/button';
+import { Icon } from '@/components/icons/Icon';
 import { EntityType } from '@prisma/client';
 
 import { getSeoEntryByEntity } from './actions/seo';
@@ -60,7 +55,7 @@ export default async function SeoDashboardPage() {
         </div>
       </div>
       <div className="mb-6 p-4 rounded-lg bg-muted flex items-center gap-3">
-        <Info className="text-primary w-6 h-6 shrink-0" />
+        <Icon name="Info" className="text-primary w-6 h-6 shrink-0" />
         <div>
           <h1 className="text-xl md:text-2xl font-bold text-primary mb-1">لوحة إدارة SEO للصفحات الرئيسية</h1>
           <p className="text-muted-foreground text-sm">
@@ -98,11 +93,11 @@ export default async function SeoDashboardPage() {
                         <td key={idx} className="p-3 text-center">
                           {status?.hasMetaTitle && status?.hasMetaDescription ? (
                             <span className="inline-flex items-center gap-1 text-success-foreground">
-                              <CheckCircle className="w-5 h-5" /> مكتمل
+                              <Icon name="CheckCircle" className="w-5 h-5" /> مكتمل
                             </span>
                           ) : (
                             <span className="inline-flex items-center gap-1 text-warning-foreground">
-                              <AlertTriangle className="w-5 h-5" />
+                              <Icon name="AlertTriangle" className="w-5 h-5" />
                               ناقص
                               <span className="ml-1">
                                 <InfoTooltip content={`الحقول الناقصة: ${missing.join('، ')}`} />

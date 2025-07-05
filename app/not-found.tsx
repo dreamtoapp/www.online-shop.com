@@ -4,8 +4,8 @@ import Link from '@/components/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { AlertTriangle, Home, ArrowLeft, RefreshCw, Search, HelpCircle } from 'lucide-react';
 import BackButton from '@/components/BackButton';
+import { Icon } from '@/components/icons/Icon';
 
 export default function NotFound() {
   return (
@@ -27,7 +27,7 @@ export default function NotFound() {
               {/* Enhanced Error Icon */}
               <div className="relative">
                 <div className="h-24 w-24 rounded-full bg-feature-settings-soft flex items-center justify-center animate-pulse">
-                  <AlertTriangle className="h-12 w-12 text-feature-settings icon-enhanced" />
+                  <Icon name="AlertTriangle" className="h-12 w-12 text-feature-settings icon-enhanced" />
                 </div>
                 <Badge
                   variant="destructive"
@@ -71,14 +71,14 @@ export default function NotFound() {
               <Card className="shadow-md border-l-4 border-l-feature-analytics card-hover-effect">
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-lg">
-                    <Home className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                    <Icon name="Home" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                     العودة للرئيسية
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <Link href="/">
                     <Button className="btn-professional w-full bg-feature-analytics hover:bg-feature-analytics/90">
-                      <Home className="h-4 w-4 ml-2" />
+                      <Icon name="Home" className="h-4 w-4 ml-2" />
                       الصفحة الرئيسية
                     </Button>
                   </Link>
@@ -89,14 +89,14 @@ export default function NotFound() {
               <Card className="shadow-md border-l-4 border-l-feature-users card-hover-effect">
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-lg">
-                    <Search className="h-5 w-5 text-feature-users icon-enhanced" />
+                    <Icon name="Search" className="h-5 w-5 text-feature-users icon-enhanced" />
                     البحث والاستكشاف
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <Link href="/categories">
                     <Button variant="outline" className="btn-professional w-full border-feature-users text-feature-users hover:bg-feature-users-soft">
-                      <Search className="h-4 w-4 ml-2" />
+                      <Icon name="Search" className="h-4 w-4 ml-2" />
                       تصفح المنتجات
                     </Button>
                   </Link>
@@ -108,7 +108,7 @@ export default function NotFound() {
             <Card className="shadow-md border-l-4 border-l-feature-commerce card-hover-effect">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-xl">
-                  <HelpCircle className="h-5 w-5 text-feature-commerce icon-enhanced" />
+                  <Icon name="HelpCircle" className="h-5 w-5 text-feature-commerce icon-enhanced" />
                   روابط مفيدة
                 </CardTitle>
               </CardHeader>
@@ -120,7 +120,7 @@ export default function NotFound() {
                       size="sm"
                       className="btn-professional w-full justify-start hover:bg-feature-analytics-soft"
                     >
-                      <Home className="h-4 w-4 ml-2" />
+                      <Icon name="Home" className="h-4 w-4 ml-2" />
                       الرئيسية
                     </Button>
                   </Link>
@@ -131,7 +131,7 @@ export default function NotFound() {
                       size="sm"
                       className="btn-professional w-full justify-start hover:bg-feature-products-soft"
                     >
-                      <Search className="h-4 w-4 ml-2" />
+                      <Icon name="Search" className="h-4 w-4 ml-2" />
                       المنتجات
                     </Button>
                   </Link>
@@ -142,7 +142,7 @@ export default function NotFound() {
                       size="sm"
                       className="btn-professional w-full justify-start hover:bg-feature-users-soft"
                     >
-                      <HelpCircle className="h-4 w-4 ml-2" />
+                      <Icon name="HelpCircle" className="h-4 w-4 ml-2" />
                       من نحن
                     </Button>
                   </Link>
@@ -153,7 +153,7 @@ export default function NotFound() {
                       size="sm"
                       className="btn-professional w-full justify-start hover:bg-feature-commerce-soft"
                     >
-                      <AlertTriangle className="h-4 w-4 ml-2" />
+                      <Icon name="AlertTriangle" className="h-4 w-4 ml-2" />
                       اتصل بنا
                     </Button>
                   </Link>
@@ -169,7 +169,7 @@ export default function NotFound() {
                 onClick={() => window.location.reload()}
                 className="btn-professional hover:bg-feature-settings-soft"
               >
-                <RefreshCw className="h-4 w-4 ml-2" />
+                <Icon name="RefreshCw" className="h-4 w-4 ml-2" />
                 إعادة تحميل
               </Button>
 
@@ -179,7 +179,7 @@ export default function NotFound() {
                 onClick={() => window.history.back()}
                 className="btn-professional hover:bg-feature-analytics-soft"
               >
-                <ArrowLeft className="h-4 w-4 ml-2" />
+                <Icon name="ArrowLeft" className="h-4 w-4 ml-2" />
                 الصفحة السابقة
               </Button>
             </div>
@@ -197,7 +197,7 @@ export default function NotFound() {
               <div className="flex items-center justify-center gap-3">
                 <Link href="/contact">
                   <Button className="btn-add">
-                    <HelpCircle className="h-4 w-4 ml-2" />
+                    <Icon name="HelpCircle" className="h-4 w-4 ml-2" />
                     تواصل مع الدعم
                   </Button>
                 </Link>
@@ -207,7 +207,7 @@ export default function NotFound() {
                   className="btn-professional hover:bg-feature-commerce-soft"
                   onClick={() => window.open('mailto:support@ecommerce.com', '_blank')}
                 >
-                  <AlertTriangle className="h-4 w-4 ml-2" />
+                  <Icon name="AlertTriangle" className="h-4 w-4 ml-2" />
                   إرسال إيميل
                 </Button>
               </div>

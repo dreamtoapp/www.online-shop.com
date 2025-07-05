@@ -1,11 +1,11 @@
 // app/dashboard/orders-management/status/canceled/page.tsx
 
-import { XCircle } from 'lucide-react';
 import { Metadata } from 'next';
 
 import { ORDER_STATUS } from '@/constant/order-status';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Icon } from '@/components/icons/Icon';
 import BackButton from '@/components/BackButton';
 
 import {
@@ -26,7 +26,7 @@ function PageHeader({ analytics }: { analytics?: number }) {
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <XCircle className="h-6 w-6 text-red-600" />
+            <Icon name="XCircle" className="h-6 w-6 text-red-600" />
             <span className="text-2xl font-bold">الطلبات الملغية</span>
           </div>
           {analytics !== undefined && (

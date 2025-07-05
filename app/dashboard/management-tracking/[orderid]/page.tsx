@@ -6,19 +6,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import {
-    MapPin,
-    User,
-    Package,
-    DollarSign,
-    Navigation,
-    Clock,
-    Truck,
-    Phone,
-    CheckCircle,
-    AlertCircle,
-    PlayCircle
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 export default async function Page({ params }: { params: Promise<{ orderid: string }> }) {
     const { orderid } = await params;
@@ -41,7 +29,7 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                         <CardHeader className="text-center pb-4">
                             <div className="flex justify-center mb-4">
                                 <div className="p-4 bg-feature-commerce-soft rounded-full">
-                                    <AlertCircle className="h-12 w-12 text-feature-commerce animate-pulse" />
+                                    <Icon name="AlertCircle" className="h-12 w-12 text-feature-commerce animate-pulse" />
                                 </div>
                             </div>
                             <CardTitle className="text-xl text-feature-commerce">لم يبدأ السائق الرحلة بعد</CardTitle>
@@ -79,12 +67,12 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                         >
                             {isActive ? (
                                 <>
-                                    <PlayCircle className="h-3 w-3 mr-1" />
+                                    <Icon name="PlayCircle" className="h-3 w-3 mr-1" />
                                     قيد التتبع
                                 </>
                             ) : (
                                 <>
-                                    <Clock className="h-3 w-3 mr-1" />
+                                    <Icon name="Clock" className="h-3 w-3 mr-1" />
                                     في الانتظار
                                 </>
                             )}
@@ -97,14 +85,14 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                 <Card className="shadow-lg border-l-4 border-l-feature-commerce card-hover-effect">
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-xl">
-                            <Package className="h-5 w-5 text-feature-commerce icon-enhanced" />
+                            <Icon name="Package" className="h-5 w-5 text-feature-commerce icon-enhanced" />
                             طلبية رقم: {trackInfo?.order.orderNumber || 'غير متوفر'}
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="flex items-center gap-3 p-3 rounded-lg bg-feature-users-soft">
-                                <User className="h-5 w-5 text-feature-users" />
+                                <Icon name="User" className="h-5 w-5 text-feature-users" />
                                 <div>
                                     <p className="text-xs text-muted-foreground font-medium">العميل</p>
                                     <p className="font-semibold text-feature-users">
@@ -114,7 +102,7 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                             </div>
 
                             <div className="flex items-center gap-3 p-3 rounded-lg bg-feature-commerce-soft">
-                                <DollarSign className="h-5 w-5 text-feature-commerce" />
+                                <Icon name="DollarSign" className="h-5 w-5 text-feature-commerce" />
                                 <div>
                                     <p className="text-xs text-muted-foreground font-medium">إجمالي المبلغ</p>
                                     <p className="font-semibold text-feature-commerce">
@@ -124,7 +112,7 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                             </div>
 
                             <div className="flex items-center gap-3 p-3 rounded-lg bg-feature-suppliers-soft">
-                                <Truck className="h-5 w-5 text-feature-suppliers" />
+                                <Icon name="Truck" className="h-5 w-5 text-feature-suppliers" />
                                 <div>
                                     <p className="text-xs text-muted-foreground font-medium">السائق</p>
                                     <p className="font-semibold text-feature-suppliers">
@@ -141,7 +129,7 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                     <Card className="shadow-lg border-l-4 border-l-feature-suppliers card-hover-effect">
                         <CardHeader className="pb-4">
                             <CardTitle className="flex items-center gap-2 text-xl">
-                                <Truck className="h-5 w-5 text-feature-suppliers icon-enhanced" />
+                                <Icon name="Truck" className="h-5 w-5 text-feature-suppliers icon-enhanced" />
                                 معلومات السائق
                             </CardTitle>
                         </CardHeader>
@@ -158,7 +146,7 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                                         <div className="flex items-center gap-2">
                                             <span className="font-semibold">{trackInfo.driver.phone}</span>
                                             <Button variant="outline" size="sm">
-                                                <Phone className="h-3 w-3" />
+                                                <Icon name="Phone" className="h-3 w-3" />
                                             </Button>
                                         </div>
                                     </div>
@@ -196,13 +184,13 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                                 >
                                     {isActive ? (
                                         <>
-                                            <CheckCircle className="h-4 w-4 mr-2" />
+                                            <Icon name="CheckCircle" className="h-4 w-4 mr-2" />
                                             متصل ونشط
                                         </>
                                     ) : (
                                         <>
-                                            <Clock className="h-4 w-4 mr-2" />
-                                            لم يبدأ بعد
+                                            <Icon name="Clock" className="h-4 w-4 mr-2" />
+                                            في الانتظار
                                         </>
                                     )}
                                 </Badge>
@@ -214,7 +202,7 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                     <Card className="shadow-lg border-l-4 border-l-feature-analytics card-hover-effect">
                         <CardHeader className="pb-4">
                             <CardTitle className="flex items-center gap-2 text-xl">
-                                <Clock className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                                <Icon name="Clock" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                                 مراحل الطلبية
                             </CardTitle>
                         </CardHeader>
@@ -269,7 +257,7 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                 <Card className="shadow-lg border-l-4 border-l-feature-analytics card-hover-effect">
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-xl">
-                            <MapPin className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                            <Icon name="MapPin" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                             موقع التوصيل المباشر
                         </CardTitle>
                     </CardHeader>
@@ -292,7 +280,7 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
 
                                 <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
                                     <div className="flex items-center gap-2">
-                                        <Navigation className="h-4 w-4 text-feature-analytics" />
+                                        <Icon name="Navigation" className="h-4 w-4 text-feature-analytics" />
                                         <span className="text-sm font-medium">الإحداثيات الحالية</span>
                                     </div>
                                     <div className="text-sm font-mono bg-background px-3 py-1 rounded border">
@@ -306,7 +294,7 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                             </div>
                         ) : (
                             <div className="flex flex-col items-center justify-center h-96 w-full rounded-lg bg-muted border-2 border-dashed border-border">
-                                <MapPin className="h-12 w-12 text-muted-foreground mb-4" />
+                                <Icon name="MapPin" className="h-12 w-12 text-muted-foreground mb-4" />
                                 <p className="text-center text-muted-foreground mb-2">الموقع غير متوفر</p>
                                 <p className="text-center text-sm text-muted-foreground">
                                     سيظهر الموقع المباشر عند بدء السائق بالرحلة
@@ -321,7 +309,7 @@ export default async function Page({ params }: { params: Promise<{ orderid: stri
                     <Card className="shadow-lg border-l-4 border-l-feature-products card-hover-effect">
                         <CardHeader className="pb-4">
                             <CardTitle className="flex items-center gap-2 text-xl">
-                                <Package className="h-5 w-5 text-feature-products icon-enhanced" />
+                                <Icon name="Package" className="h-5 w-5 text-feature-products icon-enhanced" />
                                 محتويات الطلبية ({trackInfo.order.items.length} منتج)
                             </CardTitle>
                         </CardHeader>

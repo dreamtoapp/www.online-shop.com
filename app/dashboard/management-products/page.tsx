@@ -1,6 +1,6 @@
-import { Package, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Icon } from '@/components/icons/Icon';
 import { fetchFilteredProducts } from './actions/fetchFilteredProducts';
 import PaginationControls from './components/PaginationControls';
 import ProductCard from './components/ProductCard';
@@ -44,7 +44,7 @@ export default async function ProductsControlPage(props: { searchParams: SearchP
       <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
         <div className="flex items-start gap-4">
           <div className="flex items-center gap-3">
-            <Package className="h-8 w-8 text-feature-products icon-enhanced" />
+            <Icon name="Package" className="h-8 w-8 text-feature-products icon-enhanced" />
             <div>
               <h1 className="text-3xl font-bold text-primary">إدارة المنتجات</h1>
               <p className="text-sm text-muted-foreground mt-1">
@@ -57,7 +57,7 @@ export default async function ProductsControlPage(props: { searchParams: SearchP
         {/* Enhanced Add Product Button */}
         <Button asChild className="btn-add gap-2 shadow-lg card-hover-effect">
           <Link href="/dashboard/management-products/new">
-            <Plus className="h-5 w-5 icon-enhanced" />
+            <Icon name="Plus" className="h-5 w-5 icon-enhanced" />
             إضافة منتج جديد
           </Link>
         </Button>
@@ -97,7 +97,7 @@ export default async function ProductsControlPage(props: { searchParams: SearchP
         /* Enhanced Empty State */
         <Card className="shadow-lg border-l-4 border-l-feature-products card-hover-effect">
           <CardContent className="p-12 text-center">
-            <Package className="h-16 w-16 text-feature-products/50 mx-auto mb-4 icon-enhanced" />
+            <Icon name="Package" className="h-16 w-16 text-feature-products/50 mx-auto mb-4 icon-enhanced" />
             <h3 className="text-xl font-semibold text-foreground mb-2">
               لا توجد منتجات متاحة
             </h3>
@@ -110,7 +110,7 @@ export default async function ProductsControlPage(props: { searchParams: SearchP
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button asChild className="btn-add gap-2">
                 <Link href="/dashboard/management-products/new">
-                  <Plus className="h-4 w-4" />
+                  <Icon name="Plus" className="h-4 w-4" />
                   إضافة منتج جديد
                 </Link>
               </Button>

@@ -1,6 +1,6 @@
 // app/dashboard/orders-management/status/pending/page.tsx
 
-import { Clock, MousePointerBan, UserCheck } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { PageProps } from '@/types/commonTypes';
 import { OrderStatus } from '@prisma/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -69,7 +69,7 @@ export default async function PendingOrdersPage({
             <div className="flex items-center gap-3">
               <div className="h-8 w-1 bg-yellow-500 rounded-full"></div>
               <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                <MousePointerBan className="h-6 w-6 text-yellow-500" />
+                <Icon name="MousePointerBan" className="h-6 w-6 text-yellow-500" />
                 إدارة الطلبات قيد الانتظار
               </h1>
             </div>
@@ -77,7 +77,7 @@ export default async function PendingOrdersPage({
 
           {/* Status Badge */}
           <Badge variant="outline" className="bg-yellow-50 text-yellow-700 border-yellow-200 gap-2">
-            <Clock className="h-4 w-4" />
+            <Icon name="Clock" className="h-4 w-4" />
             الإجمالي: {pendingAnalytics + assignedAnalytics}
           </Badge>
         </div>
@@ -90,7 +90,7 @@ export default async function PendingOrdersPage({
             <Card className="shadow-lg border-l-4 border-l-yellow-500">
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2 text-lg">
-                  <MousePointerBan className="h-5 w-5 text-yellow-500" />
+                  <Icon name="MousePointerBan" className="h-5 w-5 text-yellow-500" />
                   الطلبات قيد الانتظار - تحتاج تخصيص سائق
                 </CardTitle>
               </CardHeader>
@@ -102,7 +102,7 @@ export default async function PendingOrdersPage({
                         <p className="text-sm font-medium text-yellow-700">العدد الإجمالي</p>
                         <p className="text-2xl font-bold text-yellow-600">{pendingAnalytics}</p>
                       </div>
-                      <MousePointerBan className="h-8 w-8 text-yellow-500" />
+                      <Icon name="MousePointerBan" className="h-8 w-8 text-yellow-500" />
                     </div>
                   </div>
 
@@ -112,7 +112,7 @@ export default async function PendingOrdersPage({
                         <p className="text-sm font-medium text-blue-700">في الصفحة الحالية</p>
                         <p className="text-2xl font-bold text-blue-600">{activeTab === 'pending' ? orders.orders.length : 0}</p>
                       </div>
-                      <Clock className="h-8 w-8 text-blue-500" />
+                      <Icon name="Clock" className="h-8 w-8 text-blue-500" />
                     </div>
                   </div>
 
@@ -122,7 +122,7 @@ export default async function PendingOrdersPage({
                         <p className="text-sm font-medium text-red-700">تحتاج معالجة فورية</p>
                         <p className="text-2xl font-bold text-red-600">{Math.ceil(pendingAnalytics * 0.4)}</p>
                       </div>
-                      <MousePointerBan className="h-8 w-8 text-red-500" />
+                      <Icon name="MousePointerBan" className="h-8 w-8 text-red-500" />
                     </div>
                   </div>
 
@@ -165,7 +165,7 @@ export default async function PendingOrdersPage({
             <Card className="shadow-lg border-l-4 border-l-blue-500">
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2 text-lg">
-                  <UserCheck className="h-5 w-5 text-blue-500" />
+                  <Icon name="UserCheck" className="h-5 w-5 text-blue-500" />
                   الطلبات المُخصصة للسائقين - جاهزة للتوصيل
                 </CardTitle>
               </CardHeader>
@@ -177,7 +177,7 @@ export default async function PendingOrdersPage({
                         <p className="text-sm font-medium text-blue-700">العدد الإجمالي</p>
                         <p className="text-2xl font-bold text-blue-600">{assignedAnalytics}</p>
                       </div>
-                      <UserCheck className="h-8 w-8 text-blue-500" />
+                      <Icon name="UserCheck" className="h-8 w-8 text-blue-500" />
                     </div>
                   </div>
 
@@ -187,7 +187,7 @@ export default async function PendingOrdersPage({
                         <p className="text-sm font-medium text-green-700">في الصفحة الحالية</p>
                         <p className="text-2xl font-bold text-green-600">{activeTab === 'assigned' ? orders.orders.length : 0}</p>
                       </div>
-                      <Clock className="h-8 w-8 text-green-500" />
+                      <Icon name="Clock" className="h-8 w-8 text-green-500" />
                     </div>
                   </div>
 
@@ -197,7 +197,7 @@ export default async function PendingOrdersPage({
                         <p className="text-sm font-medium text-indigo-700">جاهزة للانطلاق</p>
                         <p className="text-2xl font-bold text-indigo-600">{assignedAnalytics}</p>
                       </div>
-                      <UserCheck className="h-8 w-8 text-indigo-500" />
+                      <Icon name="UserCheck" className="h-8 w-8 text-indigo-500" />
                     </div>
                   </div>
 
@@ -246,7 +246,7 @@ export default async function PendingOrdersPage({
         <Card className="shadow-lg border-l-4 border-l-red-500">
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-lg text-red-600">
-              <MousePointerBan className="h-5 w-5" />
+              <Icon name="MousePointerBan" className="h-5 w-5" />
               خطأ في تحميل الطلبات
             </CardTitle>
           </CardHeader>
@@ -255,7 +255,7 @@ export default async function PendingOrdersPage({
               <h3 className="text-xl font-semibold text-red-700 mb-2">حدث خطأ أثناء تحميل الطلبات قيد الانتظار</h3>
               <p className="text-red-600 mb-4">يرجى المحاولة مرة أخرى لاحقاً أو الاتصال بالدعم الفني.</p>
               <Badge variant="destructive" className="gap-2">
-                <Clock className="h-4 w-4" />
+                <Icon name="Clock" className="h-4 w-4" />
                 خطأ في التحميل
               </Badge>
             </div>

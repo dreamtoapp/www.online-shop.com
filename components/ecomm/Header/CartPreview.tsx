@@ -1,6 +1,5 @@
 "use client";
 import Image from 'next/image';
-import { ShoppingBag, Trash2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -9,6 +8,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { CartWithItems } from '@/app/(e-comm)/cart/actions/cartServerActions';
 import QuantityControls from '@/components/cart/QuantityControls';
 import { useOptimisticCart } from '@/lib/hooks/useOptimisticCart';
+import { Icon } from '@/components/icons/Icon';
 
 interface CartPreviewProps {
     cart: CartWithItems | null;
@@ -35,7 +35,7 @@ export default function CartPreview({ cart, closePopover, hideHeader = false }: 
             {!hideHeader && (
                 <CardHeader className="pb-4">
                     <CardTitle className="flex items-center gap-2 text-xl">
-                        <ShoppingBag className="h-5 w-5 text-feature-commerce icon-enhanced" />
+                        <Icon name="ShoppingBag" className="h-5 w-5 text-feature-commerce icon-enhanced" />
                         سلة التسوق
                     </CardTitle>
                 </CardHeader>
@@ -44,14 +44,14 @@ export default function CartPreview({ cart, closePopover, hideHeader = false }: 
                 {isEmpty ? (
                     <div className="flex flex-col items-center justify-center text-center py-10">
                         <div className="mb-4 rounded-full bg-feature-commerce-soft p-4 text-feature-commerce">
-                            <ShoppingBag className="h-10 w-10 icon-enhanced" />
+                            <Icon name="ShoppingBag" className="h-10 w-10 icon-enhanced" />
                         </div>
                         <h3 className="text-lg font-semibold text-foreground">سلتك فارغة!</h3>
                         <p className="mt-1 text-sm text-muted-foreground">لم تقم بإضافة أي منتجات بعد.</p>
                         <Button asChild className="mt-6 w-full btn-view-outline" onClick={closePopover}>
                             <Link href="/categories">
                                 ابدأ التسوق
-                                <ArrowLeft className="mr-2 h-4 w-4" />
+                                <Icon name="ArrowLeft" className="mr-2 h-4 w-4" />
                             </Link>
                         </Button>
                     </div>
@@ -100,7 +100,7 @@ export default function CartPreview({ cart, closePopover, hideHeader = false }: 
                                                     onClick={() => remove(item.productId)}
                                                     aria-label="حذف المنتج من السلة"
                                                 >
-                                                    <Trash2 className="h-4 w-4" />
+                                                    <Icon name="Trash2" className="h-4 w-4" />
                                                 </Button>
                                             </div>
                                         </div>

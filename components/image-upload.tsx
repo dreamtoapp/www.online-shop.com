@@ -5,14 +5,7 @@ import React, {
   useState,
 } from 'react';
 
-import {
-  AlertCircle,
-  ImageOff,
-  Trash2,
-  UploadCloud,
-  X,
-  ZoomIn,
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import Image from 'next/image';
 import type { Accept } from 'react-dropzone';
 import { useDropzone } from 'react-dropzone';
@@ -25,7 +18,6 @@ import {
 } from '@/components/ui/dialog';
 import {
   cn,
-  iconVariants,
 } from '@/lib/utils';
 
 // import fallbackImage from '@/public/fallback/fallback.avif';
@@ -199,7 +191,7 @@ function ImageUploadButton({
       onClick={open}
       disabled={disabled}
     >
-      {icon || <UploadCloud className={iconVariants({ size: 'sm' })} />}
+      {icon || <Icon name="UploadCloud" size="sm" />}
       <span>{label}</span>
     </Button>
   );
@@ -271,7 +263,7 @@ function ImagePreview({
               tabIndex={0}
               aria-label='تكبير الصورة'
             >
-              {icon || <ZoomIn className={iconVariants({ size: 'sm' })} />}
+              {icon || <Icon name="ZoomIn" size="sm" />}
             </button>
             <button
               type='button'
@@ -280,13 +272,13 @@ function ImagePreview({
               tabIndex={0}
               aria-label='حذف الصورة'
             >
-              <Trash2 className={iconVariants({ size: 'sm', variant: 'destructive' })} />
+              <Icon name="Trash2" size="sm" variant="destructive" />
             </button>
           </div>
         </>
       ) : (
         <div className='absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/60'>
-          <UploadCloud className={iconVariants({ size: 'lg', className: 'text-primary/70' })} />
+          <Icon name="UploadCloud" size="lg" className="text-primary/70" />
           <span className='text-xs font-medium text-muted-foreground'>
             {i18n.noImage}
           </span>
@@ -512,7 +504,7 @@ const ImageUpload = ({
                 {errors[index]?.length > 0 && (
                   <ImageErrorMessage
                     errors={errors[index]}
-                    icon={icons?.error || <ImageOff className={iconVariants({ size: 'xs' })} />}
+                    icon={icons?.error || <Icon name="ImageOff" size="xs" />}
                   />
                 )}
               </div>
@@ -565,7 +557,7 @@ const ImageUpload = ({
           aria-expanded={showHint}
           aria-controls='image-upload-hint'
         >
-          {showHint ? <X className={iconVariants({ size: 'xs' })} /> : <AlertCircle className={iconVariants({ size: 'xs' })} />}
+          {showHint ? <Icon name="X" size="xs" /> : <Icon name="AlertCircle" size="xs" />}
         </button>
         <div className='flex-1'>
           <ImageUploadButton
@@ -608,7 +600,7 @@ const ImageUpload = ({
       <ImageActions customActions={customActions} />
       <ImageErrorMessage
         errors={allErrors}
-        icon={icons?.error || <ImageOff className={iconVariants({ size: 'xs' })} />}
+        icon={icons?.error || <Icon name="ImageOff" size="xs" />}
       />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

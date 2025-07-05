@@ -6,25 +6,6 @@ import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 
 import {
-    XCircle,
-    ChevronLeft,
-    ChevronRight,
-    Search,
-    Download,
-    Filter,
-    DollarSign,
-    Users,
-    Truck,
-    Eye,
-    BarChart3,
-    Phone,
-    User,
-    Package,
-    RefreshCw,
-    AlertTriangle,
-    Clock,
-} from 'lucide-react';
-import {
     usePathname,
     useRouter,
     useSearchParams,
@@ -45,6 +26,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { Icon } from '@/components/icons/Icon';
 import { cn } from '@/lib/utils';
 import { Order } from '@/types/databaseTypes';
 import { Badge } from '@/components/ui/badge';
@@ -214,7 +196,7 @@ export default function CanceledOrdersView({
                     disabled={currentPage === 1}
                     className="h-8 w-8 p-0"
                 >
-                    <ChevronRight className="h-4 w-4" />
+                    <Icon name="ChevronRight" className="h-4 w-4" />
                 </Button>
 
                 {pages}
@@ -226,7 +208,7 @@ export default function CanceledOrdersView({
                     disabled={currentPage === totalPages}
                     className="h-8 w-8 p-0"
                 >
-                    <ChevronLeft className="h-4 w-4" />
+                    <Icon name="ChevronLeft" className="h-4 w-4" />
                 </Button>
             </div>
         );
@@ -378,7 +360,7 @@ export default function CanceledOrdersView({
                                 </span>
                             </div>
                             <div className="p-3 bg-destructive/10 rounded-xl">
-                                <DollarSign className="h-6 w-6 text-destructive" />
+                                <Icon name="DollarSign" className="h-6 w-6 text-destructive" />
                             </div>
                         </div>
                     </CardContent>
@@ -397,7 +379,7 @@ export default function CanceledOrdersView({
                                 </div>
                             </div>
                             <div className="p-3 bg-feature-users-soft rounded-xl">
-                                <Users className="h-6 w-6 text-feature-users" />
+                                <Icon name="Users" className="h-6 w-6 text-feature-users" />
                             </div>
                         </div>
                     </CardContent>
@@ -416,7 +398,7 @@ export default function CanceledOrdersView({
                                 </div>
                             </div>
                             <div className="p-3 bg-feature-suppliers-soft rounded-xl">
-                                <Truck className="h-6 w-6 text-feature-suppliers" />
+                                <Icon name="Truck" className="h-6 w-6 text-feature-suppliers" />
                             </div>
                         </div>
                     </CardContent>
@@ -432,7 +414,7 @@ export default function CanceledOrdersView({
                                 </span>
                             </div>
                             <div className="p-3 bg-feature-analytics-soft rounded-xl">
-                                <BarChart3 className="h-6 w-6 text-feature-analytics" />
+                                <Icon name="BarChart3" className="h-6 w-6 text-feature-analytics" />
                             </div>
                         </div>
                     </CardContent>
@@ -446,10 +428,10 @@ export default function CanceledOrdersView({
                         {/* Search */}
                         <form onSubmit={handleSearch} className="flex items-center gap-2 flex-1 max-w-md">
                             <div className="relative flex-1">
-                                <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                                <Icon name="Search" className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                                 <Input
                                     type="search"
-                                    placeholder="بحث برقم الطلب أو اسم العميل..."
+                                    placeholder="البحث في الطلبات..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                     className="pr-10"
@@ -460,34 +442,34 @@ export default function CanceledOrdersView({
                         {/* Filters */}
                         <div className="flex items-center gap-2 flex-wrap">
                             <div className="flex items-center gap-2">
-                                <AlertTriangle className="h-4 w-4 text-muted-foreground" />
+                                <Icon name="AlertTriangle" className="h-4 w-4 text-muted-foreground" />
                                 <span className="text-sm text-foreground">سبب الإلغاء:</span>
                                 <Select value={selectedReason} onValueChange={handleReasonChange}>
-                                    <SelectTrigger className="w-[180px]">
-                                        <SelectValue placeholder="جميع الأسباب" />
+                                    <SelectTrigger className="w-40">
+                                        <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="all">جميع الأسباب</SelectItem>
-                                        <SelectItem value="customer_request">طلب العميل</SelectItem>
+                                        <SelectItem value="customer">طلب العميل</SelectItem>
                                         <SelectItem value="out_of_stock">نفاد المخزون</SelectItem>
                                         <SelectItem value="delivery_issue">مشكلة في التوصيل</SelectItem>
-                                        <SelectItem value="payment_failed">فشل الدفع</SelectItem>
+                                        <SelectItem value="payment_issue">مشكلة في الدفع</SelectItem>
                                         <SelectItem value="other">أسباب أخرى</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
 
                             <div className="flex items-center gap-2">
-                                <Filter className="h-4 w-4 text-muted-foreground" />
+                                <Icon name="Filter" className="h-4 w-4 text-muted-foreground" />
                                 <span className="text-sm text-foreground">ترتيب:</span>
                                 <Select value={sortBy} onValueChange={handleSortChange}>
-                                    <SelectTrigger className="w-[150px]">
+                                    <SelectTrigger className="w-40">
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="canceledAt">تاريخ الإلغاء</SelectItem>
                                         <SelectItem value="amount">المبلغ</SelectItem>
-                                        <SelectItem value="orderNumber">رقم الطلب</SelectItem>
+                                        <SelectItem value="customer">اسم العميل</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
@@ -498,7 +480,7 @@ export default function CanceledOrdersView({
                                 size="sm"
                                 className="gap-2"
                             >
-                                <Download className="h-4 w-4" />
+                                <Icon name="Download" className="h-4 w-4" />
                                 تصدير CSV
                             </Button>
                         </div>
@@ -522,7 +504,7 @@ export default function CanceledOrdersView({
                                             </div>
                                             <div>
                                                 <div className="flex items-center gap-1">
-                                                    <XCircle className="h-4 w-4 text-destructive" />
+                                                    <Icon name="XCircle" className="h-4 w-4 text-destructive" />
                                                     <span className="font-mono text-sm font-semibold text-destructive">
                                                         {order.orderNumber || '—'}
                                                     </span>
@@ -535,15 +517,21 @@ export default function CanceledOrdersView({
                                     <div className="md:col-span-3">
                                         <div className="space-y-1">
                                             <div className="flex items-center gap-2">
-                                                <User className="h-4 w-4 text-muted-foreground" />
+                                                <Icon name="User" className="h-4 w-4 text-muted-foreground" />
                                                 <span className="font-medium">
                                                     {order.customer?.name || order.customer?.email || 'غير معروف'}
                                                 </span>
                                             </div>
                                             {order.customer?.phone && (
                                                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                                    <Phone className="h-3 w-3" />
+                                                    <Icon name="Phone" className="h-3 w-3" />
                                                     <span className="font-mono">{order.customer.phone}</span>
+                                                </div>
+                                            )}
+                                            {order.items && (
+                                                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                                    <Icon name="Package" className="h-3 w-3" />
+                                                    <span>{order.items.length} منتج</span>
                                                 </div>
                                             )}
                                         </div>
@@ -555,19 +543,13 @@ export default function CanceledOrdersView({
                                             <div className="text-lg font-bold text-destructive" style={{ fontFamily: 'monospace' }}>
                                                 {formatCurrency(order.amount || 0)}
                                             </div>
-                                            {order.items && (
-                                                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                                    <Package className="h-3 w-3" />
-                                                    <span>{order.items.length} منتج</span>
-                                                </div>
-                                            )}
                                         </div>
                                     </div>
 
                                     {/* Cancellation Date */}
                                     <div className="md:col-span-3">
                                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                            <Clock className="h-4 w-4" />
+                                            <Icon name="Clock" className="h-4 w-4" />
                                             <span>{formatDate(String(order.updatedAt))}</span>
                                         </div>
                                     </div>
@@ -582,12 +564,12 @@ export default function CanceledOrdersView({
                                                 disabled={loading}
                                                 className="gap-2 text-emerald-600 border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700"
                                             >
-                                                <RefreshCw className={cn("h-4 w-4", loading && "animate-spin")} />
+                                                <Icon name="RefreshCw" className={cn("h-4 w-4", loading && "animate-spin")} />
                                                 استعادة
                                             </Button>
                                             <Link href={`/dashboard/show-invoice/${order.id}`}>
                                                 <Button variant="outline" size="sm" className="gap-2">
-                                                    <Eye className="h-4 w-4" />
+                                                    <Icon name="Eye" className="h-4 w-4" />
                                                     تفاصيل
                                                 </Button>
                                             </Link>
@@ -610,7 +592,7 @@ export default function CanceledOrdersView({
                 <Card className="border-dashed border-2 border-border">
                     <CardContent className="flex flex-col items-center justify-center py-12">
                         <div className="w-20 h-20 bg-destructive/10 rounded-full flex items-center justify-center mb-4">
-                            <XCircle className="h-10 w-10 text-destructive/60" />
+                            <Icon name="XCircle" className="h-10 w-10 text-destructive/60" />
                         </div>
                         <h3 className="text-lg font-medium text-foreground mb-2">لا توجد طلبات ملغية</h3>
                         <p className="text-sm text-muted-foreground text-center mb-4">

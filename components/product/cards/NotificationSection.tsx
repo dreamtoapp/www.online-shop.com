@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, memo } from 'react';
-import { Check, X, ShoppingCart, Heart } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 interface NotificationProps {
     show: boolean;
@@ -41,7 +41,7 @@ const NotificationSection = memo(({
         switch (type) {
             case 'add':
                 return {
-                    icon: <ShoppingCart className="h-4 w-4" />,
+                    icon: <Icon name="ShoppingCart" size="sm" />,
                     bgColor: 'bg-green-500 dark:bg-green-600',
                     textColor: 'text-white',
                     borderColor: 'border-green-400 dark:border-green-500',
@@ -49,7 +49,7 @@ const NotificationSection = memo(({
                 };
             case 'remove':
                 return {
-                    icon: <X className="h-4 w-4" />,
+                    icon: <Icon name="X" size="sm" />,
                     bgColor: 'bg-red-500 dark:bg-red-600',
                     textColor: 'text-white',
                     borderColor: 'border-red-400 dark:border-red-500',
@@ -57,7 +57,7 @@ const NotificationSection = memo(({
                 };
             case 'wishlist-add':
                 return {
-                    icon: <Heart className="h-4 w-4 fill-current" />,
+                    icon: <Icon name="Heart" size="sm" className="fill-current" />,
                     bgColor: 'bg-pink-500 dark:bg-pink-600',
                     textColor: 'text-white',
                     borderColor: 'border-pink-400 dark:border-pink-500',
@@ -65,7 +65,7 @@ const NotificationSection = memo(({
                 };
             case 'wishlist-remove':
                 return {
-                    icon: <Heart className="h-4 w-4" />,
+                    icon: <Icon name="Heart" size="sm" />,
                     bgColor: 'bg-gray-500 dark:bg-gray-600',
                     textColor: 'text-white',
                     borderColor: 'border-gray-400 dark:border-gray-500',
@@ -73,7 +73,7 @@ const NotificationSection = memo(({
                 };
             default:
                 return {
-                    icon: <Check className="h-4 w-4" />,
+                    icon: <Icon name="Check" size="sm" />,
                     bgColor: 'bg-blue-500 dark:bg-blue-600',
                     textColor: 'text-white',
                     borderColor: 'border-blue-400 dark:border-blue-500',

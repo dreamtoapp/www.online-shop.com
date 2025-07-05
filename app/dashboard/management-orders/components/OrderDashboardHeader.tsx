@@ -1,17 +1,6 @@
 'use client';
 import { useMemo } from 'react';
-import {
-    CheckCircle,
-    MousePointerBan,
-    Package,
-    Truck,
-    X,
-    TrendingUp,
-    Calendar,
-    Clock,
-    AlertTriangle,
-    Info
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 import Link from '@/components/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -64,7 +53,7 @@ const OrderDashboardHeader = function OrderDashboardHeader({
             title: 'إجمالي الطلبات',
             value: totalOrders,
             href: '/dashboard/management-orders',
-            icon: Package,
+            icon: 'Package',
             borderColor: 'border-l-feature-commerce',
             textColor: 'text-feature-commerce',
             bgColor: 'bg-feature-commerce-soft',
@@ -77,7 +66,7 @@ const OrderDashboardHeader = function OrderDashboardHeader({
             title: 'قيد الانتظار',
             value: pendingOrders,
             href: '?status=Pending',
-            icon: MousePointerBan,
+            icon: 'MousePointerBan',
             borderColor: 'border-l-yellow-500',
             textColor: 'text-yellow-600',
             bgColor: 'bg-yellow-50',
@@ -90,7 +79,7 @@ const OrderDashboardHeader = function OrderDashboardHeader({
             title: 'في الطريق',
             value: inWaydOrders,
             href: '?status=InWay',
-            icon: Truck,
+            icon: 'Truck',
             borderColor: 'border-l-blue-500',
             textColor: 'text-blue-600',
             bgColor: 'bg-blue-50',
@@ -103,7 +92,7 @@ const OrderDashboardHeader = function OrderDashboardHeader({
             title: 'تم التسليم',
             value: deliveredOrders,
             href: '?status=Delivered',
-            icon: CheckCircle,
+            icon: 'CheckCircle',
             borderColor: 'border-l-green-500',
             textColor: 'text-green-600',
             bgColor: 'bg-green-50',
@@ -116,7 +105,7 @@ const OrderDashboardHeader = function OrderDashboardHeader({
             title: 'ملغي',
             value: cancelOrders,
             href: '?status=canceled',
-            icon: X,
+            icon: 'X',
             borderColor: 'border-l-red-500',
             textColor: 'text-red-600',
             bgColor: 'bg-red-50',
@@ -130,13 +119,13 @@ const OrderDashboardHeader = function OrderDashboardHeader({
     // Performance insights
     const getPerformanceInsight = () => {
         if (metrics.deliveryRate >= 80) {
-            return { type: 'success', message: 'أداء ممتاز في التسليم!', icon: CheckCircle };
+            return { type: 'success', message: 'أداء ممتاز في التسليم!', icon: 'CheckCircle' };
         } else if (metrics.pendingRate >= 50) {
-            return { type: 'warning', message: 'يوجد عدد كبير من الطلبات المعلقة', icon: AlertTriangle };
+            return { type: 'warning', message: 'يوجد عدد كبير من الطلبات المعلقة', icon: 'AlertTriangle' };
         } else if (metrics.cancellationRate >= 20) {
-            return { type: 'error', message: 'معدل الإلغاء مرتفع - يحتاج مراجعة', icon: X };
+            return { type: 'error', message: 'معدل الإلغاء مرتفع - يحتاج مراجعة', icon: 'X' };
         }
-        return { type: 'info', message: 'الأداء ضمن المعدل الطبيعي', icon: Info };
+        return { type: 'info', message: 'الأداء ضمن المعدل الطبيعي', icon: 'Info' };
     };
 
     const insight = getPerformanceInsight();
@@ -147,7 +136,7 @@ const OrderDashboardHeader = function OrderDashboardHeader({
             <Card className="shadow-lg border-l-4 border-l-feature-commerce">
                 <CardHeader className="pb-3">
                     <CardTitle className="flex items-center gap-2 text-lg">
-                        <Calendar className="h-5 w-5 text-feature-commerce icon-enhanced" />
+                        <Icon name="Calendar" className="h-5 w-5 text-feature-commerce icon-enhanced" />
                         حالة الطلبات
                         {totalOrders > 0 && (
                             <Badge variant="outline" className="ml-auto">
@@ -171,7 +160,7 @@ const OrderDashboardHeader = function OrderDashboardHeader({
                                             <CardContent className={cardStyle}>
                                                 <div className="flex items-center gap-2 w-full">
                                                     <div className={`p-2 rounded-lg ${card.bgColor}`}>
-                                                        <card.icon className={`h-4 w-4 ${card.iconColor} icon-enhanced`} />
+                                                        <Icon name={card.icon} className={`h-4 w-4 ${card.iconColor} icon-enhanced`} />
                                                     </div>
                                                     <div className="flex-1">
                                                         <p className="text-xs font-medium text-muted-foreground">
@@ -229,7 +218,7 @@ const OrderDashboardHeader = function OrderDashboardHeader({
             <Card className="shadow-lg border-l-4 border-l-feature-analytics">
                 <CardHeader className="pb-3">
                     <CardTitle className="flex items-center gap-2 text-lg">
-                        <TrendingUp className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                        <Icon name="TrendingUp" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                         نظرة عامة على الأداء
                     </CardTitle>
                 </CardHeader>
@@ -278,13 +267,13 @@ const OrderDashboardHeader = function OrderDashboardHeader({
 
                     {/* Performance Insight */}
                     <Alert className={`border-${insight.type === 'success' ? 'green' : insight.type === 'warning' ? 'yellow' : insight.type === 'error' ? 'red' : 'blue'}-200 py-2`}>
-                        <insight.icon className="h-4 w-4" />
+                        <Icon name={insight.icon} className="h-4 w-4" />
                         <AlertDescription className="text-sm">{insight.message}</AlertDescription>
                     </Alert>
 
                     {/* Quick Actions Hint */}
                     <Alert className="border-feature-analytics/30 py-2">
-                        <Clock className="h-4 w-4 text-feature-analytics" />
+                        <Icon name="Clock" className="h-4 w-4 text-feature-analytics" />
                         <AlertDescription className="text-xs">
                             <strong>نصيحة:</strong> انقر على أي بطاقة للتصفية حسب حالة الطلب. استخدم البحث أعلاه للعثور على طلبات محددة بسرعة.
                         </AlertDescription>

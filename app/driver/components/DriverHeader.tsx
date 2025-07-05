@@ -1,8 +1,6 @@
 'use client';
-import { Package } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import MenuList from './MenuList';
 
 interface DriverHeaderProps {
@@ -27,7 +25,7 @@ const DriverHeader = ({
       <div className='flex w-full items-center justify-between'>
         {/* Start (Right in RTL): Driver's name with icon */}
         <div className='flex items-center gap-2'>
-          <Package className={iconVariants({ size: 'xl', variant: 'muted', className: 'text-primary-foreground' })} /> {/* Use direct import + CVA (adjust size/variant if needed) */}
+          <Icon name="Package" size="xl" variant="muted" className={iconVariants({ size: 'xl', variant: 'muted', className: 'text-primary-foreground' })} />
           <span className='text-sm font-medium text-primary-foreground'>{drivername}</span>
         </div>
 

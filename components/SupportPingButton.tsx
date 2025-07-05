@@ -1,8 +1,6 @@
-
 'use client';
 import { useState, useRef, useEffect } from 'react';
-import { Zap } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
+import { Icon } from '@/components/icons/Icon';
 import { pingAdminAction } from '@/app/pingAdminAction';
 // Removed Icon import: import { Icon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
@@ -89,7 +87,7 @@ export function SupportPingButton({ userId }: SupportPingButtonProps) {
         tabIndex={0}
       >
         <span className='sr-only'>طلب دعم فوري</span>
-        <Zap className={iconVariants({ variant: 'warning', size: 'lg', animation: 'pulse', className: 'drop-shadow' })} /> {/* Use direct import + CVA */}
+        <Icon name="Zap" variant="warning" size="lg" animation="pulse" className="drop-shadow" />
         {cooldown > 0 && (
           <span
             className='absolute -right-2 -top-2 animate-pulse rounded-full bg-gray-200 px-2 py-0.5 text-xs font-bold text-blue-700 shadow'

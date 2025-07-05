@@ -1,5 +1,4 @@
 "use client";
-import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
@@ -7,6 +6,7 @@ import CartPreview from './CartPreview';
 import { useState, useEffect, useTransition } from 'react';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { motion, AnimatePresence } from "framer-motion";
+import { Icon } from '@/components/icons/Icon';
 
 import type { CartWithItems } from '@/app/(e-comm)/cart/actions/cartServerActions';
 import { getCart } from '@/app/(e-comm)/cart/actions/cartServerActions';
@@ -69,7 +69,8 @@ export default function CartIconClient() {
             disabled={isPending}
         >
             <span className="absolute inset-0 rounded-full bg-feature-commerce/30 blur-md opacity-70 pointer-events-none animate-pulse" />
-            <ShoppingCart
+            <Icon
+                name="ShoppingCart"
                 className="relative z-10 h-7 w-7 text-feature-commerce-bright icon-enhanced drop-shadow-[0_2px_8px_rgba(80,120,255,0.45)] transition-transform duration-200 group-hover:scale-110"
                 aria-label="عرض السلة"
             />

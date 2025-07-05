@@ -1,16 +1,3 @@
-import {
-  Receipt,
-  User,
-  Mail,
-  FileText,
-  Calendar,
-  DollarSign,
-  Package,
-  Calculator,
-  CheckCircle2,
-  Clock
-} from 'lucide-react';
-
 import BackButton from '@/components/BackButton';
 import {
   Card,
@@ -20,6 +7,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Icon } from '@/components/icons/Icon';
 
 import { getOrderData } from '../actions/Actions';
 import { getDriver } from '../actions/driver-list';
@@ -58,37 +46,36 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
         return {
           label: 'قيد الانتظار',
           className: 'bg-amber-50 text-amber-800 border border-amber-200',
-          icon: Clock
+          iconName: 'Clock'
         };
       case 'delivered':
         return {
           label: 'تم التوصيل',
           className: 'bg-green-50 text-green-800 border border-green-200',
-          icon: CheckCircle2
+          iconName: 'CheckCircle2'
         };
       case 'cancelled':
         return {
           label: 'ملغي',
           className: 'bg-red-50 text-red-800 border border-red-200',
-          icon: CheckCircle2
+          iconName: 'CheckCircle2'
         };
       case 'in_transit':
         return {
           label: 'في الطريق',
           className: 'bg-blue-50 text-blue-800 border border-blue-200',
-          icon: CheckCircle2
+          iconName: 'CheckCircle2'
         };
       default:
         return {
           label: status || 'غير محدد',
           className: 'bg-gray-50 text-gray-800 border border-gray-200',
-          icon: CheckCircle2
+          iconName: 'CheckCircle2'
         };
     }
   };
 
   const statusInfo = getStatusInfo(order?.status || '');
-  const StatusIcon = statusInfo.icon;
 
   return (
     <div className="font-cairo p-4 bg-background" dir="rtl">
@@ -115,7 +102,7 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
 
                   {/* Status Badge */}
                   <Badge className={`flex items-center gap-2 px-3 py-1.5 rounded-lg font-medium ${statusInfo.className}`}>
-                    <StatusIcon className="w-4 h-4" />
+                    <Icon name={statusInfo.iconName} className="w-4 h-4" />
                     {statusInfo.label}
                   </Badge>
                 </div>
@@ -147,14 +134,14 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
           <Card className="shadow-lg border-l-4 border-l-feature-users lg:col-span-1">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-xl">
-                <User className="h-5 w-5 text-feature-users icon-enhanced" />
+                <Icon name="User" className="h-5 w-5 text-feature-users icon-enhanced" />
                 معلومات العميل
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30">
-                  <User className="h-4 w-4 text-feature-users" />
+                  <Icon name="User" className="h-4 w-4 text-feature-users" />
                   <div>
                     <p className="text-sm text-muted-foreground">اسم العميل</p>
                     <p className="font-medium text-foreground">{order?.customerName}</p>
@@ -162,7 +149,7 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
                 </div>
 
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30">
-                  <Mail className="h-4 w-4 text-feature-users" />
+                  <Icon name="Mail" className="h-4 w-4 text-feature-users" />
                   <div>
                     <p className="text-sm text-muted-foreground">البريد الإلكتروني</p>
                     <p className="font-medium text-foreground">{order?.customerEmail}</p>
@@ -170,7 +157,7 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
                 </div>
 
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30">
-                  <FileText className="h-4 w-4 text-feature-users" />
+                  <Icon name="FileText" className="h-4 w-4 text-feature-users" />
                   <div>
                     <p className="text-sm text-muted-foreground">رقم الطلب</p>
                     <p className="font-medium text-foreground">{order?.orderNumber}</p>
@@ -178,7 +165,7 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
                 </div>
 
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30">
-                  <Calendar className="h-4 w-4 text-feature-users" />
+                  <Icon name="Calendar" className="h-4 w-4 text-feature-users" />
                   <div>
                     <p className="text-sm text-muted-foreground">الوردية</p>
                     <p className="font-medium text-foreground">{order?.shift}</p>
@@ -186,7 +173,7 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
                 </div>
 
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30">
-                  <CheckCircle2 className="h-4 w-4 text-feature-users" />
+                  <Icon name="CheckCircle2" className="h-4 w-4 text-feature-users" />
                   <div>
                     <p className="text-sm text-muted-foreground">حالة الطلب</p>
                     <Badge className={`rounded-md ${getStatusInfo(order?.status || '').className}`}>
@@ -202,7 +189,7 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
           <Card className="shadow-lg border-l-4 border-l-feature-products lg:col-span-2">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-xl">
-                <Package className="h-5 w-5 text-feature-products icon-enhanced" />
+                <Icon name="Package" className="h-5 w-5 text-feature-products icon-enhanced" />
                 عناصر الطلب
               </CardTitle>
             </CardHeader>
@@ -270,7 +257,7 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
           <Card className="shadow-lg border-l-4 border-l-feature-analytics lg:col-span-3">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-xl">
-                <Calculator className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                <Icon name="Calculator" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                 ملخص الفاتورة
               </CardTitle>
             </CardHeader>
@@ -278,7 +265,7 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {/* Subtotal */}
                 <div className="flex items-center gap-3 p-4 rounded-lg bg-muted/30">
-                  <DollarSign className="h-5 w-5 text-feature-analytics" />
+                  <Icon name="DollarSign" className="h-5 w-5 text-feature-analytics" />
                   <div>
                     <p className="text-sm text-muted-foreground">الإجمالي الفرعي</p>
                     <p className="text-xl font-bold text-foreground">{subtotal.toFixed(2)} ر.س</p>
@@ -287,7 +274,7 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
 
                 {/* Tax */}
                 <div className="flex items-center gap-3 p-4 rounded-lg bg-muted/30">
-                  <Calculator className="h-5 w-5 text-feature-analytics" />
+                  <Icon name="Calculator" className="h-5 w-5 text-feature-analytics" />
                   <div>
                     <p className="text-sm text-muted-foreground">الضريبة (15%)</p>
                     <p className="text-xl font-bold text-foreground">{taxAmount.toFixed(2)} ر.س</p>
@@ -296,7 +283,7 @@ export default async function InvoicePage({ params, searchParams }: ParamsProp) 
 
                 {/* Total */}
                 <div className="flex items-center gap-3 p-4 rounded-lg bg-feature-analytics-soft border border-feature-analytics md:col-span-2 lg:col-span-1">
-                  <Receipt className="h-5 w-5 text-feature-analytics" />
+                  <Icon name="Receipt" className="h-5 w-5 text-feature-analytics" />
                   <div>
                     <p className="text-sm text-feature-analytics">المبلغ الإجمالي</p>
                     <p className="text-2xl font-bold text-feature-analytics">{total.toFixed(2)} ر.س</p>

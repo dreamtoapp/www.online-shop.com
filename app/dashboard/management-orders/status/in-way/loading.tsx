@@ -1,6 +1,6 @@
-import { Truck } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card';
+import { Icon } from '@/components/icons/Icon';
 
 export default function InWayOrdersLoading() {
     return (
@@ -12,7 +12,7 @@ export default function InWayOrdersLoading() {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-2">
                 <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                        <Truck className="h-6 w-6 text-feature-commerce" />
+                        <Icon name="Truck" className="h-6 w-6 text-feature-commerce" />
                         <Skeleton className="h-8 w-48" />
                     </div>
                     <Skeleton className="h-5 w-72" />
@@ -21,7 +21,7 @@ export default function InWayOrdersLoading() {
                 <div className="flex items-center gap-3">
                     <Skeleton className="h-9 w-32" />
                     <div className="flex items-center gap-2">
-                        <Truck className="h-5 w-5 text-feature-commerce" />
+                        <Icon name="Truck" className="h-5 w-5 text-feature-commerce" />
                         <Skeleton className="h-10 w-28" />
                     </div>
                 </div>

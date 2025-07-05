@@ -1,8 +1,8 @@
 "use client";
 import { useState } from 'react';
-import { RefreshCw } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Icon } from '@/components/icons/Icon';
 import { syncOrderInWay } from '@/utils/syncOrderInWay';
 import { toast } from 'sonner';
 
@@ -29,7 +29,7 @@ export default function SyncOrderInWayButton() {
       size="sm"
       className="gap-2 transition-all duration-150 hover:shadow-md"
     >
-      <RefreshCw className={`h-4 w-4 ${syncing ? 'animate-spin' : 'icon-enhanced'}`} />
+      <Icon name="RefreshCw" className={`h-4 w-4 ${syncing ? 'animate-spin' : 'icon-enhanced'}`} />
       {syncing ? "جارٍ التحديث..." : "تحديث الطلبات"}
     </Button>
   );

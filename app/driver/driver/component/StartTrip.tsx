@@ -1,14 +1,11 @@
 'use client';
 
-import { Rocket } from 'lucide-react'; // Import directly
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
 import { Button } from '../../../../components/ui/button';
 import { startTrip } from '../action/startTrip';
+import { Icon } from '@/components/icons/Icon';
 
 interface Props {
   orderId: string;
@@ -57,7 +54,7 @@ function StartTrip({ orderId, driverId, latitude, longitude, driverName }: Props
   return (
     <Button onClick={handleStartTrip} className='flex h-12 w-1/2 items-center gap-4'>
       <p>ابداء الرحلة</p>
-      <Rocket className={iconVariants({ size: 'xl', className: 'text-white' })} /> {/* Use direct import + CVA (adjust size if needed) */}
+      <Icon name="Rocket" size="xl" className="text-white" />
     </Button>
   );
 }

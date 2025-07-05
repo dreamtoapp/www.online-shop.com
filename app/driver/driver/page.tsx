@@ -1,4 +1,3 @@
-import { RocketIcon } from 'lucide-react';
 import { OrderStatus } from '@prisma/client';
 
 import {
@@ -12,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Icon } from '@/components/icons/Icon';
 
 import DriverHeader from '../components/DriverHeader';
 
@@ -22,7 +22,7 @@ import { getOrderCount } from './action/getOrderCount';
 const NoActiveOrder = () => (
   <Card className='mx-auto mt-8 w-full max-w-md'>
     <CardHeader className='text-center'>
-      <RocketIcon className='mx-auto h-12 w-12 text-primary' />
+      <Icon name="Rocket" className='mx-auto h-12 w-12 text-primary' />
       <CardTitle>لا يوجد رحلة نشطة</CardTitle>
       <CardDescription>سيتم عرض تفاصيل الرحلة هنا عندما تصبح متاحة</CardDescription>
     </CardHeader>

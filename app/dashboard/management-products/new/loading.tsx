@@ -1,4 +1,4 @@
-import { Package, Building2, Tag, Settings } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 export default function AddProductLoading() {
   return (
@@ -22,7 +22,7 @@ export default function AddProductLoading() {
           <div className="shadow-lg border-l-4 border-l-feature-products card-hover-effect rounded-lg bg-card">
             <div className="p-6 pb-4">
               <div className="flex items-center gap-2 mb-6">
-                <Package className="h-5 w-5 text-feature-products/50 animate-pulse" />
+                <Icon name="Package" className="h-5 w-5 text-feature-products/50 animate-pulse" />
                 <div className="h-6 w-48 rounded bg-muted animate-pulse" />
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function AddProductLoading() {
           <div className="shadow-lg border-l-4 border-l-feature-suppliers card-hover-effect rounded-lg bg-card">
             <div className="p-6 pb-4">
               <div className="flex items-center gap-2 mb-6">
-                <Building2 className="h-5 w-5 text-feature-suppliers/50 animate-pulse" />
+                <Icon name="Building2" className="h-5 w-5 text-feature-suppliers/50 animate-pulse" />
                 <div className="h-6 w-32 rounded bg-muted animate-pulse" />
               </div>
             </div>
@@ -101,7 +101,7 @@ export default function AddProductLoading() {
           <div className="shadow-lg border-l-4 border-l-feature-products card-hover-effect rounded-lg bg-card">
             <div className="p-6 pb-4">
               <div className="flex items-center gap-2 mb-6">
-                <Tag className="h-5 w-5 text-feature-products/50 animate-pulse" />
+                <Icon name="Tag" className="h-5 w-5 text-feature-products/50 animate-pulse" />
                 <div className="h-6 w-32 rounded bg-muted animate-pulse" />
               </div>
             </div>
@@ -132,7 +132,7 @@ export default function AddProductLoading() {
           <div className="shadow-lg border-l-4 border-l-feature-settings card-hover-effect rounded-lg bg-card">
             <div className="p-6 pb-4">
               <div className="flex items-center gap-2 mb-6">
-                <Settings className="h-5 w-5 text-feature-settings/50 animate-pulse" />
+                <Icon name="Settings" className="h-5 w-5 text-feature-settings/50 animate-pulse" />
                 <div className="h-6 w-32 rounded bg-muted animate-pulse" />
               </div>
             </div>

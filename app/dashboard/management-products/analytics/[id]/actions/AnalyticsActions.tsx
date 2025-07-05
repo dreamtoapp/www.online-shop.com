@@ -1,9 +1,7 @@
 'use client';
-import { Printer, FileDown } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-// Removed Icon import: import { Icon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Product } from '@/types/databaseTypes';
+import { Icon } from '@/components/icons/Icon';
 
 // Re-define or import necessary types (consider moving to shared file if used elsewhere)
 interface SalesByMonthData {
@@ -61,11 +59,11 @@ export default function AnalyticsActions({ analytics, id }: { analytics: Analyti
     return (
         <div className='flex gap-2'>
             <Button variant='outline' onClick={handlePrint} title='طباعة التحليلات'>
-                <Printer className={iconVariants({ size: 'sm' })} /> {/* Use direct import + CVA */}
+                <Icon name="Printer" size="sm" className="mr-1" />
                 <span className='sr-only'>طباعة</span>
             </Button>
             <Button variant='outline' onClick={handleExport} title='تصدير التحليلات'>
-                <FileDown className={iconVariants({ size: 'sm' })} /> {/* Use direct import + CVA */}
+                <Icon name="FileDown" size="sm" className="mr-1" />
                 <span className='sr-only'>تصدير</span>
             </Button>
         </div>

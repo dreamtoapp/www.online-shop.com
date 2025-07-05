@@ -4,13 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import {
-    Heart,
-    ShoppingBag,
-    Star,
-    Percent,
-    Flame
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -78,13 +72,13 @@ export default function MobileProductGrid({
                                 )}
                                 {product.isHot && (
                                     <Badge className="bg-destructive text-destructive-foreground text-xs px-2 py-1 rounded-full flex items-center gap-1">
-                                        <Flame className="h-3 w-3" />
+                                        <Icon name="Flame" size="xs" />
                                         HOT
                                     </Badge>
                                 )}
                                 {product.discount && product.discount > 0 && (
                                     <Badge className="bg-orange-500 text-orange-50 text-xs px-2 py-1 rounded-full flex items-center gap-1">
-                                        <Percent className="h-3 w-3" />
+                                        <Icon name="Percent" size="xs" />
                                         -{product.discount}%
                                     </Badge>
                                 )}
@@ -107,7 +101,7 @@ export default function MobileProductGrid({
                                             : "bg-background/90 text-foreground hover:bg-background"
                                     )}
                                 >
-                                    <Heart className={cn("h-4 w-4", isWishlisted && "fill-current")} />
+                                    <Icon name="Heart" size="sm" className={cn(isWishlisted && "fill-current")} />
                                 </Button>
                             </div>
                         </div>
@@ -123,7 +117,7 @@ export default function MobileProductGrid({
 
                             <div className="flex items-center gap-1 mb-2">
                                 <div className="flex items-center">
-                                    <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                                    <Icon name="Star" size="xs" className="fill-yellow-400 text-yellow-400" />
                                     <span className="text-xs text-muted-foreground ml-1">
                                         {product.rating.toFixed(1)}
                                     </span>
@@ -154,7 +148,7 @@ export default function MobileProductGrid({
                                     }}
                                     className="w-8 h-8 rounded-full p-0 bg-feature-products hover:bg-feature-products/90 text-primary-foreground shadow-sm"
                                 >
-                                    <ShoppingBag className="h-4 w-4" />
+                                    <Icon name="ShoppingBag" size="sm" />
                                 </Button>
                             </div>
                         </CardContent>
@@ -182,7 +176,7 @@ export default function MobileProductGrid({
             {products.length === 0 && (
                 <div className="text-center py-12">
                     <div className="text-muted-foreground mb-4">
-                        <ShoppingBag className="h-16 w-16 mx-auto mb-4" />
+                        <Icon name="ShoppingBag" size="lg" className="mx-auto mb-4" />
                     </div>
                     <h3 className="text-lg font-medium text-foreground mb-2">
                         لا توجد منتجات

@@ -1,11 +1,7 @@
 'use client';
 
-'use client';
-import { Star } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
+import { Icon } from '@/components/icons/Icon';
 import { cn } from '@/lib/utils';
-// Removed Icon import: import { Icon } from '@/components/icons';
 import Link from '../link';
 
 interface RatingPreviewProps {
@@ -56,17 +52,16 @@ export default function RatingPreview({
     <>
       <div className='flex'>
         {stars.map((type, index) => (
-          <Star // Use direct import + CVA
+          <Icon
             key={index}
-            className={iconVariants({
-              size: iconSize <= 16 ? 'xs' : 'sm',
-              className: cn(
-                'transition-colors',
-                type === 'full' && 'fill-amber-400 text-amber-400',
-                type === 'half' && 'fill-amber-400 text-amber-400', // For half star, fill color is same, clip-path handles visual
-                type === 'empty' && 'text-gray-300', // Use a neutral color for empty
-              ),
-            })}
+            name="Star"
+            size={iconSize <= 16 ? 'xs' : 'sm'}
+            className={cn(
+              'transition-colors',
+              type === 'full' && 'fill-amber-400 text-amber-400',
+              type === 'half' && 'fill-amber-400 text-amber-400', // For half star, fill color is same, clip-path handles visual
+              type === 'empty' && 'text-gray-300', // Use a neutral color for empty
+            )}
             style={{
               clipPath: type === 'half' ? 'inset(0 50% 0 0)' : undefined, // Apply clip-path only for half stars
             }}

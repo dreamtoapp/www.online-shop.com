@@ -1,5 +1,5 @@
-import { Plus } from 'lucide-react';
 import BackButton from '@/components/BackButton';
+import { Icon } from '@/components/icons/Icon';
 import { getProductFormData, type DataFetchResult } from './actions/getProductData';
 import ProductUpsert from './components/ProductUpsert';
 import ProductFormFallback from './components/ProductFormFallback';
@@ -44,7 +44,7 @@ export default async function NewProductPage() {
           <div className="flex items-center gap-4">
             <BackButton variant="default" />
             <div className="flex items-center gap-3">
-              <Plus className="h-6 w-6 text-feature-products icon-enhanced" />
+              <Icon name="Plus" className="h-6 w-6 text-feature-products icon-enhanced" />
               <h1 className="text-2xl font-bold text-foreground">إضافة منتج جديد</h1>
             </div>
           </div>
@@ -67,7 +67,7 @@ export default async function NewProductPage() {
         <div className="flex items-center gap-4">
           <BackButton variant="default" />
           <div className="flex items-center gap-3">
-            <Plus className="h-6 w-6 text-feature-products icon-enhanced" />
+            <Icon name="Plus" className="h-6 w-6 text-feature-products icon-enhanced" />
             <h1 className="text-2xl font-bold text-foreground">إضافة منتج جديد</h1>
           </div>
         </div>

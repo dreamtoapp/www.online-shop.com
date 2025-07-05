@@ -6,8 +6,8 @@ import React, {
   useState,
 } from 'react';
 
-import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
+import { Icon } from '@/components/icons/Icon';
 
 interface AddImageProps {
   url?: string;
@@ -142,21 +142,7 @@ const AddImage: React.FC<AddImageProps> = ({
         />
       ) : (
         <div className="flex items-center justify-center w-full h-full bg-muted-foreground/10 rounded-md">
-          <svg
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="text-muted-foreground"
-          >
-            <path
-              d="M12 5v14m7-7H5"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Icon name="Plus" className="h-10 w-10 text-muted-foreground" />
         </div>
       )}
 
@@ -182,7 +168,7 @@ const AddImage: React.FC<AddImageProps> = ({
         >
           {loading ? (
             <span className="flex items-center gap-2">
-              <Loader2 className="animate-spin h-4 w-4" />
+              <Icon name="Loader2" className="animate-spin h-4 w-4" />
               {progress > 0 ? `${progress}%` : 'جاري الحفظ...'}
             </span>
           ) : (
@@ -203,7 +189,7 @@ const AddImage: React.FC<AddImageProps> = ({
 
       {/* Error message */}
       {error && (
-        <div className="absolute bottom-2 left-2 text-red-600 text-xs">
+        <div className="absolute top-2 left-2 right-2 bg-destructive text-destructive-foreground text-xs p-2 rounded shadow">
           {error}
         </div>
       )}

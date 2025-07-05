@@ -1,10 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { ChevronRight, Check, Circle } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import { cn } from '@/lib/utils';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 
@@ -36,7 +34,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <ChevronRight className={iconVariants({ size: 'xs', className: 'ml-auto' })} /> {/* Use direct import + CVA */}
+    <Icon name="ChevronRight" size="xs" className={iconVariants({ size: 'xs', className: 'ml-auto' })} />
   </DropdownMenuPrimitive.SubTrigger>
 ));
 DropdownMenuSubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName;
@@ -108,7 +106,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   >
     <span className='absolute left-2 flex h-3.5 w-3.5 items-center justify-center'>
       <DropdownMenuPrimitive.ItemIndicator>
-        <Check className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+        <Icon name="Check" size="xs" className={iconVariants({ size: 'xs' })} />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -130,7 +128,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   >
     <span className='absolute left-2 flex h-3.5 w-3.5 items-center justify-center'>
       <DropdownMenuPrimitive.ItemIndicator>
-        <Circle className={iconVariants({ size: 'xs', className: 'h-2 w-2 fill-current' })} /> {/* Use direct import + CVA */}
+        <Icon name="Circle" size="xs" className={iconVariants({ size: 'xs', className: 'h-2 w-2 fill-current' })} />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { Bell, ShieldAlert, Info, CheckCircle2, Truck, Gift, Server, AlertTriangle } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import Link from 'next/link';
 import { getUserAlerts } from '@/app/(e-comm)/actions/getUserAlerts';
 
@@ -26,13 +26,13 @@ interface NotificationDropdownProps {
 }
 
 const iconMap = {
-    warning: AlertTriangle,
-    destructive: ShieldAlert,
-    info: Info,
-    success: CheckCircle2,
-    order: Truck,
-    promo: Gift,
-    system: Server,
+    warning: 'AlertTriangle',
+    destructive: 'ShieldAlert',
+    info: 'Info',
+    success: 'CheckCircle2',
+    order: 'Truck',
+    promo: 'Gift',
+    system: 'Server',
 };
 
 const colorMap = {
@@ -45,7 +45,7 @@ const colorMap = {
     system: 'text-slate-500',
 };
 
-const fallbackIcon = Info;
+const fallbackIcon = 'Info';
 const fallbackColor = 'text-muted-foreground';
 
 export function NotificationDropdown({
@@ -114,7 +114,7 @@ export function NotificationDropdown({
                         <div className='border-t border-border max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-muted/60 scrollbar-track-transparent'>
                             {alerts.map((alert) => {
                                 const typeKey = (alert.type || '').toLowerCase();
-                                const Icon = iconMap[typeKey as keyof typeof iconMap] || fallbackIcon;
+                                const iconName = iconMap[typeKey as keyof typeof iconMap] || fallbackIcon;
                                 const textColor = colorMap[typeKey as keyof typeof colorMap] || fallbackColor;
                                 console.log(alert.title);
                                 return (
@@ -125,7 +125,7 @@ export function NotificationDropdown({
                                         onClick={() => setIsOpen(false)}
                                     >
                                         <div className='flex items-start gap-3'>
-                                            <Icon className={`h-6 w-6 flex-shrink-0 ${textColor}`} />
+                                            <Icon name={iconName} size="md" className={`flex-shrink-0 ${textColor}`} />
                                             <div className='space-y-1'>
                                                 <p className={`font-semibold ${textColor}`}>
                                                     {alert.title}
@@ -151,7 +151,7 @@ export function NotificationDropdown({
                     </>
                 ) : (
                     <div className='border-t border-border p-4 text-center text-muted-foreground'>
-                        <Bell className='mx-auto h-10 w-10 text-muted/30' />
+                        <Icon name="Bell" size="lg" className="mx-auto text-muted/30" />
                         <p className='mt-2'>لا توجد إشعارات جديدة</p>
                     </div>
                 )}

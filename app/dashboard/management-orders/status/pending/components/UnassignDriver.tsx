@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { UserX, AlertTriangle } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
@@ -61,7 +61,7 @@ export default function UnassignDriver({ orderId, driverName }: UnassignDriverPr
                     className="gap-2 border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
                     disabled={isUnassigning}
                 >
-                    <UserX className="h-4 w-4" />
+                    <Icon name="UserX" className="h-4 w-4" />
                     إلغاء التعيين
                 </Button>
             </AlertDialogTrigger>
@@ -69,7 +69,7 @@ export default function UnassignDriver({ orderId, driverName }: UnassignDriverPr
             <AlertDialogContent dir="rtl">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex items-center gap-2 text-red-600">
-                        <AlertTriangle className="h-5 w-5" />
+                        <Icon name="AlertTriangle" className="h-5 w-5" />
                         تأكيد إلغاء تعيين السائق
                     </AlertDialogTitle>
                     <AlertDialogDescription className="text-right">

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Shield, RefreshCw } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { otpViaWhatsApp, verifyTheUser, resendOTP } from '@/app/(e-comm)/auth/verify/action/otp-via-whatsapp';
 
 export default function WhatsAppOTPExample() {
@@ -122,7 +122,7 @@ export default function WhatsAppOTPExample() {
             <Card className="shadow-lg border-l-4 border-l-feature-users">
                 <CardHeader className="pb-4">
                     <CardTitle className="flex items-center gap-2 text-xl">
-                        <Shield className="h-5 w-5 text-feature-users icon-enhanced" />
+                        <Icon name="Shield" size="sm" className="text-feature-users icon-enhanced" />
                         التحقق عبر WhatsApp
                     </CardTitle>
                     <CardDescription>
@@ -158,7 +158,7 @@ export default function WhatsAppOTPExample() {
                             >
                                 {loading ? (
                                     <>
-                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        <Icon name="Loader2" size="sm" animation="spin" className="mr-2" />
                                         جاري الإرسال...
                                     </>
                                 ) : (
@@ -197,7 +197,7 @@ export default function WhatsAppOTPExample() {
                                 >
                                     {loading ? (
                                         <>
-                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                            <Icon name="Loader2" size="sm" animation="spin" className="mr-2" />
                                             جاري التحقق...
                                         </>
                                     ) : (
@@ -212,9 +212,9 @@ export default function WhatsAppOTPExample() {
                                     className="btn-view-outline"
                                 >
                                     {loading ? (
-                                        <Loader2 className="h-4 w-4 animate-spin" />
+                                        <Icon name="Loader2" size="sm" animation="spin" />
                                     ) : canResend ? (
-                                        <RefreshCw className="h-4 w-4" />
+                                        <Icon name="RefreshCw" size="sm" />
                                     ) : (
                                         formatCountdown(resendCountdown)
                                     )}
@@ -234,7 +234,7 @@ export default function WhatsAppOTPExample() {
                     {step === 'success' && (
                         <div className="text-center space-y-4">
                             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-                                <Shield className="h-8 w-8 text-green-600" />
+                                <Icon name="Shield" size="lg" className="text-green-600" />
                             </div>
                             <div>
                                 <h3 className="text-lg font-semibold text-green-600">

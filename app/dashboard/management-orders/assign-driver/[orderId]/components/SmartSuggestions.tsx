@@ -1,16 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-    Brain,
-    AlertTriangle,
-    CheckCircle,
-    Info,
-    Target,
-    ChevronDown,
-    ChevronUp,
-    Loader2
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -127,13 +118,13 @@ export default function SmartSuggestions({
             <Card className="shadow-lg border-l-4 border-l-feature-analytics">
                 <CardHeader className="pb-4">
                     <CardTitle className="flex items-center gap-2 text-xl">
-                        <Brain className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                        <Icon name="Brain" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                         اقتراحات ذكية
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="flex items-center justify-center py-8">
-                        <Loader2 className="h-6 w-6 animate-spin text-feature-analytics" />
+                        <Icon name="Loader2" className="h-6 w-6 animate-spin text-feature-analytics" />
                         <span className="mr-2 text-muted-foreground">جاري تحليل السائقين...</span>
                     </div>
                 </CardContent>
@@ -146,13 +137,13 @@ export default function SmartSuggestions({
             <Card className="shadow-lg border-l-4 border-l-feature-analytics">
                 <CardHeader className="pb-4">
                     <CardTitle className="flex items-center gap-2 text-xl">
-                        <Brain className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                        <Icon name="AlertTriangle" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                         اقتراحات ذكية
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="text-center py-6">
-                        <AlertTriangle className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
+                        <Icon name="AlertTriangle" className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
                         <p className="text-muted-foreground">لا يوجد سائقين متاحين للتحليل</p>
                     </div>
                 </CardContent>
@@ -168,7 +159,7 @@ export default function SmartSuggestions({
                         <CardTitle className="flex items-center justify-between text-xl">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 rounded-lg bg-feature-analytics/10 group-hover:bg-feature-analytics/20 transition-colors">
-                                    <Brain className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                                    <Icon name="Brain" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                                 </div>
                                 <div>
                                     <span className="text-lg font-bold">اقتراحات ذكية</span>
@@ -180,9 +171,9 @@ export default function SmartSuggestions({
                                     AI مُحسّن
                                 </Badge>
                                 {isExpanded ? (
-                                    <ChevronUp className="h-5 w-5 text-muted-foreground group-hover:text-feature-analytics transition-colors" />
+                                    <Icon name="ChevronUp" className="h-5 w-5 text-muted-foreground group-hover:text-feature-analytics transition-colors" />
                                 ) : (
-                                    <ChevronDown className="h-5 w-5 text-muted-foreground group-hover:text-feature-analytics transition-colors" />
+                                    <Icon name="ChevronDown" className="h-5 w-5 text-muted-foreground group-hover:text-feature-analytics transition-colors" />
                                 )}
                             </div>
                         </CardTitle>
@@ -199,7 +190,7 @@ export default function SmartSuggestions({
                                 <div className="relative">
                                     <div className="flex items-start gap-3">
                                         <div className="p-2 rounded-lg bg-feature-analytics/10">
-                                            <Info className="h-4 w-4 text-feature-analytics" />
+                                            <Icon name="Info" className="h-4 w-4 text-feature-analytics" />
                                         </div>
                                         <div className="flex-1">
                                             <h4 className="text-feature-analytics font-semibold mb-2 flex items-center gap-2">
@@ -236,7 +227,7 @@ export default function SmartSuggestions({
                             {/* Enhanced Top Recommendations */}
                             <div className="space-y-4">
                                 <h4 className="font-semibold text-lg flex items-center gap-2">
-                                    <Target className="h-5 w-5 text-feature-analytics" />
+                                    <Icon name="Target" className="h-5 w-5 text-feature-analytics" />
                                     أفضل الترشيحات
                                 </h4>
                                 {topDrivers.map((driver, index) => (
@@ -278,7 +269,7 @@ export default function SmartSuggestions({
                                                         </Avatar>
                                                         {index === 0 && (
                                                             <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-status-delivered rounded-full flex items-center justify-center">
-                                                                <CheckCircle className="h-3 w-3 text-white" />
+                                                                <Icon name="CheckCircle" className="h-3 w-3 text-white" />
                                                             </div>
                                                         )}
                                                     </div>
@@ -301,7 +292,7 @@ export default function SmartSuggestions({
                                                     <TooltipTrigger asChild>
                                                         <div className={`text-lg px-4 py-2 font-bold rounded-xl border-2 transition-all ${getScoreColor(driver.smartScore)} hover:scale-105`}>
                                                             <div className="flex items-center gap-2">
-                                                                <Target className="h-4 w-4" />
+                                                                <Icon name="Target" className="h-4 w-4" />
                                                                 {driver.smartScore}%
                                                             </div>
                                                         </div>
@@ -330,12 +321,12 @@ export default function SmartSuggestions({
                                                 >
                                                     {isAssigning ? (
                                                         <>
-                                                            <Loader2 className="h-5 w-5 ml-2 animate-spin" />
+                                                            <Icon name="Loader2" className="h-5 w-5 ml-2 animate-spin" />
                                                             جاري التعيين...
                                                         </>
                                                     ) : (
                                                         <>
-                                                            <CheckCircle className="h-5 w-5 ml-2" />
+                                                            <Icon name="CheckCircle" className="h-5 w-5 ml-2" />
                                                             {index === 0 ? 'تعيين السائق الأفضل' : 'تعيين هذا السائق'}
                                                         </>
                                                     )}

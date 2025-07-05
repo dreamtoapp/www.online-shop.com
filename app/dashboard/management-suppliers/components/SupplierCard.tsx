@@ -1,16 +1,12 @@
 'use client';
 
-import {
-  BarChart2,
-  Eye,
-  PackageSearch,
-} from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
 
 import AddImage from '@/components/AddImage';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Icon } from '@/components/icons/Icon';
 import { Supplier } from '@/types/databaseTypes';
 
 import DeleteSupplierAlert from './DeleteSupplierAlert';
@@ -68,7 +64,7 @@ export default function SupplierCard({
           <h3 className="text-lg font-semibold truncate" title={name}>
             {name}
           </h3>
-          <Badge variant={"outline"} className='flex items-center gap-2 text-muted-foreground'><PackageSearch className='h-4 w-4 ' />{products.length}</Badge>
+          <Badge variant={"outline"} className='flex items-center gap-2 text-muted-foreground'><Icon name="PackageSearch" className='h-4 w-4 ' />{products.length}</Badge>
         </div>
         <p className="text-sm text-muted-foreground truncate" title={email}>
           {email || '-'}
@@ -91,7 +87,7 @@ export default function SupplierCard({
 
         <Link href={`/dashboard/management-suppliers/view/${id}`}
         >
-          <Eye className="h-5 w-5" />
+          <Icon name="Eye" className="h-5 w-5" />
         </Link>
 
 
@@ -121,7 +117,7 @@ export default function SupplierCard({
           aria-label="تحليلات"
           onClick={() => alert("comeing soon")}
         >
-          <BarChart2 className="h-5 w-5" />
+          <Icon name="BarChart2" className="h-5 w-5" />
         </Button>
 
 

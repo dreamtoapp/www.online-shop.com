@@ -1,10 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { Check } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import { cn } from '@/lib/utils';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 
@@ -21,7 +19,7 @@ const Checkbox = React.forwardRef<
     {...props}
   >
     <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
-      <Check className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+      <Icon name="Check" size="xs" className={iconVariants({ size: 'xs' })} />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));

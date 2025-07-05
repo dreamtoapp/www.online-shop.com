@@ -1,7 +1,6 @@
 'use client';
-import { Trash2 } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import { Button } from '@/components/ui/button';
 
 interface CartItemProps {
@@ -11,7 +10,7 @@ interface CartItemProps {
     price: number;
   };
   quantity: number;
-  onRemove: () => void; // Function to handle item removal
+  onRemove: () => void;
 }
 
 export default function MiniCartItem({ product, quantity, onRemove }: CartItemProps) {
@@ -33,9 +32,9 @@ export default function MiniCartItem({ product, quantity, onRemove }: CartItemPr
           size='icon'
           onClick={onRemove}
           className='border-red-500 text-red-500 transition hover:bg-red-100'
-          aria-label={`حذف المنتج ${product.name}`} // ✅ Add ARIA Label
+          aria-label={`حذف المنتج ${product.name}`}
         >
-          <Trash2 className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+          <Icon name="Trash2" size="xs" className={iconVariants({ size: 'xs' })} />
         </Button>
       </div>
     </div>

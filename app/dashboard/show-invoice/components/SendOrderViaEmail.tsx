@@ -1,7 +1,5 @@
 'use client';
 import { useState } from 'react';
-
-import { Mail, Send, Copy } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { sendInvoiceEmail } from '@/app/dashboard/show-invoice/actions/sendInvoiceEmail';
@@ -17,6 +15,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Icon } from '@/components/icons/Icon';
 
 function SendOrderViaEmail({
   invoiceNumber,
@@ -53,14 +52,14 @@ function SendOrderViaEmail({
     <Dialog>
       <DialogTrigger asChild>
         <Button className="btn-add w-full sm:w-auto flex items-center gap-2 shadow-md">
-          <Mail className="h-4 w-4" />
+          <Icon name="Mail" className="h-4 w-4" />
           إرسال الفاتورة
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md" dir="rtl">
         <DialogHeader className="space-y-3">
           <DialogTitle className="flex items-center gap-2 text-xl">
-            <Send className="h-5 w-5 text-feature-commerce icon-enhanced" />
+            <Icon name="Send" className="h-5 w-5 text-feature-commerce icon-enhanced" />
             إرسال الفاتورة عبر البريد الإلكتروني
           </DialogTitle>
           <DialogDescription className="text-muted-foreground">
@@ -73,7 +72,7 @@ function SendOrderViaEmail({
           <div className="space-y-2">
             <Label className="text-sm font-medium text-foreground">البريد الإلكتروني الأساسي</Label>
             <div className="flex items-center gap-2 p-3 rounded-lg bg-green-50 border border-green-200">
-              <Mail className="h-4 w-4 text-green-600" />
+              <Icon name="Mail" className="h-4 w-4 text-green-600" />
               <span className="text-green-700 font-medium">{email}</span>
             </div>
           </div>
@@ -84,7 +83,7 @@ function SendOrderViaEmail({
               نسخة كربونية (اختياري)
             </Label>
             <div className="relative">
-              <Copy className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Icon name="Copy" className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 id="ccEmail"
                 type="email"
@@ -101,7 +100,7 @@ function SendOrderViaEmail({
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">سيتم إرسال نسخة إلى</Label>
               <div className="flex items-center gap-2 p-3 rounded-lg bg-blue-50 border border-blue-200">
-                <Copy className="h-4 w-4 text-blue-600" />
+                <Icon name="Copy" className="h-4 w-4 text-blue-600" />
                 <span className="text-blue-700 font-medium">{ccEmail}</span>
               </div>
             </div>
@@ -126,7 +125,7 @@ function SendOrderViaEmail({
               </>
             ) : (
               <>
-                <Send className="h-4 w-4" />
+                <Icon name="Send" className="h-4 w-4" />
                 تأكيد وإرسال
               </>
             )}

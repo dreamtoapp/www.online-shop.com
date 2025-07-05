@@ -1,8 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Trash2 } from 'lucide-react';
-import { FaCartPlus } from 'react-icons/fa6';
+import { Icon } from '@/components/icons/Icon';
 import QuantityControls from '@/components/cart/QuantityControls';
 
 interface ProductCardActionsProps {
@@ -65,7 +64,7 @@ const ProductCardActions = React.memo(function ProductCardActions({
                 disabled={loading || isOutOfStock}
                 aria-label={isRemoveMode ? `إزالة ${productName} من السلة` : `أضف ${productName} إلى السلة`}
             >
-                {isRemoveMode ? <Trash2 className="h-5 w-5" /> : <FaCartPlus className="h-5 w-5" />}
+                {isRemoveMode ? <Icon name="Trash2" size="sm" /> : <Icon name="FaCartPlus" size="sm" />}
                 <span className="font-semibold text-base">{buttonText}</span>
             </Button>
         </div>

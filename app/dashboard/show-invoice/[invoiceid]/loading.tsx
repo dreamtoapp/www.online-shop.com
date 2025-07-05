@@ -1,6 +1,6 @@
-import { Receipt, User, Package, Calculator } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Icon } from '@/components/icons/Icon';
 
 function Loading() {
   return (
@@ -13,7 +13,7 @@ function Loading() {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <Receipt className="h-6 w-6 text-feature-commerce" />
+                <Icon name="Receipt" className="h-6 w-6 text-feature-commerce" />
                 <Skeleton className="h-8 w-64" /> {/* Title */}
               </div>
               <Skeleton className="h-4 w-48" /> {/* Subtitle */}
@@ -33,7 +33,7 @@ function Loading() {
           <Card className="shadow-lg border-l-4 border-l-feature-users lg:col-span-1">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-xl">
-                <User className="h-5 w-5 text-feature-users" />
+                <Icon name="User" className="h-5 w-5 text-feature-users" />
                 معلومات العميل
               </CardTitle>
             </CardHeader>
@@ -56,7 +56,7 @@ function Loading() {
           <Card className="shadow-lg border-l-4 border-l-feature-products lg:col-span-2">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-xl">
-                <Package className="h-5 w-5 text-feature-products" />
+                <Icon name="Package" className="h-5 w-5 text-feature-products" />
                 عناصر الطلب
               </CardTitle>
             </CardHeader>
@@ -116,7 +116,7 @@ function Loading() {
           <Card className="shadow-lg border-l-4 border-l-feature-analytics lg:col-span-3">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-xl">
-                <Calculator className="h-5 w-5 text-feature-analytics" />
+                <Icon name="Calculator" className="h-5 w-5 text-feature-analytics" />
                 ملخص الفاتورة
               </CardTitle>
             </CardHeader>

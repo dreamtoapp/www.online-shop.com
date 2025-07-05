@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { MapPin, Package, User, Clock, Info, Calendar, CreditCard, FileText, ChevronDown, ChevronUp } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
@@ -103,7 +103,7 @@ export default function OrderSummaryPanel({ order }: OrderSummaryPanelProps) {
                 <CardTitle className="flex items-center justify-between text-xl">
                     <div className="flex items-center gap-3">
                         <div className="p-2 rounded-lg bg-feature-commerce/10">
-                            <Package className="h-5 w-5 text-feature-commerce icon-enhanced" />
+                            <Icon name="Package" className="h-5 w-5 text-feature-commerce icon-enhanced" />
                         </div>
                         <div>
                             <span className="text-lg font-bold">تفاصيل الطلب</span>
@@ -119,9 +119,9 @@ export default function OrderSummaryPanel({ order }: OrderSummaryPanelProps) {
                         className="h-8 w-8 p-0 hover:bg-feature-commerce/10 transition-all duration-200"
                     >
                         {isCollapsed ? (
-                            <ChevronDown className="h-4 w-4 text-feature-commerce icon-enhanced" />
+                            <Icon name="ChevronDown" className="h-4 w-4 text-feature-commerce icon-enhanced" />
                         ) : (
-                            <ChevronUp className="h-4 w-4 text-feature-commerce icon-enhanced" />
+                            <Icon name="ChevronUp" className="h-4 w-4 text-feature-commerce icon-enhanced" />
                         )}
                     </Button>
                 </CardTitle>
@@ -135,7 +135,7 @@ export default function OrderSummaryPanel({ order }: OrderSummaryPanelProps) {
                     <div className="bg-gradient-to-r from-feature-commerce/5 to-feature-commerce/10 rounded-xl p-4 border border-feature-commerce/20">
                         <div className="flex items-center justify-between mb-3">
                             <h4 className="font-semibold text-base flex items-center gap-2">
-                                <Info className="h-4 w-4 text-feature-commerce icon-enhanced" />
+                                <Icon name="Info" className="h-4 w-4 text-feature-commerce icon-enhanced" />
                                 حالة الطلب
                             </h4>
                             <Badge className={`px-3 py-1 rounded-lg font-medium border ${getStatusBadgeColor(order.status)}`}>
@@ -145,13 +145,13 @@ export default function OrderSummaryPanel({ order }: OrderSummaryPanelProps) {
 
                         <div className="grid grid-cols-2 gap-3 text-sm">
                             <div className="bg-background/70 rounded-lg p-3 text-center border border-border">
-                                <Calendar className="h-4 w-4 text-feature-commerce mx-auto mb-1 icon-enhanced" />
+                                <Icon name="Calendar" className="h-4 w-4 text-feature-commerce mx-auto mb-1 icon-enhanced" />
                                 <p className="text-xs text-muted-foreground mb-1">تاريخ الطلب</p>
                                 <p className="font-medium text-feature-commerce">{formatDate(order.createdAt)}</p>
                             </div>
 
                             <div className="bg-background/70 rounded-lg p-3 text-center border border-border">
-                                <Clock className="h-4 w-4 text-feature-commerce mx-auto mb-1 icon-enhanced" />
+                                <Icon name="Clock" className="h-4 w-4 text-feature-commerce mx-auto mb-1 icon-enhanced" />
                                 <p className="text-xs text-muted-foreground mb-1">الوقت</p>
                                 <p className="font-medium text-feature-commerce">{formatTime(order.createdAt)}</p>
                             </div>
@@ -161,7 +161,7 @@ export default function OrderSummaryPanel({ order }: OrderSummaryPanelProps) {
                     {/* Customer Information */}
                     <div className="bg-gradient-to-r from-feature-users/10 to-feature-users/5 rounded-xl p-4 border border-feature-users/20">
                         <h4 className="font-semibold text-base mb-3 flex items-center gap-2">
-                            <User className="h-4 w-4 text-feature-users icon-enhanced" />
+                            <Icon name="User" className="h-4 w-4 text-feature-users icon-enhanced" />
                             معلومات العميل
                         </h4>
 
@@ -181,7 +181,7 @@ export default function OrderSummaryPanel({ order }: OrderSummaryPanelProps) {
                     {/* Delivery Address */}
                     <div className="bg-gradient-to-r from-feature-analytics/10 to-feature-analytics/5 rounded-xl p-4 border border-feature-analytics/20">
                         <h4 className="font-semibold text-base mb-3 flex items-center gap-2">
-                            <MapPin className="h-4 w-4 text-feature-analytics icon-enhanced" />
+                            <Icon name="MapPin" className="h-4 w-4 text-feature-analytics icon-enhanced" />
                             عنوان التوصيل
                         </h4>
 
@@ -191,7 +191,7 @@ export default function OrderSummaryPanel({ order }: OrderSummaryPanelProps) {
                             {(order.location?.latitude && order.location?.longitude) && (
                                 <div className="mt-3 pt-3 border-t border-border">
                                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                        <MapPin className="h-3 w-3 icon-enhanced" />
+                                        <Icon name="MapPin" className="h-3 w-3 icon-enhanced" />
                                         <span>الإحداثيات:</span>
                                         <span className="font-mono text-feature-analytics" dir="ltr">
                                             {order.location.latitude.toFixed(6)}, {order.location.longitude.toFixed(6)}
@@ -205,7 +205,7 @@ export default function OrderSummaryPanel({ order }: OrderSummaryPanelProps) {
                     {/* Order Items */}
                     <div className="bg-gradient-to-r from-feature-products/10 to-feature-products/5 rounded-xl p-4 border border-feature-products/20">
                         <h4 className="font-semibold text-base mb-3 flex items-center gap-2">
-                            <Package className="h-4 w-4 text-feature-products icon-enhanced" />
+                            <Icon name="Package" className="h-4 w-4 text-feature-products icon-enhanced" />
                             منتجات الطلب ({order.items.length})
                         </h4>
 
@@ -225,7 +225,7 @@ export default function OrderSummaryPanel({ order }: OrderSummaryPanelProps) {
                                                 />
                                             ) : (
                                                 <div className="w-full h-full flex items-center justify-center">
-                                                    <Package className="h-5 w-5 text-feature-products/50 icon-enhanced" />
+                                                    <Icon name="Package" className="h-5 w-5 text-feature-products/50 icon-enhanced" />
                                                 </div>
                                             )}
                                         </div>
@@ -260,7 +260,7 @@ export default function OrderSummaryPanel({ order }: OrderSummaryPanelProps) {
                     <div className="bg-gradient-to-r from-feature-commerce/10 via-feature-commerce/5 to-feature-commerce/10 rounded-xl p-4 border-2 border-feature-commerce/30 card-border-glow">
                         <div className="flex items-center justify-between">
                             <h4 className="font-bold text-lg flex items-center gap-2">
-                                <CreditCard className="h-5 w-5 text-feature-commerce icon-enhanced" />
+                                <Icon name="CreditCard" className="h-5 w-5 text-feature-commerce icon-enhanced" />
                                 إجمالي الطلب
                             </h4>
                             <div className="text-right">
@@ -285,7 +285,7 @@ export default function OrderSummaryPanel({ order }: OrderSummaryPanelProps) {
                                 className="w-full btn-view-outline hover:scale-[1.02] transition-all duration-200"
                                 size="lg"
                             >
-                                <FileText className="h-4 w-4 ml-2 icon-enhanced" />
+                                <Icon name="FileText" className="h-4 w-4 ml-2 icon-enhanced" />
                                 عرض تفاصيل الطلب كاملة
                             </Button>
                         </Link>

@@ -1,10 +1,6 @@
 'use client';
 import { useState } from 'react';
 
-import {
-  Loader2,
-  Trash,
-} from 'lucide-react';
 import Swal from 'sweetalert2';
 
 import {
@@ -19,6 +15,7 @@ import {
 } from '@/components/ui/dialog';
 
 import { Button } from '../../../../components/ui/button';
+import { Icon } from '@/components/icons/Icon';
 import { deleteSupplier } from '../actions/deleteSupplier';
 
 interface DeleteSupplierAlertProps {
@@ -74,7 +71,7 @@ export default function DeleteSupplierAlert({ supplierId }: DeleteSupplierAlertP
           aria-label='فتح نافذة حذف العنصر'
         >
 
-          <Trash className='h-4 w-4 text-destructive' aria-hidden />
+          <Icon name="Trash" className='h-4 w-4 text-destructive' aria-hidden />
         </Button>
       </DialogTrigger>
 
@@ -125,7 +122,7 @@ export default function DeleteSupplierAlert({ supplierId }: DeleteSupplierAlertP
           >
             {isProcessing ? (
               <>
-                <Loader2 className='ml-2 h-4 w-4 animate-spin' aria-hidden />
+                <Icon name="Loader2" className='ml-2 h-4 w-4 animate-spin' aria-hidden />
                 <span>جارِ تنفيذ العملية...</span>
               </>
             ) : (

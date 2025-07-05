@@ -9,11 +9,11 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Truck, UserCheck, AlertTriangle } from 'lucide-react';
 import { Drivers } from './Drivers';
 import { approveDriverToOrder } from '../actions/approveOrder-toDtiver';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
+import { Icon } from '@/components/icons/Icon';
 
 interface driverProp {
   orderNo: string;
@@ -78,14 +78,14 @@ function ConfirmDriver({ orderNo, driverList }: driverProp) {
     <Dialog>
       <DialogTrigger asChild>
         <Button className="btn-edit w-full sm:w-auto flex items-center gap-2 shadow-md">
-          <Truck className="h-4 w-4" />
+          <Icon name="Truck" className="h-4 w-4" />
           تحديد السائق
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md" dir="rtl">
         <DialogHeader className="space-y-3">
           <DialogTitle className="flex items-center gap-2 text-xl">
-            <Truck className="h-5 w-5 text-feature-commerce icon-enhanced" />
+            <Icon name="Truck" className="h-5 w-5 text-feature-commerce icon-enhanced" />
             إسناد الطلبية للسائق
           </DialogTitle>
           <DialogDescription className="text-muted-foreground">
@@ -97,7 +97,7 @@ function ConfirmDriver({ orderNo, driverList }: driverProp) {
           {/* Driver Selection */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <UserCheck className="h-4 w-4 text-feature-users" />
+              <Icon name="UserCheck" className="h-4 w-4 text-feature-users" />
               <span className="text-sm font-medium text-foreground">اختر السائق المناسب:</span>
             </div>
 
@@ -107,7 +107,7 @@ function ConfirmDriver({ orderNo, driverList }: driverProp) {
               </div>
             ) : (
               <div className="flex items-center gap-2 p-4 rounded-lg bg-amber-50 border border-amber-200">
-                <AlertTriangle className="h-4 w-4 text-amber-600" />
+                <Icon name="AlertTriangle" className="h-4 w-4 text-amber-600" />
                 <span className="text-sm text-amber-700">لا يوجد سائقين متاحين حالياً</span>
               </div>
             )}
@@ -117,7 +117,7 @@ function ConfirmDriver({ orderNo, driverList }: driverProp) {
           {selectedDriverId && (
             <div className="p-3 rounded-lg bg-green-50 border border-green-200">
               <div className="flex items-center gap-2">
-                <UserCheck className="h-4 w-4 text-green-600" />
+                <Icon name="UserCheck" className="h-4 w-4 text-green-600" />
                 <span className="text-sm font-medium text-green-700">
                   السائق المختار: {driverList?.find(d => d.id === selectedDriverId)?.name}
                 </span>
@@ -144,7 +144,7 @@ function ConfirmDriver({ orderNo, driverList }: driverProp) {
               </>
             ) : (
               <>
-                <UserCheck className="h-4 w-4" />
+                <Icon name="UserCheck" className="h-4 w-4" />
                 تأكيد العملية
               </>
             )}

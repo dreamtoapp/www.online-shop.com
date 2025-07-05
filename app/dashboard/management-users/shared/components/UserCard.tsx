@@ -1,9 +1,7 @@
 'use client'; // Mark as a Client Component
-import { Trash2 } from 'lucide-react'; // Import directly
 import { toast } from 'sonner';
 
 import AddImage from '@/components/AddImage';
-// Removed Icon import: import { Icon } from '@/components/icons';
 import {
   Card,
   CardContent,
@@ -11,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
+import { Icon } from '@/components/icons/Icon';
 import { UserRole } from '@prisma/client';
 
 import DeleteDriverAlert from './DeleteUser';
@@ -102,7 +100,7 @@ export default function UserCard({ driver }: DriverCardProps) {
         {/* Delete Driver Alert */}
         <DeleteDriverAlert driverId={safeDriver.id}>
           <button className='flex items-center gap-1 text-destructive hover:underline'>
-            <Trash2 className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+            <Icon name="Trash2" size="xs" />
           </button>
         </DeleteDriverAlert>
       </CardFooter>

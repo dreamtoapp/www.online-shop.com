@@ -1,13 +1,7 @@
 'use client';
 
-import React, {
-  ElementType,
-  useState,
-} from 'react'; // Import ElementType
-
-import { Star, ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
-
 import Link from '@/components/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -20,15 +14,15 @@ import {
   SidebarFooter,
 } from '@/components/ui/sidebar';
 import { formatDistanceToNow } from 'date-fns';
-
 import { menuGroups } from '../helpers/mainMenu';
+import { Icon } from '@/components/icons/Icon';
 
-// Define type for menu items
-interface MenuItem { // Renamed BaseMenuItem to MenuItem
+// Define type for menu items (icon is now a string)
+interface MenuItem {
   title: string;
   url: string;
-  icon: ElementType; // Type for React component like lucide icons
-  children?: MenuItem[]; // Make children optional directly on MenuItem
+  icon: string;
+  children?: MenuItem[];
 }
 
 // Enhanced menu item with color mapping
@@ -85,7 +79,7 @@ export default function AppSidebar() {
         {favorites.length > 0 && (
           <div className='mt-3'>
             <p className='text-xs font-medium text-muted-foreground mb-2 flex items-center gap-1'>
-              <Star className='h-3 w-3' />
+              <Icon name="Star" size="xs" className="h-3 w-3" />
               المفضلة
             </p>
             <div className='flex flex-wrap gap-1'>
@@ -94,7 +88,7 @@ export default function AppSidebar() {
                 return favItem ? (
                   <Link key={fav} href={fav}>
                     <Badge variant="secondary" className='text-xs'>
-                      <favItem.icon className='h-3 w-3 mr-1 icon-enhanced' />
+                      <Icon name={favItem.icon} size="xs" className="h-3 w-3 mr-1 icon-enhanced" />
                       {favItem.title.slice(0, 8)}...
                     </Badge>
                   </Link>
@@ -129,7 +123,7 @@ export default function AppSidebar() {
                     {group.items.length}
                   </Badge>
                   <span className={`transition-transform duration-200 ${isCollapsed ? 'rotate-180' : ''}`}>
-                    <ChevronDown className="h-4 w-4 icon-enhanced" />
+                    <Icon name="ChevronDown" size="xs" className={`h-4 w-4 icon-enhanced ${isCollapsed ? 'rotate-180' : ''}`} />
                   </span>
                 </div>
               </button>
@@ -162,7 +156,7 @@ export default function AppSidebar() {
                               }
                             `}
                           >
-                            <item.icon className={`h-5 w-5 icon-enhanced ${isActive ? colors.text : 'text-muted-foreground'}`} />
+                            <Icon name={item.icon} size="md" className={`h-5 w-5 icon-enhanced ${isActive ? colors.text : 'text-muted-foreground'}`} />
                             <span className='flex-1 text-sm font-semibold'>{item.title}</span>
                             {isActive && (
                               <div className={`h-2 w-2 rounded-full ${colors.text.replace('text-', 'bg-')}`} />
@@ -179,9 +173,7 @@ export default function AppSidebar() {
                               toggleFavorite(item.url);
                             }}
                           >
-                            <Star
-                              className={`h-3 w-3 icon-enhanced ${isFavorite ? 'fill-feature-commerce text-feature-commerce' : 'text-muted-foreground'}`}
-                            />
+                            <Icon name="Star" size="xs" className={`h-3 w-3 icon-enhanced ${isFavorite ? 'fill-feature-commerce text-feature-commerce' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </li>
@@ -203,7 +195,7 @@ export default function AppSidebar() {
                                     }
                                   `}
                                 >
-                                  <child.icon className={`h-4 w-4 icon-enhanced ${isChildActive ? colors.text : 'text-muted-foreground'}`} />
+                                  <Icon name={child.icon} size="md" className={`h-4 w-4 icon-enhanced ${isChildActive ? colors.text : 'text-muted-foreground'}`} />
                                   <span className='flex-1'>{child.title}</span>
                                 </Link>
                               </li>

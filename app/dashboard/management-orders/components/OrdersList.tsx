@@ -2,14 +2,7 @@
 // app/dashboard/orders-management/components/OrdersList.tsx
 import React, { useState } from 'react';
 
-import {
-  ChevronLeft,
-  ChevronRight,
-  Filter,
-  Loader2,
-  Package,
-  Search,
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import {
   usePathname,
   useRouter,
@@ -136,7 +129,7 @@ export default function OrdersList({
           disabled={currentPage === 1}
           className="h-8 w-8 p-0"
         >
-          <ChevronRight className="h-4 w-4" />
+          <Icon name="ChevronRight" className="h-4 w-4" />
         </Button>
 
         {pages}
@@ -148,7 +141,7 @@ export default function OrdersList({
           disabled={currentPage === totalPages}
           className="h-8 w-8 p-0"
         >
-          <ChevronLeft className="h-4 w-4" />
+          <Icon name="ChevronLeft" className="h-4 w-4" />
         </Button>
       </div>
     );
@@ -167,13 +160,13 @@ export default function OrdersList({
             className="w-full"
           />
           <Button type="submit" size="sm">
-            <Search className="h-4 w-4 ml-2 rtl:mr-2" />
+            <Icon name="Search" className="h-4 w-4 ml-2 rtl:mr-2" />
             بحث
           </Button>
         </form>
 
         <div className="flex items-center space-x-2 rtl:space-x-reverse">
-          <Filter className="h-4 w-4" />
+          <Icon name="Filter" className="h-4 w-4" />
           <span className="text-sm">ترتيب حسب:</span>
           <Select value={sortBy} onValueChange={handleSortChange}>
             <SelectTrigger className="w-[180px]">
@@ -192,7 +185,7 @@ export default function OrdersList({
       {/* Orders List */}
       {loading ? (
         <div className="flex h-40 items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <Icon name="Loader2" className="h-8 w-8 animate-spin text-primary" />
         </div>
       ) : orders.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -203,7 +196,7 @@ export default function OrdersList({
       ) : (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-10">
-            <Package className="h-16 w-16 text-gray-400" />
+            <Icon name="Package" className="h-16 w-16 text-gray-400" />
             <h3 className="mt-4 text-lg font-medium">لا توجد طلبات</h3>
             <p className="text-sm text-gray-500">
               {status

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { cn } from '@/lib/utils';
 
 interface BackButtonProps {
@@ -35,7 +35,7 @@ export default function BackButton({
   };
 
   // Icon selection based on RTL/LTR support
-  const IconComponent = icon === 'chevron' ? ChevronRight : ArrowRight;
+  const iconName = icon === 'chevron' ? 'ChevronRight' : 'ArrowRight';
 
   // Mobile-First Variant styles with proper touch targets
   const variantStyles = {
@@ -75,7 +75,8 @@ export default function BackButton({
         className
       )}
     >
-      <IconComponent
+      <Icon
+        name={iconName}
         className={cn(
           'transition-transform duration-300 flex-shrink-0',
           // Mobile-first icon sizes

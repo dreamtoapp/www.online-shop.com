@@ -1,14 +1,10 @@
 import {
-  Check,
-  Info,
-  Star,
-} from 'lucide-react'; // Import directly
-import { Metadata } from 'next';
+  Metadata
+} from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { auth } from '@/auth';
-// Removed Icon import: import { Icon } from '@/components/icons';
 import ProductImageGallery from '@/components/product/gallery/ProductImageGallery';
 import RelatedProducts from '@/components/product/related/RelatedProducts';
 import RateProductButton from '@/components/rating/RateProductButton';
@@ -21,7 +17,8 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
+import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import ReviewsTabsWrapper from '@/components/product/ReviewsTabsWrapper';
 
 import {
@@ -121,7 +118,7 @@ export default async function ProductPage({ params }: PageProps<{ slug: string }
               />
               {!product.outOfStock ? (
                 <Badge variant='outline' className='border-green-200 bg-green-50 text-green-700'>
-                  <Check className={iconVariants({ size: 'xs', className: 'mr-1' })} /> {/* Use direct import + CVA */}
+                  <Icon name="Check" size="xs" className={iconVariants({ size: 'xs', className: 'mr-1' })} />
                   متوفر
                 </Badge>
               ) : (
@@ -155,7 +152,7 @@ export default async function ProductPage({ params }: PageProps<{ slug: string }
           </div>
 
           <div className='flex items-center gap-2 pt-2 text-sm text-muted-foreground'>
-            <Info className={iconVariants({ size: 'sm' })} /> {/* Use direct import + CVA */}
+            <Icon name="Info" size="sm" className={iconVariants({ size: 'sm' })} />
             <span>الشحن خلال 3-5 أيام عمل</span>
           </div>
         </div>
@@ -226,7 +223,7 @@ export default async function ProductPage({ params }: PageProps<{ slug: string }
 
               {reviews.length === 0 ? (
                 <div className='rounded-lg bg-muted/30 py-12 text-center'>
-                  <Star className={iconVariants({ size: 'xl', className: 'mx-auto mb-4 text-amber-400' })} /> {/* Use direct import + CVA */}
+                  <Icon name="Star" size="xl" className={iconVariants({ size: 'xl', className: 'mx-auto mb-4 text-amber-400' })} />
                   <h3 className='mb-2 text-lg font-medium'>لا توجد تقييمات بعد</h3>
                   <p className='mb-6 text-muted-foreground'>
                     كن أول من يقيم هذا المنتج وشارك تجربتك مع الآخرين

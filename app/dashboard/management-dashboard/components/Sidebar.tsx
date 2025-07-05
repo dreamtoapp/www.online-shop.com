@@ -1,21 +1,19 @@
-import { useState, ElementType } from 'react'; // Import ElementType
-
+import { useState } from 'react';
 import { ChevronDown, ChevronUp, UserCircle } from 'lucide-react';
-
 import Link from '@/components/link';
-
 import { menuGroups } from '../helpers/mainMenu';
 import SidebarHeader from './SidebarHeader';
+import { Icon } from '@/components/icons/Icon';
 
-// Define type for menu items (copied from AppSidebar.tsx - consider shared file)
+// MenuItem type: icon is now a string
 interface MenuItem {
   title: string;
   url: string;
-  icon: ElementType;
+  icon: string;
   children?: MenuItem[];
 }
 
-type SidebarMenuItemProps = { item: MenuItem; level?: number }; // Use MenuItem type
+type SidebarMenuItemProps = { item: MenuItem; level?: number };
 function SidebarMenuItem({ item, level = 0 }: SidebarMenuItemProps) {
   const [open, setOpen] = useState(false);
   const hasChildren = Array.isArray(item.children) && item.children.length > 0;
@@ -26,13 +24,13 @@ function SidebarMenuItem({ item, level = 0 }: SidebarMenuItemProps) {
           className={`flex cursor-pointer items-center gap-3 rounded-lg p-2 text-right transition hover:bg-gray-100 ${level > 0 ? 'pl-6' : ''}`}
           onClick={() => setOpen((o) => !o)}
         >
-          <item.icon className='h-5 w-5 text-primary' />
+          <Icon name={item.icon} size="md" className="h-5 w-5 text-primary" />
           <span className='flex-1'>{item.title}</span>
           {open ? <ChevronUp className='h-4 w-4' /> : <ChevronDown className='h-4 w-4' />}
         </div>
-        {open && hasChildren && ( // Check hasChildren before accessing item.children
+        {open && hasChildren && (
           <ul className='ml-2 space-y-1 border-r border-gray-100'>
-            {item.children!.map((child) => ( // Use non-null assertion
+            {item.children!.map((child) => (
               <li key={child.url}>
                 <SidebarMenuItem item={child} level={level + 1} />
               </li>
@@ -48,7 +46,7 @@ function SidebarMenuItem({ item, level = 0 }: SidebarMenuItemProps) {
       href={item.url}
       className={`flex items-center gap-3 rounded-lg p-2 text-right transition hover:bg-gray-100 ${level > 0 ? 'pl-6' : ''}`}
     >
-      <item.icon className='h-5 w-5 text-primary' />
+      <Icon name={item.icon} size="md" className="h-5 w-5 text-primary" />
       <span className='flex-1'>{item.title}</span>
     </Link>
   );

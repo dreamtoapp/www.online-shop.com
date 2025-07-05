@@ -1,17 +1,18 @@
 'use client';
 
 import React from 'react';
-import { ChevronRight, Home } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from '@/components/link';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Icon } from '@/components/icons/Icon';
 import { menuGroups } from '../helpers/mainMenu';
 
 interface BreadcrumbItem {
     label: string;
     href: string;
-    icon?: React.ComponentType<{ className?: string }>;
+    icon?: string | React.ComponentType<{ className?: string }>;
     isActive?: boolean;
 }
 
@@ -28,7 +29,7 @@ export default function EnhancedBreadcrumb() {
             {
                 label: 'الرئيسية',
                 href: '/dashboard',
-                icon: Home,
+                icon: 'Home',
             },
         ];
 
@@ -78,7 +79,13 @@ export default function EnhancedBreadcrumb() {
                                     }`}
                                 aria-current={item.isActive ? 'page' : undefined}
                             >
-                                {item.icon && <item.icon className="h-4 w-4" />}
+                                {item.icon && (
+                                    typeof item.icon === 'string' ? (
+                                        <Icon name={item.icon} className="h-4 w-4" />
+                                    ) : (
+                                        <item.icon className="h-4 w-4" />
+                                    )
+                                )}
                                 <span>{item.label}</span>
                             </Link>
                         </li>

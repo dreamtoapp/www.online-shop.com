@@ -1,10 +1,9 @@
 'use client';
 
-import { Search, X, TrendingUp } from 'lucide-react';
 import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 
 export default function SearchBar() {
   const [searchValue, setSearchValue] = useState('');
@@ -44,8 +43,8 @@ export default function SearchBar() {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             className={`h-11 w-full rounded-xl border-2 bg-background/80 backdrop-blur-sm pl-4 pr-20 text-sm transition-all duration-300 placeholder:text-muted-foreground/70 ${isFocused
-                ? 'border-feature-users/50 bg-background shadow-lg shadow-feature-users/10 ring-2 ring-feature-users/20'
-                : 'border-border/50 hover:border-border hover:bg-background/90'
+              ? 'border-feature-users/50 bg-background shadow-lg shadow-feature-users/10 ring-2 ring-feature-users/20'
+              : 'border-border/50 hover:border-border hover:bg-background/90'
               }`}
             aria-label='Search products'
           />
@@ -53,7 +52,7 @@ export default function SearchBar() {
           {/* Search icon */}
           <div className={`absolute right-12 top-1/2 -translate-y-1/2 transition-colors duration-300 ${isFocused ? 'text-feature-users' : 'text-muted-foreground'
             }`}>
-            <Search className="h-4 w-4" />
+            <Icon name="Search" className="h-4 w-4" />
           </div>
 
           {/* Clear button - shows when there's text */}
@@ -66,7 +65,7 @@ export default function SearchBar() {
               className='absolute right-14 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full bg-muted/80 text-muted-foreground hover:bg-destructive/20 hover:text-destructive transition-all duration-200'
               aria-label='Clear search'
             >
-              <X className="h-3 w-3" />
+              <Icon name="X" className="h-3 w-3" />
             </Button>
           )}
         </div>
@@ -77,12 +76,12 @@ export default function SearchBar() {
           variant='ghost'
           size='icon'
           className={`absolute right-1 top-1/2 h-9 w-9 -translate-y-1/2 rounded-lg transition-all duration-300 ${isFocused
-              ? 'bg-feature-users/10 text-feature-users hover:bg-feature-users/20 hover:scale-105'
-              : 'text-muted-foreground hover:text-feature-users hover:bg-feature-users/10'
+            ? 'bg-feature-users/10 text-feature-users hover:bg-feature-users/20 hover:scale-105'
+            : 'text-muted-foreground hover:text-feature-users hover:bg-feature-users/10'
             }`}
           aria-label='Submit search'
         >
-          <Search className={iconVariants({ size: 'sm' })} />
+          <Icon name="Search" size="sm" />
         </Button>
       </form>
 
@@ -92,7 +91,7 @@ export default function SearchBar() {
           {/* Popular searches header */}
           <div className="p-3 border-b border-border/50 bg-muted/30">
             <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              <TrendingUp className="h-4 w-4 text-feature-analytics" />
+              <Icon name="TrendingUp" className="h-4 w-4 text-feature-analytics" />
               البحث الشائع
             </div>
           </div>
@@ -109,7 +108,7 @@ export default function SearchBar() {
                 className="w-full text-right p-3 rounded-lg hover:bg-accent/50 transition-colors duration-200 flex items-center gap-3 group"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <Search className="h-4 w-4 text-muted-foreground group-hover:text-feature-users transition-colors duration-200" />
+                <Icon name="Search" className="h-4 w-4 text-muted-foreground group-hover:text-feature-users transition-colors duration-200" />
                 <span className="text-sm group-hover:text-accent-foreground transition-colors duration-200">
                   {search}
                 </span>
@@ -128,8 +127,8 @@ export default function SearchBar() {
 
       {/* Focus ring animation */}
       <div className={`absolute inset-0 rounded-xl transition-all duration-300 pointer-events-none ${isFocused
-          ? 'ring-2 ring-feature-users/30 ring-offset-2 ring-offset-background'
-          : ''
+        ? 'ring-2 ring-feature-users/30 ring-offset-2 ring-offset-background'
+        : ''
         }`} />
     </div>
   );

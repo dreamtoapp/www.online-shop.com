@@ -3,22 +3,7 @@ import React, { useMemo } from 'react';
 
 import { formatDistanceToNow } from 'date-fns';
 import { ar } from 'date-fns/locale';
-import {
-    AlertCircle,
-    Calendar,
-    CheckCircle,
-    List,
-    Phone,
-    ReceiptText,
-    RefreshCw,
-    Truck,
-    User,
-    X,
-    Clock,
-    Package,
-    CreditCard,
-    Box
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 import Link from '@/components/link';
 import { Badge } from '@/components/ui/badge';
@@ -63,13 +48,13 @@ const STATUS_TRANSLATIONS = {
 // Enhanced status icons with proper feature colors
 const StatusIcon = ({ status }: { status: OrderStatus }) => {
     const icons: Record<OrderStatus, React.ReactNode> = {
-        [ORDER_STATUS.PENDING]: <Clock className="h-4 w-4 text-yellow-600" />,
-        [ORDER_STATUS.IN_TRANSIT]: <Truck className="h-4 w-4 text-blue-600" />,
-        [ORDER_STATUS.DELIVERED]: <CheckCircle className="h-4 w-4 text-green-600" />,
-        [ORDER_STATUS.CANCELED]: <X className="h-4 w-4 text-red-600" />,
-        [ORDER_STATUS.ASSIGNED]: <Box className="h-4 w-4 text-blue-600" />,
+        [ORDER_STATUS.PENDING]: <Icon name="Clock" className="h-4 w-4 text-yellow-600" />,
+        [ORDER_STATUS.IN_TRANSIT]: <Icon name="Truck" className="h-4 w-4 text-blue-600" />,
+        [ORDER_STATUS.DELIVERED]: <Icon name="CheckCircle" className="h-4 w-4 text-green-600" />,
+        [ORDER_STATUS.CANCELED]: <Icon name="X" className="h-4 w-4 text-red-600" />,
+        [ORDER_STATUS.ASSIGNED]: <Icon name="Box" className="h-4 w-4 text-blue-600" />,
     };
-    return icons[status.toUpperCase() as OrderStatus] || <Package className="h-4 w-4 text-muted-foreground" />;
+    return icons[status.toUpperCase() as OrderStatus] || <Icon name="Package" className="h-4 w-4 text-muted-foreground" />;
 };
 
 // Enhanced order header with better typography and layout
@@ -94,7 +79,7 @@ const OrderHeader = ({ order, statusStyle }: { order: Order, statusStyle: string
                 </Badge>
                 <div className="text-left">
                     <CardTitle className="text-xl font-bold text-feature-commerce flex items-center gap-1">
-                        <CreditCard className="h-4 w-4" />
+                        <Icon name="CreditCard" className="h-4 w-4" />
                         {order.amount.toFixed(2)} ر.س
                     </CardTitle>
                 </div>
@@ -104,7 +89,7 @@ const OrderHeader = ({ order, statusStyle }: { order: Order, statusStyle: string
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <div className="flex items-center gap-2 cursor-help">
-                            <Calendar className="h-3 w-3" />
+                            <Icon name="Calendar" className="h-3 w-3" />
                             <span>{createdAt}</span>
                         </div>
                     </TooltipTrigger>
@@ -116,7 +101,7 @@ const OrderHeader = ({ order, statusStyle }: { order: Order, statusStyle: string
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <div className="flex items-center gap-2 cursor-help">
-                            <RefreshCw className="h-3 w-3" />
+                            <Icon name="RefreshCw" className="h-3 w-3" />
                             <span>{updatedAt}</span>
                         </div>
                     </TooltipTrigger>
@@ -144,7 +129,7 @@ const CustomerCardAction = ({
                     className="btn-professional h-8 w-8 hover:bg-feature-users-soft"
                     disabled={!phone}
                 >
-                    <Phone className="h-3 w-3" />
+                    <Icon name="Phone" className="h-3 w-3" />
                 </Button>
             </TooltipTrigger>
             <TooltipContent>
@@ -159,7 +144,7 @@ const OrderContent = ({ order }: { order: Order }) => (
     <CardContent className="space-y-4 text-foreground">
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-                <List className="h-4 w-4 text-feature-commerce" />
+                <Icon name="List" className="h-4 w-4 text-feature-commerce" />
                 <CardTitle className="text-sm font-semibold text-feature-commerce">
                     {order.orderNumber}
                 </CardTitle>
@@ -174,7 +159,7 @@ const OrderContent = ({ order }: { order: Order }) => (
                             className: 'btn-view-outline h-8 w-8',
                         })}
                     >
-                        <ReceiptText className="h-3 w-3" />
+                        <Icon name="ReceiptText" className="h-3 w-3" />
                     </Link>
                 </TooltipTrigger>
                 <TooltipContent>عرض الفاتورة</TooltipContent>
@@ -183,7 +168,7 @@ const OrderContent = ({ order }: { order: Order }) => (
 
         <div className="flex items-center justify-between">
             <CardDescription className="flex items-center gap-2 text-sm">
-                <User className="h-4 w-4 text-feature-users" />
+                <Icon name="User" className="h-4 w-4 text-feature-users" />
                 <span className="font-medium">{order.customer.name || 'عميل غير معروف'}</span>
             </CardDescription>
             <CustomerCardAction
@@ -193,7 +178,7 @@ const OrderContent = ({ order }: { order: Order }) => (
 
         {order.driverId && (
             <div className="flex items-center gap-2 p-2 bg-feature-suppliers-soft rounded-lg">
-                <Truck className="h-4 w-4 text-feature-suppliers" />
+                <Icon name="Truck" className="h-4 w-4 text-feature-suppliers" />
                 <span className="text-sm font-medium text-feature-suppliers">
                     السائق: {order.driverId}
                 </span>
@@ -202,7 +187,7 @@ const OrderContent = ({ order }: { order: Order }) => (
 
         {order.status === ORDER_STATUS.CANCELED && (
             <div className="flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <AlertCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+                <Icon name="AlertCircle" className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
                 <div>
                     <p className="text-sm font-medium text-red-700">الطلب ملغي</p>
                     <p className="text-sm text-red-600">تم إلغاء هذا الطلب</p>

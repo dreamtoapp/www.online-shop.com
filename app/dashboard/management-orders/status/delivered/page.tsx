@@ -1,6 +1,6 @@
 // app/dashboard/orders-management/status/delivered/page.tsx
-import { CheckCircle } from 'lucide-react';
 import { Metadata } from 'next';
+import { Icon } from '@/components/icons/Icon';
 import BackButton from '@/components/BackButton';
 
 import { ORDER_STATUS } from '@/constant/order-status';
@@ -74,7 +74,7 @@ export default async function DeliveredOrdersPage({
 
               {/* Status Badge */}
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg font-medium bg-green-50 text-green-800 border border-green-200">
-                <CheckCircle className="w-4 h-4" />
+                <Icon name="CheckCircle" className="w-4 h-4" />
                 تم التسليم: {analytics}
               </div>
             </div>

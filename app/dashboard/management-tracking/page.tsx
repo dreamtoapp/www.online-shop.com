@@ -2,13 +2,7 @@ import BackButton from '@/components/BackButton';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-    MapPin,
-    Package,
-    Search,
-    Truck,
-    Eye
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import Link from 'next/link';
 
 export default function ManagementTrackingPage() {
@@ -26,7 +20,7 @@ export default function ManagementTrackingPage() {
                     </div>
                     <div className="flex items-center gap-3">
                         <Button variant="outline" className="btn-view-outline">
-                            <Search className="h-4 w-4 mr-2" />
+                            <Icon name="Search" className="h-4 w-4 mr-2" />
                             بحث
                         </Button>
                     </div>
@@ -41,7 +35,7 @@ export default function ManagementTrackingPage() {
                                     <p className="text-sm text-muted-foreground">قيد التتبع</p>
                                     <p className="text-2xl font-bold text-feature-commerce">24</p>
                                 </div>
-                                <MapPin className="h-8 w-8 text-feature-commerce" />
+                                <Icon name="MapPin" className="h-8 w-8 text-feature-commerce" />
                             </div>
                         </CardContent>
                     </Card>
@@ -53,7 +47,7 @@ export default function ManagementTrackingPage() {
                                     <p className="text-sm text-muted-foreground">السائقين النشطين</p>
                                     <p className="text-2xl font-bold text-feature-suppliers">8</p>
                                 </div>
-                                <Truck className="h-8 w-8 text-feature-suppliers" />
+                                <Icon name="Truck" className="h-8 w-8 text-feature-suppliers" />
                             </div>
                         </CardContent>
                     </Card>
@@ -65,7 +59,7 @@ export default function ManagementTrackingPage() {
                                     <p className="text-sm text-muted-foreground">إجمالي الطلبات</p>
                                     <p className="text-2xl font-bold text-feature-products">156</p>
                                 </div>
-                                <Package className="h-8 w-8 text-feature-products" />
+                                <Icon name="Package" className="h-8 w-8 text-feature-products" />
                             </div>
                         </CardContent>
                     </Card>
@@ -89,7 +83,7 @@ export default function ManagementTrackingPage() {
                 <Card className="shadow-lg border-l-4 border-l-feature-commerce card-hover-effect">
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-xl">
-                            <MapPin className="h-5 w-5 text-feature-commerce icon-enhanced" />
+                            <Icon name="MapPin" className="h-5 w-5 text-feature-commerce icon-enhanced" />
                             الطلبات قيد التتبع
                         </CardTitle>
                     </CardHeader>
@@ -126,7 +120,7 @@ export default function ManagementTrackingPage() {
 
                                         <Link href={`/dashboard/management-tracking/${order.id}`}>
                                             <Button variant="outline" size="sm" className="btn-view-outline">
-                                                <Eye className="h-4 w-4 mr-1" />
+                                                <Icon name="Eye" className="h-4 w-4 mr-1" />
                                                 تتبع
                                             </Button>
                                         </Link>
@@ -137,7 +131,7 @@ export default function ManagementTrackingPage() {
 
                         {/* Empty state for when no tracking data */}
                         <div className="text-center py-12 text-muted-foreground">
-                            <MapPin className="h-16 w-16 mx-auto mb-4 text-muted-foreground/50" />
+                            <Icon name="MapPin" className="h-16 w-16 mx-auto mb-4 text-muted-foreground/50" />
                             <p className="text-lg font-medium mb-2">لا توجد طلبات قيد التتبع حالياً</p>
                             <p className="text-sm">ستظهر الطلبات هنا عند بدء السائقين برحلاتهم</p>
                         </div>

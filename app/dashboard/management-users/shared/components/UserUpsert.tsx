@@ -1,13 +1,5 @@
 'use client';
 
-import {
-  ChevronDown,
-  ChevronUp,
-  Edit,
-  LocateFixed,
-  MapPin,
-  Plus,
-} from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useState } from 'react';
@@ -18,7 +10,7 @@ import InfoTooltip from '@/components/InfoTooltip';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import {
   extractCoordinatesFromUrl,
 } from '@/utils/extract-latAndLog-fromWhatsAppLink';
@@ -134,11 +126,11 @@ export default function AddUser({ role, mode, defaultValues, title, description 
       trigger={<Button variant={mode === "new" ? 'default' : 'outline'} size='sm' className='flex items-center gap-2'>
         {mode === 'new' ? (
           <>
-            <Plus className={iconVariants({ size: 'xs' })} /> <span>إضافة</span>
+            <Icon name="Plus" size="xs" /> <span>إضافة</span>
           </>
         ) : (
           <>
-            <Edit className={iconVariants({ size: 'xs' })} /> <span>تعديل</span>
+            <Icon name="Edit" size="xs" /> <span>تعديل</span>
           </>
         )}
 
@@ -187,9 +179,9 @@ export default function AddUser({ role, mode, defaultValues, title, description 
                     className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
                   >
                     {isExpanded ? (
-                      <ChevronUp className="h-4 w-4" />
+                      <Icon name="ChevronUp" className="h-4 w-4" />
                     ) : (
-                      <ChevronDown className="h-4 w-4" />
+                      <Icon name="ChevronDown" className="h-4 w-4" />
                     )}
                   </button>
                 </div>
@@ -222,7 +214,7 @@ export default function AddUser({ role, mode, defaultValues, title, description 
                                 onClick={handleExtractCoordinates}
                                 disabled={isSubmitting || !isWhatsAppLinkValid()}
                               >
-                                <LocateFixed />
+                                <Icon name="LocateFixed" />
                               </Button>
                               <Button
                                 type="button"
@@ -230,7 +222,7 @@ export default function AddUser({ role, mode, defaultValues, title, description 
                                 onClick={handleOpenWhatsApp}
                                 disabled={!isWhatsAppLinkValid()}
                               >
-                                <MapPin />
+                                <Icon name="MapPin" />
                               </Button>
                               <InfoTooltip content="  يمكنك نسخ رابط مشاركة الموقع من WhatsApp أو خرائط Google وسنقوم باستخراج الإحداثيات تلقائياً." />
                             </div>

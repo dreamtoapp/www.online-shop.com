@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Truck, User, Clock, Star } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { toast } from 'sonner';
 
 import BackButton from '@/components/BackButton';
@@ -94,7 +94,7 @@ export default function AssignDriverClient({
                             <div>
                                 <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
                                     <div className="p-2 rounded-lg bg-feature-users/10">
-                                        <Truck className="h-6 w-6 text-feature-users icon-enhanced" />
+                                        <Icon name="Truck" className="h-6 w-6 text-feature-users icon-enhanced" />
                                     </div>
                                     تعيين سائق للطلب
                                 </h1>
@@ -132,7 +132,7 @@ export default function AssignDriverClient({
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 rounded-lg bg-feature-users/10 group-hover:bg-feature-users/20 transition-colors">
-                                    <User className="h-5 w-5 text-feature-users icon-enhanced" />
+                                    <Icon name="User" className="h-5 w-5 text-feature-users icon-enhanced" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-muted-foreground">السائقون المتاحون</p>
@@ -148,7 +148,7 @@ export default function AssignDriverClient({
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 rounded-lg bg-feature-analytics/10 group-hover:bg-feature-analytics/20 transition-colors">
-                                    <Star className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                                    <Icon name="Star" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-muted-foreground">متوسط التقييم</p>
@@ -167,7 +167,7 @@ export default function AssignDriverClient({
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 rounded-lg bg-feature-commerce/10 group-hover:bg-feature-commerce/20 transition-colors">
-                                    <Clock className="h-5 w-5 text-feature-commerce icon-enhanced" />
+                                    <Icon name="Clock" className="h-5 w-5 text-feature-commerce icon-enhanced" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-muted-foreground">وقت التوصيل المتوقع</p>
@@ -182,7 +182,7 @@ export default function AssignDriverClient({
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 rounded-lg bg-feature-products/10 group-hover:bg-feature-products/20 transition-colors">
-                                    <Truck className="h-5 w-5 text-feature-products icon-enhanced" />
+                                    <Icon name="Truck" className="h-5 w-5 text-feature-products icon-enhanced" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-muted-foreground">معدل الإنجاز</p>
@@ -212,7 +212,7 @@ export default function AssignDriverClient({
                             <CardHeader className="pb-4 bg-gradient-to-r from-feature-users/5 to-transparent">
                                 <CardTitle className="flex items-center gap-3 text-xl">
                                     <div className="p-2 rounded-lg bg-feature-users/10">
-                                        <User className="h-5 w-5 text-feature-users icon-enhanced" />
+                                        <Icon name="User" className="h-5 w-5 text-feature-users icon-enhanced" />
                                     </div>
                                     <div>
                                         <span className="text-lg font-bold">جميع السائقين المتاحين</span>

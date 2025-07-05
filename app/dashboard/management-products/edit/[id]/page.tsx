@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
-import { Edit3 } from 'lucide-react';
+// import { Edit3 } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import ProductUpsert from '../../new/components/ProductUpsert';
 import { getProductFormData } from '../../new/actions/getProductData';
 import BackButton from '@/components/BackButton';
@@ -77,7 +78,7 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
                 <div className="flex items-center gap-4">
                     <BackButton variant="default" />
                     <div className="flex items-center gap-3">
-                        <Edit3 className="h-6 w-6 text-feature-products icon-enhanced" />
+                        <Icon name="Edit3" className="h-6 w-6 text-feature-products icon-enhanced" />
                         <h1 className="text-2xl font-bold text-primary">تعديل المنتج</h1>
                     </div>
                 </div>

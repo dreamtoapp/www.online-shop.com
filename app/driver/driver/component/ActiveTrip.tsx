@@ -1,10 +1,10 @@
 'use client';
 import { formatDistanceToNow } from 'date-fns';
 import { ar } from 'date-fns/locale';
-import { MapPin, Package, PhoneCall, User } from 'lucide-react';
 
 import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Icon } from '@/components/icons/Icon';
 
 import CancelOrder from './CancelOrder';
 import DeleverOrder from './DeleverOrder';
@@ -35,7 +35,7 @@ export default function ActiveTrip({ order }: { order: Order }) {
 
         <div className='space-y-2 text-gray-700'>
           <div className='flex items-center gap-2'>
-            <User className='h-5 w-5 text-gray-400' />
+            <Icon name="User" className='h-5 w-5 text-gray-400' />
             <span>{order.customer.name || 'عميل غير معروف'}</span>
           </div>
         </div>
@@ -44,7 +44,7 @@ export default function ActiveTrip({ order }: { order: Order }) {
       {/* Items Card with ScrollArea */}
       <Card className='w-full rounded-lg bg-white p-4 shadow-sm'>
         <div className='mb-3 flex items-center gap-2'>
-          <Package className='h-5 w-5 text-gray-400' />
+          <Icon name="Package" className='h-5 w-5 text-gray-400' />
           <span className='text-lg font-semibold text-gray-800'>المنتجات</span>
         </div>
 
@@ -89,7 +89,7 @@ export default function ActiveTrip({ order }: { order: Order }) {
           href={`tel:${order.customer.phone}`}
           className='flex items-center gap-2 text-blue-600 transition-colors hover:text-blue-800'
         >
-          <PhoneCall className='h-5 w-5' />
+          <Icon name="PhoneCall" className='h-5 w-5' />
           <span className='font-semibold'>اتصل بالعميل</span>
         </a>
         <a
@@ -98,7 +98,7 @@ export default function ActiveTrip({ order }: { order: Order }) {
           rel='noopener noreferrer'
           className='flex items-center gap-2 text-green-600 transition-colors hover:text-green-800'
         >
-          <MapPin className='h-5 w-5' />
+          <Icon name="MapPin" className='h-5 w-5' />
           <span className='font-semibold'>مشاركة الموقع</span>
         </a>
       </div>

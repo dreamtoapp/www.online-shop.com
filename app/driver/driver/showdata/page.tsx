@@ -1,17 +1,7 @@
 import {
-  DollarSign,
-  FileText,
-  ShoppingCart,
-  User,
-} from 'lucide-react'; // Import directly
-
-import {
   ORDER_STATUS,
   OrderStatus,
 } from '@/constant/order-status';
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
 import BackButton from '../../../../components/BackButton';
 import {
   Card,
@@ -22,6 +12,7 @@ import {
 } from '../../../../components/ui/card';
 import { getOrderByStatus } from '../action/getOrderByStatus';
 import StartTrip from '../component/StartTrip';
+import { Icon } from '@/components/icons/Icon';
 
 async function page({
   searchParams,
@@ -78,25 +69,24 @@ async function page({
           <Card key={order.id} className='rounded-lg border border-gray-200 bg-white shadow-md'>
             <CardHeader className='rounded-t-lg bg-gray-200 p-4'>
               <CardTitle className='flex items-center gap-2 text-lg text-gray-700'>
-                <FileText className={iconVariants({ size: 'sm', variant: 'muted', className: 'text-blue-500' })} /> {/* Use direct import + CVA (adjust size if needed) */}
+                <Icon name="FileText" size="sm" className="text-blue-500" />
                 <span className='text-sm font-medium'>رقم الفاتورة: {order.orderNumber}</span>
               </CardTitle>
             </CardHeader>
 
             <CardContent className='space-y-3 p-4'>
               <div className='flex items-center gap-3 text-gray-600'>
-                <User className={iconVariants({ size: 'sm', variant: 'muted' })} /> {/* Use direct import + CVA (adjust size if needed) */}
+                <Icon name="User" size="sm" />
                 <span className='font-medium'>العميل: {order.customer?.name || 'غير معروف'}</span>
               </div>
 
               <div className='flex items-center gap-3 text-gray-600'>
-                <ShoppingCart className={iconVariants({ size: 'sm', variant: 'muted', className: 'text-yellow-500' })} /> {/* Use direct import + CVA (adjust size if needed) */}
-
+                <Icon name="ShoppingCart" size="sm" className="text-yellow-500" />
                 <span className='font-medium'>حالة الطلب: {order.status}</span>
               </div>
 
               <div className='flex items-center gap-3 text-gray-600'>
-                <DollarSign className={iconVariants({ size: 'sm', variant: 'muted', className: 'text-red-500' })} /> {/* Use direct import + CVA (adjust size if needed) */}
+                <Icon name="DollarSign" size="sm" className="text-red-500" />
                 <span className='font-medium'>
                   الإجمالي:{' '}
                   <span className='text-lg font-bold text-gray-800'>

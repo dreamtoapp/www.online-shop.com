@@ -1,23 +1,23 @@
-import { Store, Users, Phone } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Correct import path for CVA variants
+import { iconVariants } from '@/lib/utils';
 import Link from '@/components/link';
+import { Icon } from '@/components/icons/Icon';
 
 const QuickLinks = () => {
   const links = [
     {
       name: 'المتجر',
       href: '/',
-      icon: <Store className={iconVariants({ size: 'xs', className: 'mr-2 inline-block' })} />, // Use direct import + CVA
+      icon: <Icon name="Store" size="xs" className={iconVariants({ size: 'xs', className: 'mr-2 inline-block' })} />,
     },
     {
       name: 'من نحن',
       href: '/about',
-      icon: <Users className={iconVariants({ size: 'xs', className: 'mr-2 inline-block' })} />, // Use direct import + CVA
+      icon: <Icon name="Users" size="xs" className={iconVariants({ size: 'xs', className: 'mr-2 inline-block' })} />,
     },
     {
       name: 'تواصل معنا',
       href: '/contact',
-      icon: <Phone className={iconVariants({ size: 'xs', className: 'mr-2 inline-block' })} />, // Use direct import + CVA
+      icon: <Icon name="Phone" size="xs" className={iconVariants({ size: 'xs', className: 'mr-2 inline-block' })} />,
     },
   ];
 

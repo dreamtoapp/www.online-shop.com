@@ -2,7 +2,7 @@
 // app/dashboard/orders-management/status/pending/components/PendingOrdersView.tsx
 import React, { useState } from 'react';
 
-import { Search, Filter, SortAsc, SortDesc, FileText, X } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import {
   usePathname,
   useRouter,
@@ -87,7 +87,7 @@ export default function PendingOrdersView({
   // Get sort icon
   const getSortIcon = (field: 'createdAt' | 'amount' | 'orderNumber') => {
     if (sortBy === field) {
-      return sortOrder === 'asc' ? <SortAsc className="h-4 w-4" /> : <SortDesc className="h-4 w-4" />;
+      return sortOrder === 'asc' ? <Icon name="SortAsc" className="h-4 w-4" /> : <Icon name="SortDesc" className="h-4 w-4" />;
     }
     return null;
   };
@@ -98,7 +98,7 @@ export default function PendingOrdersView({
       <Card className="shadow-lg border-l-4 border-l-status-pending">
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center gap-2 text-lg">
-            <Search className="h-5 w-5 text-status-pending" />
+            <Icon name="Search" className="h-5 w-5 text-status-pending" />
             البحث والتصفية
           </CardTitle>
         </CardHeader>
@@ -117,7 +117,7 @@ export default function PendingOrdersView({
                 className="flex-1"
               />
               <Button type="submit" className="gap-2 sm:w-auto w-full">
-                <Search className="h-4 w-4" />
+                <Icon name="Search" className="h-4 w-4" />
                 بحث
               </Button>
             </form>
@@ -145,7 +145,7 @@ export default function PendingOrdersView({
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Filter className="h-4 w-4 text-feature-analytics" />
+                <Icon name="Filter" className="h-4 w-4 text-feature-analytics" />
                 <span className="text-sm font-semibold text-foreground">ترتيب حسب:</span>
               </div>
 
@@ -157,7 +157,7 @@ export default function PendingOrdersView({
                   onClick={handleClearFilters}
                   className="gap-2 text-muted-foreground border-dashed"
                 >
-                  <X className="h-3 w-3" />
+                  <Icon name="X" className="h-3 w-3" />
                   مسح الفلاتر
                 </Button>
               )}
@@ -230,7 +230,7 @@ export default function PendingOrdersView({
       <Card className="shadow-lg border-l-4 border-l-feature-commerce">
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center gap-2 text-lg">
-            <FileText className="h-5 w-5 text-feature-commerce" />
+            <Icon name="FileText" className="h-5 w-5 text-feature-commerce" />
             {orderType === 'assigned' ? 'الطلبات المُخصصة للسائقين' : 'الطلبات قيد الانتظار'}
             <Badge className={`px-2 py-1 ml-2 text-sm ${orderType === 'assigned'
               ? 'bg-blue-500 text-white'

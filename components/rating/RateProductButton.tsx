@@ -3,11 +3,8 @@
 import { useState } from 'react'; // Keep one useState
 import dynamic from 'next/dynamic'; // Keep one dynamic
 import { toast } from 'sonner';
-import { Star } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
+import { Icon } from '@/components/icons/Icon';
 import { submitProductRating, verifyUserPurchase } from '@/app/(e-comm)/product/actions/rating';
-// Removed Icon import: import { Icon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -95,7 +92,7 @@ export function RateProductButton({
           className,
         )}
       >
-        {showIcon && <Star className={iconVariants({ size: 'xs', className: 'mr-2' })} />} {/* Use direct import + CVA */}
+        {showIcon && <Icon name="Star" size="xs" className="mr-2" />}
         {buttonText}
         {isPurchaseVerified === false && (
           <span className='mr-1 text-xs text-muted-foreground'>(غير مؤكد)</span>

@@ -1,32 +1,10 @@
 // 'use client'; // REMOVE THIS LINE to make the component a server component
 
 import Link from 'next/link';
-import {
-  Building2,
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  Shield,
-  Award,
-  Truck,
-  ShoppingBag,
-  Users,
-  Heart,
-  Star,
-  CreditCard,
-  Headphones,
-  Globe,
-  CheckCircle,
-  Facebook,
-  Instagram,
-  Twitter,
-  Linkedin
-} from 'lucide-react';
-
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import NewsletterClientWrapper from './NewsletterClientWrapper';
+import { Icon } from '@/components/icons/Icon';
 
 interface FooterProps {
   aboutus?: string;
@@ -47,7 +25,7 @@ function CompanyInfo({ aboutus, companyName }: { aboutus?: string; companyName?:
       {/* Logo and Company Name */}
       <div className="flex items-center gap-3">
         <div className="h-12 w-12 rounded-lg bg-feature-commerce flex items-center justify-center">
-          <Building2 className="h-6 w-6 text-white" />
+          <Icon name="Building2" className="h-6 w-6 text-white" />
         </div>
         <div>
           <h2 className="text-xl font-bold text-foreground">{companyName || 'Dream To App'}</h2>
@@ -63,15 +41,15 @@ function CompanyInfo({ aboutus, companyName }: { aboutus?: string; companyName?:
       {/* Trust Badges */}
       <div className="flex flex-wrap gap-2">
         <Badge variant="secondary" className="bg-feature-products/10 text-feature-products border-feature-products/20">
-          <Shield className="h-3 w-3 ml-1" />
+          <Icon name="Shield" className="h-3 w-3 ml-1" />
           آمن ومضمون
         </Badge>
         <Badge variant="secondary" className="bg-feature-commerce/10 text-feature-commerce border-feature-commerce/20">
-          <Award className="h-3 w-3 ml-1" />
+          <Icon name="Award" className="h-3 w-3 ml-1" />
           جودة مضمونة
         </Badge>
         <Badge variant="secondary" className="bg-feature-analytics/10 text-feature-analytics border-feature-analytics/20">
-          <Truck className="h-3 w-3 ml-1" />
+          <Icon name="Truck" className="h-3 w-3 ml-1" />
           توصيل سريع
         </Badge>
       </div>
@@ -98,26 +76,26 @@ function CompanyInfo({ aboutus, companyName }: { aboutus?: string; companyName?:
 // Services Section Component (45 lines)
 function ServicesSection() {
   const services = [
-    { name: 'المتجر الإلكتروني', href: '/', icon: ShoppingBag },
-    { name: 'من نحن', href: '/about', icon: Users },
-    { name: 'تواصل معنا', href: '/contact', icon: Phone },
-    { name: 'المفضلة', href: '/user/wishlist', icon: Heart },
-    { name: 'التقييمات', href: '/user/ratings', icon: Star },
-    { name: 'الطلبات', href: '/user/purchase-history', icon: CreditCard },
+    { name: 'المتجر الإلكتروني', href: '/', iconName: 'ShoppingBag' },
+    { name: 'من نحن', href: '/about', iconName: 'Users' },
+    { name: 'تواصل معنا', href: '/contact', iconName: 'Phone' },
+    { name: 'المفضلة', href: '/user/wishlist', iconName: 'Heart' },
+    { name: 'التقييمات', href: '/user/ratings', iconName: 'Star' },
+    { name: 'الطلبات', href: '/user/purchase-history', iconName: 'CreditCard' },
   ];
 
   const customerService = [
-    { name: 'الدعم الفني', href: '/support', icon: Headphones },
-    { name: 'شروط الاستخدام', href: '/terms', icon: Shield },
-    { name: 'سياسة الخصوصية', href: '/privacy', icon: CheckCircle },
-    { name: 'سياسة الإرجاع', href: '/returns', icon: Truck },
+    { name: 'الدعم الفني', href: '/support', iconName: 'Headphones' },
+    { name: 'شروط الاستخدام', href: '/terms', iconName: 'Shield' },
+    { name: 'سياسة الخصوصية', href: '/privacy', iconName: 'CheckCircle' },
+    { name: 'سياسة الإرجاع', href: '/returns', iconName: 'Truck' },
   ];
 
   return (
     <div className="grid md:grid-cols-2 gap-8">
       <div>
         <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-          <Globe className="h-5 w-5 text-feature-commerce" />
+          <Icon name="Globe" className="h-5 w-5 text-feature-commerce" />
           خدماتنا
         </h3>
         <ul className="space-y-3">
@@ -127,7 +105,7 @@ function ServicesSection() {
                 href={service.href}
                 className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
               >
-                <service.icon className="h-4 w-4 text-feature-commerce group-hover:text-feature-commerce/80 transition-colors" />
+                <Icon name={service.iconName} className="h-4 w-4 text-feature-commerce group-hover:text-feature-commerce/80 transition-colors" />
                 <span className="text-sm">{service.name}</span>
               </Link>
             </li>
@@ -137,7 +115,7 @@ function ServicesSection() {
 
       <div>
         <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-          <Headphones className="h-5 w-5 text-feature-users" />
+          <Icon name="Headphones" className="h-5 w-5 text-feature-users" />
           خدمة العملاء
         </h3>
         <ul className="space-y-3">
@@ -147,7 +125,7 @@ function ServicesSection() {
                 href={service.href}
                 className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
               >
-                <service.icon className="h-4 w-4 text-feature-users group-hover:text-feature-users/80 transition-colors" />
+                <Icon name={service.iconName} className="h-4 w-4 text-feature-users group-hover:text-feature-users/80 transition-colors" />
                 <span className="text-sm">{service.name}</span>
               </Link>
             </li>
@@ -179,7 +157,7 @@ function EnhancedContact({
   return (
     <div className="space-y-6">
       <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-        <MapPin className="h-5 w-5 text-feature-settings" />
+        <Icon name="MapPin" className="h-5 w-5 text-feature-settings" />
         تواصل معنا
       </h3>
 
@@ -187,7 +165,7 @@ function EnhancedContact({
         {email && (
           <div className="flex items-center gap-3 group">
             <div className="h-8 w-8 rounded-full bg-feature-settings/10 flex items-center justify-center">
-              <Mail className="h-4 w-4 text-feature-settings" />
+              <Icon name="Mail" className="h-4 w-4 text-feature-settings" />
             </div>
             <a href={`mailto:${email}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {email}
@@ -198,7 +176,7 @@ function EnhancedContact({
         {phone && (
           <div className="flex items-center gap-3 group">
             <div className="h-8 w-8 rounded-full bg-feature-settings/10 flex items-center justify-center">
-              <Phone className="h-4 w-4 text-feature-settings" />
+              <Icon name="Phone" className="h-4 w-4 text-feature-settings" />
             </div>
             <a href={`tel:${phone}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {phone}
@@ -209,64 +187,63 @@ function EnhancedContact({
         {address && (
           <div className="flex items-center gap-3 group">
             <div className="h-8 w-8 rounded-full bg-feature-settings/10 flex items-center justify-center">
-              <MapPin className="h-4 w-4 text-feature-settings" />
+              <Icon name="MapPin" className="h-4 w-4 text-feature-settings" />
             </div>
-            <span className="text-sm text-muted-foreground">{address}</span>
+            <span className="text-sm text-muted-foreground">
+              {address}
+            </span>
           </div>
         )}
 
-        <div className="flex items-center gap-3 group">
-          <div className="h-8 w-8 rounded-full bg-feature-settings/10 flex items-center justify-center">
-            <Clock className="h-4 w-4 text-feature-settings" />
+        {/* Social Media Links */}
+        {(facebook || instagram || twitter || linkedin) && (
+          <div className="pt-4 border-t border-border/50">
+            <h4 className="text-sm font-medium text-foreground mb-3">تابعنا على</h4>
+            <div className="flex gap-3">
+              {facebook && (
+                <a
+                  href={facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-8 w-8 rounded-full bg-feature-commerce/10 flex items-center justify-center hover:bg-feature-commerce/20 transition-colors"
+                >
+                  <Icon name="Facebook" className="h-4 w-4 text-feature-commerce" />
+                </a>
+              )}
+              {instagram && (
+                <a
+                  href={instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-8 w-8 rounded-full bg-feature-commerce/10 flex items-center justify-center hover:bg-feature-commerce/20 transition-colors"
+                >
+                  <Icon name="Instagram" className="h-4 w-4 text-feature-commerce" />
+                </a>
+              )}
+              {twitter && (
+                <a
+                  href={twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-8 w-8 rounded-full bg-feature-commerce/10 flex items-center justify-center hover:bg-feature-commerce/20 transition-colors"
+                >
+                  <Icon name="Twitter" className="h-4 w-4 text-feature-commerce" />
+                </a>
+              )}
+              {linkedin && (
+                <a
+                  href={linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-8 w-8 rounded-full bg-feature-commerce/10 flex items-center justify-center hover:bg-feature-commerce/20 transition-colors"
+                >
+                  <Icon name="Linkedin" className="h-4 w-4 text-feature-commerce" />
+                </a>
+              )}
+            </div>
           </div>
-          <span className="text-sm text-muted-foreground">متوفرون 24/7 لخدمتكم</span>
-        </div>
+        )}
       </div>
-
-      {/* Client Social Media */}
-      {(facebook || instagram || twitter || linkedin) && (
-        <div className="pt-4 border-t border-border/50">
-          <h4 className="text-sm font-medium text-foreground mb-3">تابعونا</h4>
-          <div className="flex items-center gap-3">
-            {facebook && (
-              <a
-                href={facebook}
-                className="h-9 w-9 rounded-full bg-feature-users/10 flex items-center justify-center text-feature-users hover:bg-feature-users hover:text-white transition-all duration-300"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-4 w-4" />
-              </a>
-            )}
-            {instagram && (
-              <a
-                href={instagram}
-                className="h-9 w-9 rounded-full bg-feature-users/10 flex items-center justify-center text-feature-users hover:bg-feature-users hover:text-white transition-all duration-300"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-4 w-4" />
-              </a>
-            )}
-            {twitter && (
-              <a
-                href={twitter}
-                className="h-9 w-9 rounded-full bg-feature-users/10 flex items-center justify-center text-feature-users hover:bg-feature-users hover:text-white transition-all duration-300"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-4 w-4" />
-              </a>
-            )}
-            {linkedin && (
-              <a
-                href={linkedin}
-                className="h-9 w-9 rounded-full bg-feature-users/10 flex items-center justify-center text-feature-users hover:bg-feature-users hover:text-white transition-all duration-300"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-4 w-4" />
-              </a>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

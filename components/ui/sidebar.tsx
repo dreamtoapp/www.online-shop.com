@@ -3,10 +3,8 @@
 import * as React from 'react'; // Ensure React is imported (keep one)
 
 import { cva, VariantProps } from 'class-variance-authority';
-import { PanelLeft } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
@@ -272,7 +270,7 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      <PanelLeft className={iconVariants({ size: 'sm' })} /> {/* Use direct import + CVA */}
+      <Icon name="PanelLeft" size="sm" className={iconVariants({ size: 'sm' })} />
       <span className='sr-only'>Toggle Sidebar</span>
     </Button>
   );

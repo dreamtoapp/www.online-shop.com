@@ -6,7 +6,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Info } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 interface InfoTooltipProps {
   content: React.ReactNode;
@@ -16,6 +16,15 @@ interface InfoTooltipProps {
   iconSize?: number;
   iconClassName?: string;
 }
+
+// Map number size to IconSize string
+const mapIconSize = (size: number): 'xs' | 'sm' | 'md' | 'lg' | 'xl' => {
+  if (size <= 16) return 'xs';
+  if (size <= 20) return 'sm';
+  if (size <= 24) return 'md';
+  if (size <= 32) return 'lg';
+  return 'xl';
+};
 
 export default function InfoTooltip({
   content,
@@ -34,7 +43,7 @@ export default function InfoTooltip({
           size="icon" // Use standard "icon" size
           className="h-5 w-5 p-0" // Adjust padding/size if needed
         >
-          <Info size={iconSize} className={iconClassName} />
+          <Icon name="Info" size={mapIconSize(iconSize)} className={iconClassName} />
           <span className="sr-only">معلومات إضافية</span>
         </Button>
       </TooltipTrigger>

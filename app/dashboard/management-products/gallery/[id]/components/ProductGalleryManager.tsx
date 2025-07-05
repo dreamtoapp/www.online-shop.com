@@ -3,18 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-// Removed unused import
-import {
-    Upload,
-    Images,
-    Star,
-    Trash2,
-
-    Zap,
-    AlertCircle,
-    HardDrive,
-    CheckCircle
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import Image from 'next/image';
 // Removed unused import
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -273,10 +262,10 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                 <Card className="border-l-4 border-l-feature-analytics">
                     <CardContent className="p-4">
                         <div className="flex items-center gap-2">
-                            <Images className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                            <Icon name="Images" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                             <div>
                                 <p className="text-sm text-muted-foreground">إجمالي الصور</p>
-                                <p className="text-2xl font-bold">{allImages.length}</p>
+                                <p className="text-2xl font-bold text-feature-analytics">{allImages.length}</p>
                             </div>
                         </div>
                     </CardContent>
@@ -285,12 +274,10 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                 <Card className="border-l-4 border-l-feature-products">
                     <CardContent className="p-4">
                         <div className="flex items-center gap-2">
-                            <Star className="h-5 w-5 text-feature-products icon-enhanced" />
+                            <Icon name="Star" className="h-5 w-5 text-feature-products icon-enhanced" />
                             <div>
                                 <p className="text-sm text-muted-foreground">الصورة الرئيسية</p>
-                                <p className="text-sm font-medium">
-                                    {mainImageUrl ? 'محددة ✓' : 'غير محددة'}
-                                </p>
+                                <p className="text-2xl font-bold text-feature-products">{mainImageIndex >= 0 ? '✓' : '✗'}</p>
                             </div>
                         </div>
                     </CardContent>
@@ -299,10 +286,10 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                 <Card className="border-l-4 border-l-feature-settings">
                     <CardContent className="p-4">
                         <div className="flex items-center gap-2">
-                            <Zap className="h-5 w-5 text-feature-settings icon-enhanced" />
+                            <Icon name="Zap" className="h-5 w-5 text-feature-settings icon-enhanced" />
                             <div>
                                 <p className="text-sm text-muted-foreground">حالة التحسين</p>
-                                <p className="text-sm font-medium text-feature-products">محسنة</p>
+                                <p className="text-2xl font-bold text-feature-settings">{allImages.length > 0 ? '✓' : '✗'}</p>
                             </div>
                         </div>
                     </CardContent>
@@ -311,10 +298,10 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                 <Card className="border-l-4 border-l-feature-commerce">
                     <CardContent className="p-4">
                         <div className="flex items-center gap-2">
-                            <HardDrive className="h-5 w-5 text-feature-commerce icon-enhanced" />
+                            <Icon name="HardDrive" className="h-5 w-5 text-feature-commerce icon-enhanced" />
                             <div>
                                 <p className="text-sm text-muted-foreground">حجم التخزين</p>
-                                <p className="text-sm font-medium">2.4 ميجا</p>
+                                <p className="text-2xl font-bold text-feature-commerce">{Math.round((allImages.length * 0.5) * 10) / 10}MB</p>
                             </div>
                         </div>
                     </CardContent>
@@ -325,7 +312,7 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
             <Card className="border-l-4 border-l-feature-products card-hover-effect" data-upload-section>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                        <Upload className="h-5 w-5 text-feature-products icon-enhanced" />
+                        <Icon name="Upload" className="h-5 w-5 text-feature-products icon-enhanced" />
                         اختيار صور جديدة للمعرض
                     </CardTitle>
                 </CardHeader>
@@ -354,7 +341,7 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                                 : 'bg-feature-products hover:bg-feature-products/90 text-white cursor-pointer hover:shadow-xl'
                                 }`}
                         >
-                            <Upload className="h-6 w-6" />
+                            <Icon name="Upload" className="h-6 w-6" />
                             {(allImages.length + previewImages.length) >= 10
                                 ? 'تم الوصول للحد الأقصى (10 صور)'
                                 : 'اختيار صور للمعرض'
@@ -376,11 +363,11 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                                     <div className="relative">
                                         {uploadComplete ? (
                                             <div className="h-6 w-6 bg-green-500 rounded-full flex items-center justify-center animate-bounce">
-                                                <CheckCircle className="h-4 w-4 text-white" />
+                                                <Icon name="CheckCircle" className="h-4 w-4 text-white" />
                                             </div>
                                         ) : (
                                             <>
-                                                <Upload className="h-6 w-6 text-feature-products animate-pulse" />
+                                                <Icon name="Upload" className="h-6 w-6 text-feature-products animate-pulse" />
                                                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
                                             </>
                                         )}
@@ -470,7 +457,7 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                     <CardHeader className="pb-3">
                         <CardTitle className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <AlertCircle className="h-5 w-5 text-amber-600 icon-enhanced" />
+                                <Icon name="AlertCircle" className="h-5 w-5 text-amber-600 icon-enhanced" />
                                 <span className="text-amber-800 dark:text-amber-200">
                                     صور جديدة في انتظار الرفع ({previewImages.length})
                                 </span>
@@ -482,7 +469,7 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                                 className="text-xs border-amber-300 text-amber-700 hover:bg-amber-100 dark:border-amber-700 dark:text-amber-300"
                                 disabled={isUploading}
                             >
-                                <Trash2 className="h-3 w-3 mr-1" />
+                                <Icon name="Trash2" className="h-3 w-3 mr-1" />
                                 مسح الكل
                             </Button>
                         </CardTitle>
@@ -523,7 +510,7 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                                                     className="h-8 w-8 p-0 shadow-lg"
                                                     disabled={isUploading}
                                                 >
-                                                    <Trash2 className="h-4 w-4" />
+                                                    <Icon name="Trash2" className="h-4 w-4" />
                                                 </Button>
                                             </TooltipTrigger>
                                             <TooltipContent side="bottom">حذف من المعاينة</TooltipContent>
@@ -557,7 +544,7 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                                     {isUploading ? (
                                         <div className="flex items-center gap-3">
                                             <div className="relative">
-                                                <Upload className="h-5 w-5 animate-pulse" />
+                                                <Icon name="Upload" className="h-5 w-5 animate-pulse" />
                                                 <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
                                             </div>
                                             <div className="flex flex-col items-start">
@@ -571,7 +558,7 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                                         </div>
                                     ) : (
                                         <>
-                                            <Upload className="h-5 w-5 mr-2" />
+                                            <Icon name="Upload" className="h-5 w-5 mr-2" />
                                             <span>رفع إلى Cloudinary ({previewImages.length})</span>
                                         </>
                                     )}
@@ -583,13 +570,13 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                                     disabled={isUploading}
                                     className="border-amber-300 text-amber-700 hover:bg-amber-50 dark:border-amber-700 dark:text-amber-300 h-10"
                                 >
-                                    <Trash2 className="h-4 w-4 mr-2" />
+                                    <Icon name="Trash2" className="h-4 w-4 mr-2" />
                                     إلغاء الكل
                                 </Button>
                             </div>
 
                             <div className="mt-3 flex items-center gap-2 text-sm text-amber-700 dark:text-amber-300">
-                                <AlertCircle className="h-4 w-4" />
+                                <Icon name="AlertCircle" className="h-4 w-4" />
                                 <span>سيتم رفع الصور إلى المعرض وحفظها في قاعدة البيانات</span>
                             </div>
                         </div>
@@ -603,13 +590,13 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                     <CardHeader>
                         <CardTitle className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <Images className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                                <Icon name="Images" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                                 <span className="text-feature-analytics">
                                     معرض المنتج الحالي ({allImages.length})
                                 </span>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                <CheckCircle className="h-4 w-4 text-green-500" />
+                                <Icon name="CheckCircle" className="h-4 w-4 text-green-500" />
                                 <span>محفوظ</span>
                             </div>
                         </CardTitle>
@@ -634,7 +621,7 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                                     {/* مؤشر الصورة الرئيسية المحسن */}
                                     {index === mainImageIndex && (
                                         <div className="absolute -top-2 -right-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs px-3 py-1 rounded-full shadow-lg font-medium z-10 border-2 border-white dark:border-gray-800">
-                                            <Star className="h-3 w-3 inline mr-1" />
+                                            <Icon name="Star" className="h-3 w-3 inline mr-1" />
                                             رئيسية
                                         </div>
                                     )}
@@ -653,9 +640,9 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                                                     disabled={isUpdating || index === mainImageIndex}
                                                 >
                                                     {index === mainImageIndex ? (
-                                                        <CheckCircle className="h-4 w-4" />
+                                                        <Icon name="CheckCircle" className="h-4 w-4" />
                                                     ) : (
-                                                        <Star className="h-4 w-4" />
+                                                        <Icon name="Star" className="h-4 w-4" />
                                                     )}
                                                 </Button>
                                             </TooltipTrigger>
@@ -673,7 +660,7 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                                                     className="h-9 w-9 p-0 shadow-lg bg-red-600 hover:bg-red-700"
                                                     disabled={isUpdating}
                                                 >
-                                                    <Trash2 className="h-4 w-4" />
+                                                    <Icon name="Trash2" className="h-4 w-4" />
                                                 </Button>
                                             </TooltipTrigger>
                                             <TooltipContent side="bottom">حذف من المعرض</TooltipContent>
@@ -699,10 +686,10 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                             {/* أيقونة متحركة */}
                             <div className="relative mb-6">
                                 <div className="w-24 h-24 mx-auto bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-full flex items-center justify-center animate-pulse">
-                                    <Images className="h-12 w-12 text-gray-400 dark:text-gray-500" />
+                                    <Icon name="Images" className="h-12 w-12 text-gray-400 dark:text-gray-500" />
                                 </div>
                                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center animate-bounce">
-                                    <Upload className="h-4 w-4 text-white" />
+                                    <Icon name="Upload" className="h-4 w-4 text-white" />
                                 </div>
                             </div>
 
@@ -723,12 +710,12 @@ export default function ProductGalleryManager({ product }: ProductGalleryManager
                                         uploadSection?.scrollIntoView({ behavior: 'smooth' });
                                     }}
                                 >
-                                    <Upload className="h-5 w-5 mr-2" />
+                                    <Icon name="Upload" className="h-5 w-5 mr-2" />
                                     ابدأ بإنشاء المعرض
                                 </Button>
 
                                 <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                                    <CheckCircle className="h-4 w-4 text-green-500" />
+                                    <Icon name="CheckCircle" className="h-4 w-4 text-green-500" />
                                     <span>يمكن رفع حتى 10 صور بجودة عالية</span>
                                 </div>
                             </div>

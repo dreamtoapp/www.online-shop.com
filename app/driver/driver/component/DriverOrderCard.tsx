@@ -6,17 +6,8 @@ import {
 
 import { formatDistanceToNow } from 'date-fns';
 import { ar } from 'date-fns/locale';
-import {
-  Calendar,
-  Car,
-  List,
-  Phone,
-  RefreshCw,
-  User,
-} from 'lucide-react'; // Import directly
 import { toast } from 'sonner';
 
-// Removed Icon import: import { Icon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -25,7 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
+import { Icon } from '@/components/icons/Icon';
 import { Order } from '@/types/databaseTypes';
 
 import {
@@ -122,7 +113,7 @@ export default function DriverOrderCard({ order }: { order: Order }) {
       <CardHeader className='space-y-3 p-4'>
         <div className='flex justify-between text-xs text-muted-foreground'>
           <div className='flex items-center gap-1'>
-            <Calendar className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+            <Icon name="Calendar" size="xs" />
             <span>
               {formatDistanceToNow(new Date(order.createdAt), {
                 addSuffix: true,
@@ -131,7 +122,7 @@ export default function DriverOrderCard({ order }: { order: Order }) {
             </span>
           </div>
           <div className='flex items-center gap-1'>
-            <RefreshCw className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+            <Icon name="RefreshCw" size="xs" />
             <span>
               {formatDistanceToNow(new Date(order.updatedAt), {
                 addSuffix: true,
@@ -143,7 +134,7 @@ export default function DriverOrderCard({ order }: { order: Order }) {
 
         <CardTitle className='flex items-center justify-between'>
           <div className='flex items-center gap-2'>
-            <List className={iconVariants({ size: 'sm' })} /> {/* Use direct import + CVA */}
+            <Icon name="List" size="sm" />
             <span>{order.orderNumber}</span>
           </div>
           <span className='text-lg font-semibold text-primary'>{order.amount.toFixed(2)} SAR</span>
@@ -153,11 +144,11 @@ export default function DriverOrderCard({ order }: { order: Order }) {
       <CardContent className='space-y-2 p-4'>
         <div className='grid grid-cols-2 gap-2 text-sm'>
           <div className='flex items-center gap-2'>
-            <User className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+            <Icon name="User" size="xs" />
             <span>{order.customer.name || 'عميل غير معروف'}</span>
           </div>
           <div className='flex items-center gap-2'>
-            <Phone className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+            <Icon name="Phone" size="xs" />
             <span>{order.customer.phone}</span>
           </div>
         </div>
@@ -165,7 +156,7 @@ export default function DriverOrderCard({ order }: { order: Order }) {
 
       <CardFooter className='p-4'>
         <Button className='w-full' onClick={handleStartTrip} disabled={isTracking}>
-          <Car className={iconVariants({ size: 'xs', className: 'ml-2' })} /> {/* Use direct import + CVA */}
+          <Icon name="Car" size="xs" className="ml-2" />
           {isTracking ? (
             <div className='flex w-full items-center'>
               <span>تتبع الرحلة</span>

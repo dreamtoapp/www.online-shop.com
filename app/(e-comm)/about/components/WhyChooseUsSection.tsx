@@ -1,15 +1,14 @@
-import React from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Star, Truck, MapPin, Droplet, ShieldCheck, Award } from 'lucide-react';
 import Image from 'next/image';
+import { Icon } from '@/components/icons/Icon';
 
-const iconMap: Record<string, React.ElementType> = {
-    star: Star,
-    truck: Truck,
-    mapPin: MapPin,
-    droplet: Droplet,
-    shieldCheck: ShieldCheck,
-    award: Award,
+const iconMap: Record<string, string> = {
+    star: 'Star',
+    truck: 'Truck',
+    mapPin: 'MapPin',
+    droplet: 'Droplet',
+    shieldCheck: 'ShieldCheck',
+    award: 'Award',
     // Add more as needed
 };
 
@@ -25,7 +24,7 @@ const WhyChooseUsSection = ({ features }: { features: Feature[] }) => (
         <h2 className='text-3xl font-bold text-center mb-10 font-arabic'>لماذا تختار أمواج؟</h2>
         <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3'>
             {features.map((feature, index) => {
-                const Icon = iconMap[feature.icon] || Star;
+                const iconName = iconMap[feature.icon] || 'Star';
                 return (
                     <Card
                         key={index}
@@ -45,7 +44,7 @@ const WhyChooseUsSection = ({ features }: { features: Feature[] }) => (
                             </div>
                         ) : (
                             <div className="flex items-center justify-center w-full h-44 bg-feature-suppliers-soft">
-                                <Icon className="h-12 w-12 text-feature-suppliers icon-enhanced" />
+                                <Icon name={iconName} size="xl" variant="accent" className="icon-enhanced" />
                             </div>
                         )}
                         <CardHeader className="items-center pt-4 pb-2">

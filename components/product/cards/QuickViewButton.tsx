@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Eye, Star, Truck, RotateCw, ShieldCheck, Share2, BadgePercent } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { Product } from '@/types/databaseTypes';
@@ -35,7 +35,7 @@ export default function QuickViewButton({ product }: QuickViewButtonProps) {
                 }}
                 data-analytics="quick-view-open"
             >
-                <Eye className="h-4 w-4" />
+                <Icon name="Eye" size="sm" />
             </Button>
             {isMobile ? (
                 <Sheet open={open} onOpenChange={setOpen}>
@@ -59,7 +59,7 @@ export default function QuickViewButton({ product }: QuickViewButtonProps) {
                                     </h2>
                                     {product.rating && (
                                         <div className="flex items-center gap-1 text-yellow-400">
-                                            <Star className="h-4 w-4 fill-yellow-400" />
+                                            <Icon name="Star" size="sm" className="fill-yellow-400 text-yellow-400" />
                                             <span className="text-sm font-medium">{ratingFormatted}</span>
                                             {product.reviewCount > 0 && (
                                                 <Link href={`/product/${product.slug}#reviews`} className="text-xs text-blue-400 hover:underline">({formatNum(product.reviewCount)} تقييم)</Link>
@@ -75,19 +75,19 @@ export default function QuickViewButton({ product }: QuickViewButtonProps) {
                                 {product.compareAtPrice && product.compareAtPrice > product.price && (
                                     <>
                                         <span className="text-sm line-through text-muted-foreground">{product.compareAtPrice.toLocaleString()} ر.س</span>
-                                        <BadgePercent className="h-4 w-4 text-feature-commerce" />
+                                        <Icon name="BadgePercent" size="sm" className="h-4 w-4 text-feature-commerce" />
                                     </>
                                 )}
                             </div>
                             <div className="flex items-center justify-center gap-3 text-xs">
                                 {product.shippingDays && (
-                                    <div className="flex items-center gap-1 text-muted-foreground"><Truck className="h-3 w-3" /> {product.shippingDays} أيام شحن</div>
+                                    <div className="flex items-center gap-1 text-muted-foreground"><Icon name="Truck" size="xs" /> {product.shippingDays} أيام شحن</div>
                                 )}
                                 {product.returnPeriodDays && (
-                                    <div className="flex items-center gap-1 text-muted-foreground"><RotateCw className="h-3 w-3" /> إرجاع {product.returnPeriodDays} يوم</div>
+                                    <div className="flex items-center gap-1 text-muted-foreground"><Icon name="RotateCw" size="xs" /> إرجاع {product.returnPeriodDays} يوم</div>
                                 )}
                                 {product.hasQualityGuarantee && (
-                                    <div className="flex items-center gap-1 text-muted-foreground"><ShieldCheck className="h-3 w-3" /> ضمان</div>
+                                    <div className="flex items-center gap-1 text-muted-foreground"><Icon name="ShieldCheck" size="xs" /> ضمان</div>
                                 )}
                             </div>
                             {product.features?.length > 0 && (
@@ -148,7 +148,7 @@ export default function QuickViewButton({ product }: QuickViewButtonProps) {
                                     }}
                                     className="flex items-center gap-1 text-sm"
                                 >
-                                    <Share2 className="h-4 w-4" /> مشاركة
+                                    <Icon name="Share2" size="sm" /> مشاركة
                                 </Button>
                                 <Link href={`/product/${product.slug}`} className="text-sm text-blue-500 hover:underline">
                                     التفاصيل الكاملة ↗
@@ -173,7 +173,7 @@ export default function QuickViewButton({ product }: QuickViewButtonProps) {
                                     </h2>
                                     {product.rating && (
                                         <div className="flex items-center gap-1 text-yellow-400">
-                                            <Star className="h-4 w-4 fill-yellow-400" />
+                                            <Icon name="Star" size="sm" className="fill-yellow-400 text-yellow-400" />
                                             <span className="text-sm font-medium">{ratingFormatted}</span>
                                             {product.reviewCount > 0 && (
                                                 <Link href={`/product/${product.slug}#reviews`} className="text-xs text-blue-400 hover:underline">({formatNum(product.reviewCount)} تقييم)</Link>
@@ -188,19 +188,19 @@ export default function QuickViewButton({ product }: QuickViewButtonProps) {
                                     {product.compareAtPrice && product.compareAtPrice > product.price && (
                                         <>
                                             <span className="text-sm line-through text-muted-foreground">{product.compareAtPrice.toLocaleString()} ر.س</span>
-                                            <BadgePercent className="h-4 w-4 text-feature-commerce" />
+                                            <Icon name="BadgePercent" size="sm" className="h-4 w-4 text-feature-commerce" />
                                         </>
                                     )}
                                 </div>
                                 <div className="flex items-center flex-wrap gap-3 text-xs">
                                     {product.shippingDays && (
-                                        <div className="flex items-center gap-1 text-muted-foreground"><Truck className="h-3 w-3" /> {product.shippingDays} أيام شحن</div>
+                                        <div className="flex items-center gap-1 text-muted-foreground"><Icon name="Truck" size="xs" /> {product.shippingDays} أيام شحن</div>
                                     )}
                                     {product.returnPeriodDays && (
-                                        <div className="flex items-center gap-1 text-muted-foreground"><RotateCw className="h-3 w-3" /> إرجاع {product.returnPeriodDays} يوم</div>
+                                        <div className="flex items-center gap-1 text-muted-foreground"><Icon name="RotateCw" size="xs" /> إرجاع {product.returnPeriodDays} يوم</div>
                                     )}
                                     {product.hasQualityGuarantee && (
-                                        <div className="flex items-center gap-1 text-muted-foreground"><ShieldCheck className="h-3 w-3" /> ضمان</div>
+                                        <div className="flex items-center gap-1 text-muted-foreground"><Icon name="ShieldCheck" size="xs" /> ضمان</div>
                                     )}
                                 </div>
                                 {product.features?.length > 0 && (
@@ -259,7 +259,7 @@ export default function QuickViewButton({ product }: QuickViewButtonProps) {
                                         }}
                                         className="flex items-center gap-1 text-sm"
                                     >
-                                        <Share2 className="h-4 w-4" /> مشاركة
+                                        <Icon name="Share2" size="sm" /> مشاركة
                                     </Button>
                                     <Link href={`/product/${product.slug}`} className="text-sm text-blue-500 hover:underline">
                                         التفاصيل الكاملة ↗

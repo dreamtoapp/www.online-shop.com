@@ -10,7 +10,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Package, Building2, Tag, Settings, Image as ImageIcon, Images, Save } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { toast } from 'sonner';
 import { ProductFormData, ProductSchema } from '../helpers/productZodAndInputs';
 import { useRouter } from 'next/navigation';
@@ -202,7 +202,7 @@ export default function ProductUpsert({
                 <Card className="shadow-lg border-l-4 border-l-feature-products card-hover-effect card-border-glow">
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-xl">
-                            <Package className="h-5 w-5 text-feature-products icon-enhanced" />
+                            <Icon name="Package" className="h-5 w-5 text-feature-products icon-enhanced" />
                             معلومات المنتج الأساسية
                         </CardTitle>
                     </CardHeader>
@@ -260,16 +260,16 @@ export default function ProductUpsert({
                                 <div className="p-4 bg-feature-products-soft/20 border border-feature-products/30 rounded-lg card-hover-effect">
                                     <div className="space-y-3">
                                         <div className="flex items-center gap-2">
-                                            <Package className="h-5 w-5 text-feature-products icon-enhanced" />
+                                            <Icon name="Package" className="h-5 w-5 text-feature-products icon-enhanced" />
                                             <h4 className="font-medium text-feature-products">إدارة صور المنتج</h4>
                                         </div>
                                         <div className="text-sm text-feature-products space-y-3">
                                             <div className="flex items-start gap-3">
-                                                <ImageIcon className="h-4 w-4 text-feature-products mt-0.5 flex-shrink-0 icon-enhanced" />
+                                                <Icon name="Image" className="h-4 w-4 text-feature-products mt-0.5 flex-shrink-0 icon-enhanced" />
                                                 <p><strong>الصورة الرئيسية:</strong> الصورة التي تظهر في بطاقة المنتج والقوائم الرئيسية</p>
                                             </div>
                                             <div className="flex items-start gap-3">
-                                                <Images className="h-4 w-4 text-feature-analytics mt-0.5 flex-shrink-0 icon-enhanced" />
+                                                <Icon name="Images" className="h-4 w-4 text-feature-analytics mt-0.5 flex-shrink-0 icon-enhanced" />
                                                 <p><strong>ألبوم الصور:</strong> مجموعة صور إضافية تظهر في صفحة تفاصيل المنتج (معرض الصور)</p>
                                             </div>
                                             <div className="mt-3 pt-2 border-t border-feature-products/20">
@@ -289,7 +289,7 @@ export default function ProductUpsert({
                 <Card className="shadow-lg border-l-4 border-l-feature-suppliers card-hover-effect card-border-glow">
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-xl">
-                            <Building2 className="h-5 w-5 text-feature-suppliers icon-enhanced" />
+                            <Icon name="Building2" className="h-5 w-5 text-feature-suppliers icon-enhanced" />
                             اختيار المورد
                         </CardTitle>
                     </CardHeader>
@@ -343,7 +343,7 @@ export default function ProductUpsert({
                 <Card className="shadow-lg border-l-4 border-l-feature-products card-hover-effect card-border-glow">
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-xl">
-                            <Tag className="h-5 w-5 text-feature-products icon-enhanced" />
+                            <Icon name="Tag" className="h-5 w-5 text-feature-products icon-enhanced" />
                             تصنيفات المنتج
                         </CardTitle>
                     </CardHeader>
@@ -412,7 +412,7 @@ export default function ProductUpsert({
                 <Card className="shadow-lg border-l-4 border-l-feature-settings card-hover-effect card-border-glow">
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-xl">
-                            <Settings className="h-5 w-5 text-feature-settings icon-enhanced" />
+                            <Icon name="Settings" className="h-5 w-5 text-feature-settings icon-enhanced" />
                             إعدادات المنتج
                         </CardTitle>
                     </CardHeader>
@@ -484,7 +484,7 @@ export default function ProductUpsert({
                 <Card className="shadow-lg border-l-4 border-l-feature-settings card-hover-effect">
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-xl">
-                            <Settings className="h-5 w-5 text-feature-settings icon-enhanced" />
+                            <Icon name="Settings" className="h-5 w-5 text-feature-settings icon-enhanced" />
                             {mode === 'new' ? 'حفظ المنتج' : 'حفظ التغييرات'}
                         </CardTitle>
                     </CardHeader>
@@ -495,7 +495,7 @@ export default function ProductUpsert({
                                 disabled={isSubmitting}
                                 className={`gap-2 flex-1 sm:flex-initial ${mode === 'new' ? 'btn-add' : 'btn-save'}`}
                             >
-                                <Save className="h-4 w-4" />
+                                <Icon name="Save" className="h-4 w-4" />
                                 {isSubmitting ? 'جارٍ الحفظ...' : (mode === 'new' ? 'حفظ المنتج' : 'حفظ التغييرات')}
                             </Button>
                             <Button

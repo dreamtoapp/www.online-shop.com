@@ -1,10 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { X } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import { cn } from '@/lib/utils';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 
@@ -57,7 +55,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
           )}
           {children}
           <DialogPrimitive.Close className='absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground'>
-            <X className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+            <Icon name="X" size="xs" className={iconVariants({ size: 'xs' })} />
             <span className='sr-only'>Close</span>
           </DialogPrimitive.Close>
         </DialogPrimitive.Content>

@@ -23,7 +23,7 @@ import {
   CartesianGrid,
 } from 'recharts';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 // Define a specific type for the product performance data used in the table
 interface ProductPerformanceData {
@@ -269,7 +269,7 @@ export default function ProductPerformanceClient({
                   disabled={currentPage === 1}
                   aria-label="الصفحة السابقة"
                 >
-                  <ChevronRight className="w-5 h-5 rtl:rotate-180" />
+                  <Icon name="chevron-left" className="w-5 h-5 rtl:rotate-180" />
                 </button>
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
@@ -286,7 +286,7 @@ export default function ProductPerformanceClient({
                   disabled={currentPage === totalPages}
                   aria-label="الصفحة التالية"
                 >
-                  <ChevronLeft className="w-5 h-5 rtl:rotate-180" />
+                  <Icon name="chevron-right" className="w-5 h-5 rtl:rotate-180" />
                 </button>
               </div>
               <div className="text-xs text-muted-foreground text-center md:text-right">

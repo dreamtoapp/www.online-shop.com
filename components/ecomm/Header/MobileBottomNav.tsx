@@ -4,8 +4,7 @@ import { useState, useEffect, useRef, useContext } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Grid3X3, Search, Heart, User, TrendingUp, Sparkles, Zap } from 'lucide-react';
-import { FaWhatsapp } from 'react-icons/fa';
+import { Icon } from '@/components/icons/Icon';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -18,7 +17,7 @@ import Image from 'next/image';
 interface BottomNavItem {
     id: string;
     label: string;
-    icon: any;
+    icon: string;
     href: string;
     badge?: number;
     color: string;
@@ -49,8 +48,6 @@ function NavigationItem({
     onTabPress: (id: string) => void;
     onSearchClick?: () => void;
 }) {
-    const Icon = item.icon;
-
     const content = (
         <>
             <div className="relative flex items-center justify-center h-7 w-7">
@@ -79,13 +76,13 @@ function NavigationItem({
                             {item.userName && item.userName.length > 0 ? (
                                 <span className="uppercase">{item.userName[0]}</span>
                             ) : (
-                                <User className="h-4 w-4" />
+                                <Icon name="User" size="sm" />
                             )}
                         </div>
                     )
                 ) : (
-                    <Icon className={cn(
-                        "h-5 w-5 transition-all duration-300",
+                    <Icon name={item.icon} size="sm" className={cn(
+                        "transition-all duration-300",
                         isActive ? `${item.color} scale-110` : "text-muted-foreground",
                         item.id === 'wishlist' && item.badge && item.badge > 0
                             ? "text-feature-users fill-current" : ""
@@ -264,7 +261,7 @@ function QuickActionButtons({
                                 className="w-12 h-12 rounded-full shadow-lg bg-feature-suppliers hover:bg-feature-suppliers/90 border-0 relative"
                                 onClick={handleWhatsAppClick}
                             >
-                                <FaWhatsapp className="h-5 w-5 text-primary-foreground" />
+                                <Icon name="Whatsapp" size="sm" className="text-primary-foreground" />
                                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-feature-suppliers rounded-full border-2 border-background animate-pulse"></div>
                             </Button>
                         </motion.div>
@@ -279,7 +276,7 @@ function QuickActionButtons({
                                 disabled={supportCooldown > 0}
                                 title="طلب دعم فوري من الإدارة"
                             >
-                                <Zap className="h-5 w-5 text-primary-foreground" />
+                                <Icon name="Zap" size="sm" className="text-primary-foreground" />
                                 {supportCooldown > 0 && (
                                     <span className="absolute -top-2 -right-2 bg-background border border-border rounded-full px-1 py-0.5 text-xs font-bold text-foreground shadow">
                                         {Math.floor(supportCooldown / 60)}:{(supportCooldown % 60).toString().padStart(2, '0')}
@@ -295,8 +292,8 @@ function QuickActionButtons({
                                 variant="secondary"
                                 className="w-12 h-12 rounded-full shadow-lg bg-gradient-to-r from-feature-analytics to-feature-settings border-0 relative"
                             >
-                                <TrendingUp className="h-5 w-5 text-primary-foreground" />
-                                <Sparkles className="h-3 w-3 text-primary-foreground absolute -top-1 -right-1 animate-pulse" />
+                                <Icon name="TrendingUp" size="sm" className="text-primary-foreground" />
+                                <Icon name="Sparkles" size="sm" className="text-primary-foreground absolute -top-1 -right-1 animate-pulse" />
                             </Button>
                         </Link>
                     </motion.div>
@@ -335,14 +332,14 @@ export default function MobileBottomNav({
     const LAST_PING_KEY = 'support_ping_last_time';
 
     const navItems: BottomNavItem[] = [
-        { id: 'home', label: 'الرئيسية', icon: Home, href: '/', color: 'text-feature-commerce' },
-        { id: 'categories', label: 'الأقسام', icon: Grid3X3, href: '/categories', color: 'text-feature-products' },
-        { id: 'search', label: 'البحث', icon: Search, href: '#', color: 'text-feature-analytics' },
-        { id: 'wishlist', label: 'المفضلة', icon: Heart, href: '/user/wishlist', badge: derivedWishlistCount, color: 'text-feature-users' },
+        { id: 'home', label: 'الرئيسية', icon: 'Home', href: '/', color: 'text-feature-commerce' },
+        { id: 'categories', label: 'الأقسام', icon: 'Grid3X3', href: '/categories', color: 'text-feature-products' },
+        { id: 'search', label: 'البحث', icon: 'Search', href: '#', color: 'text-feature-analytics' },
+        { id: 'wishlist', label: 'المفضلة', icon: 'Heart', href: '/user/wishlist', badge: derivedWishlistCount, color: 'text-feature-users' },
         {
             id: 'account',
             label: isLoggedIn ? 'حسابي' : 'دخول',
-            icon: User,
+            icon: 'User',
             href: isLoggedIn ? '/user/profile' : '/auth/login',
             color: 'text-feature-settings',
             userImage: isLoggedIn ? userImage : null,

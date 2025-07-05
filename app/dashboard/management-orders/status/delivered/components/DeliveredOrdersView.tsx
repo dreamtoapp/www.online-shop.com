@@ -5,23 +5,7 @@ import React, { useState, useMemo } from 'react';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 
-import {
-  Calendar,
-  CheckCircle,
-  ChevronLeft,
-  ChevronRight,
-  Search,
-  Download,
-  Filter,
-  DollarSign,
-  Users,
-  Truck,
-  Eye,
-  BarChart3,
-  Phone,
-  User,
-  Package,
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import {
   usePathname,
   useRouter,
@@ -188,7 +172,7 @@ export default function DeliveredOrdersView({
           disabled={currentPage === 1}
           className="h-8 w-8 p-0"
         >
-          <ChevronRight className="h-4 w-4" />
+          <Icon name="chevron-right" className="h-4 w-4" />
         </Button>
 
         {pages}
@@ -200,7 +184,7 @@ export default function DeliveredOrdersView({
           disabled={currentPage === totalPages}
           className="h-8 w-8 p-0"
         >
-          <ChevronLeft className="h-4 w-4" />
+          <Icon name="chevron-left" className="h-4 w-4" />
         </Button>
       </div>
     );
@@ -224,7 +208,7 @@ export default function DeliveredOrdersView({
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-feature-commerce-soft rounded-lg">
-                <DollarSign className="h-5 w-5 text-feature-commerce" />
+                <Icon name="dollar-sign" className="h-5 w-5 text-feature-commerce" />
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-600">إجمالي الإيرادات</p>
@@ -238,7 +222,7 @@ export default function DeliveredOrdersView({
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-feature-users-soft rounded-lg">
-                <Users className="h-5 w-5 text-feature-users" />
+                <Icon name="users" className="h-5 w-5 text-feature-users" />
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-600">العملاء</p>
@@ -252,7 +236,7 @@ export default function DeliveredOrdersView({
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-feature-suppliers-soft rounded-lg">
-                <Truck className="h-5 w-5 text-feature-suppliers" />
+                <Icon name="truck" className="h-5 w-5 text-feature-suppliers" />
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-600">السائقون</p>
@@ -266,7 +250,7 @@ export default function DeliveredOrdersView({
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-feature-analytics-soft rounded-lg">
-                <BarChart3 className="h-5 w-5 text-feature-analytics" />
+                <Icon name="bar-chart-3" className="h-5 w-5 text-feature-analytics" />
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-600">متوسط الطلب</p>
@@ -282,7 +266,7 @@ export default function DeliveredOrdersView({
         <CardHeader>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <CardTitle className="flex items-center gap-2 text-xl">
-              <CheckCircle className="h-5 w-5 text-feature-commerce" />
+              <Icon name="check-circle" className="h-5 w-5 text-feature-commerce" />
               الطلبات المسلمة
               <Badge variant="secondary" className="bg-feature-commerce-soft text-feature-commerce">
                 {deliveredCount}
@@ -296,7 +280,7 @@ export default function DeliveredOrdersView({
               className="flex items-center gap-2"
               disabled={orders.length === 0}
             >
-              <Download className="h-4 w-4" />
+              <Icon name="download" className="h-4 w-4" />
               تصدير CSV
             </Button>
           </div>
@@ -314,12 +298,12 @@ export default function DeliveredOrdersView({
                 className="w-full"
               />
               <Button type="submit" size="sm" variant="outline">
-                <Search className="h-4 w-4" />
+                <Icon name="search" className="h-4 w-4" />
               </Button>
             </form>
 
             <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-gray-500" />
+              <Icon name="calendar" className="h-4 w-4 text-gray-500" />
               <span className="text-sm font-medium">الفترة:</span>
               <Select value={selectedDateRange} onValueChange={handleDateRangeChange}>
                 <SelectTrigger className="w-[140px]">
@@ -335,7 +319,7 @@ export default function DeliveredOrdersView({
             </div>
 
             <div className="flex items-center gap-2">
-              <Filter className="h-4 w-4 text-gray-500" />
+              <Icon name="filter" className="h-4 w-4 text-gray-500" />
               <span className="text-sm font-medium">ترتيب:</span>
               <Select value={sortBy} onValueChange={handleSortChange}>
                 <SelectTrigger className="w-[120px]">
@@ -362,7 +346,7 @@ export default function DeliveredOrdersView({
                       {/* Order Info */}
                       <div className="flex-1 space-y-3">
                         <div className="flex items-center gap-3">
-                          <CheckCircle className="h-5 w-5 text-green-500" />
+                          <Icon name="check-circle" className="h-5 w-5 text-green-500" />
                           <span className="font-bold text-lg text-feature-commerce">
                             {order.orderNumber || '—'}
                           </span>
@@ -373,26 +357,26 @@ export default function DeliveredOrdersView({
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
                           <div className="flex items-center gap-2">
-                            <User className="h-4 w-4 text-gray-400" />
+                            <Icon name="user" className="h-4 w-4 text-gray-400" />
                             <span className="font-medium">
                               {order.customer?.name || order.customer?.email || '—'}
                             </span>
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <Phone className="h-4 w-4 text-gray-400" />
+                            <Icon name="phone" className="h-4 w-4 text-gray-400" />
                             <span className="font-mono text-sm">
                               {order.customer?.phone || '—'}
                             </span>
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <Truck className="h-4 w-4 text-gray-400" />
+                            <Icon name="truck" className="h-4 w-4 text-gray-400" />
                             <span>{order?.driver?.name || '—'}</span>
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <Package className="h-4 w-4 text-gray-400" />
+                            <Icon name="package" className="h-4 w-4 text-gray-400" />
                             <span>{order.items?.length || 0} منتج</span>
                           </div>
                         </div>
@@ -414,7 +398,7 @@ export default function DeliveredOrdersView({
                             href={`/dashboard/show-invoice/${order.id}`}
                             className="inline-flex items-center gap-1 px-3 py-2 text-xs font-medium text-white bg-feature-commerce rounded-md hover:bg-feature-commerce/90 transition-colors"
                           >
-                            <Eye className="h-3 w-3" />
+                            <Icon name="eye" className="h-3 w-3" />
                             تفاصيل
                           </Link>
                         </div>
@@ -425,7 +409,7 @@ export default function DeliveredOrdersView({
               ))
             ) : (
               <div className="text-center py-12">
-                <CheckCircle className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+                <Icon name="check-circle" className="h-16 w-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-gray-600 mb-2">لا توجد طلبات مسلمة</h3>
                 <p className="text-gray-500 mb-4">لم يتم العثور على طلبات في هذه الفترة</p>
                 <div className="flex gap-2 justify-center">

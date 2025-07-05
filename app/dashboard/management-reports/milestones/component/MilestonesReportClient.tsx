@@ -1,34 +1,27 @@
 'use client';
 import {
-  Award,
-  ShoppingCart,
-  TrendingUp,
-  Users,
-} from 'lucide-react'; // Example icons
-
-import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-
 import { MilestoneItem } from '../action/getMilestonesReportData';
+import { Icon } from '@/components/icons/Icon';
 
 interface MilestonesReportClientProps {
   milestones: MilestoneItem[];
   error?: string;
 }
 
-// Helper to get a relevant Lucide icon based on milestone title keywords
+// Helper to get a relevant icon based on milestone title keywords
 const getMilestoneIcon = (title: string, iconString?: string) => {
-  if (iconString) { // If an emoji/string icon is provided
+  if (iconString) {
     return <span className="text-2xl mr-2 rtl:mr-0 rtl:ml-2">{iconString}</span>;
   }
-  if (title.includes('طلب')) return <ShoppingCart size={24} className="mr-2 rtl:mr-0 rtl:ml-2 text-primary" />;
-  if (title.includes('عميل')) return <Users size={24} className="mr-2 rtl:mr-0 rtl:ml-2 text-primary" />;
-  if (title.includes('مبيعات')) return <TrendingUp size={24} className="mr-2 rtl:mr-0 rtl:ml-2 text-primary" />;
-  return <Award size={24} className="mr-2 rtl:mr-0 rtl:ml-2 text-primary" />; // Default
+  if (title.includes('طلب')) return <Icon name="ShoppingCart" size="lg" className="mr-2 rtl:mr-0 rtl:ml-2 text-primary" />;
+  if (title.includes('عميل')) return <Icon name="Users" size="lg" className="mr-2 rtl:mr-0 rtl:ml-2 text-primary" />;
+  if (title.includes('مبيعات')) return <Icon name="TrendingUp" size="lg" className="mr-2 rtl:mr-0 rtl:ml-2 text-primary" />;
+  return <Icon name="Award" size="lg" className="mr-2 rtl:mr-0 rtl:ml-2 text-primary" />;
 };
 
 export default function MilestonesReportClient({

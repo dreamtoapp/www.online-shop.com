@@ -1,5 +1,5 @@
 // app/dashboard/orders-management/components/OrderManagementHeader.tsx
-import { Package, Clock, CheckCircle, Truck, XCircle } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
@@ -22,35 +22,35 @@ export default function OrderManagementHeader({
     {
       label: 'إجمالي الطلبات',
       value: totalOrders,
-      icon: Package,
+      icon: 'Package',
       color: 'bg-blue-100 text-blue-700',
       iconColor: 'text-blue-500',
     },
     {
       label: 'قيد الانتظار',
       value: pendingOrders,
-      icon: Clock,
+      icon: 'Clock',
       color: 'bg-amber-100 text-amber-700',
       iconColor: 'text-amber-500',
     },
     {
       label: 'في الطريق',
       value: inWayOrders,
-      icon: Truck,
+      icon: 'Truck',
       color: 'bg-indigo-100 text-indigo-700',
       iconColor: 'text-indigo-500',
     },
     {
       label: 'تم التسليم',
       value: deliveredOrders,
-      icon: CheckCircle,
+      icon: 'CheckCircle',
       color: 'bg-green-100 text-green-700',
       iconColor: 'text-green-500',
     },
     {
       label: 'ملغي',
       value: canceledOrders,
-      icon: XCircle,
+      icon: 'XCircle',
       color: 'bg-red-100 text-red-700',
       iconColor: 'text-red-500',
     },
@@ -71,7 +71,7 @@ export default function OrderManagementHeader({
                 <p className="text-2xl font-bold">{stat.value}</p>
               </div>
               <div className={cn("rounded-full p-2", stat.color)}>
-                <stat.icon className={cn("h-6 w-6", stat.iconColor)} />
+                <Icon name={stat.icon} className={cn("h-6 w-6", stat.iconColor)} />
               </div>
             </CardContent>
           </Card>

@@ -2,10 +2,8 @@
 
 import * as React from 'react'; // Ensure React is imported for forwardRef (keep one)
 import { OTPInput, OTPInputContext } from 'input-otp';
-import { Minus } from 'lucide-react'; // Import directly
 import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { Icon } from '@/components/icons/Icon';
 import { cn } from '@/lib/utils';
 
 const InputOTP = React.forwardRef<
@@ -65,7 +63,7 @@ const InputOTPSeparator = React.forwardRef<
   React.ComponentPropsWithoutRef<'div'>
 >(({ ...props }, ref) => (
   <div ref={ref} role='separator' {...props}>
-    <Minus className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+    <Icon name="Minus" size="xs" className={iconVariants({ size: 'xs' })} />
   </div>
 ));
 InputOTPSeparator.displayName = 'InputOTPSeparator';

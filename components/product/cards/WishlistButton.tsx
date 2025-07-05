@@ -7,7 +7,7 @@ import {
   useContext,
 } from 'react';
 
-import { Heart } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { toast } from 'sonner';
 
 import {
@@ -18,7 +18,6 @@ import {
 import { getCachedWishlist, setCachedWishlist } from '@/lib/cache/wishlist';
 import {
   cn,
-  iconVariants,
 } from '@/lib/utils';
 import { WishlistContext } from '@/providers/wishlist-provider';
 
@@ -138,13 +137,12 @@ export default function WishlistButton({
         />
       )}
       <span className="flex h-full w-full items-center justify-center">
-        <Heart
-          className={iconVariants({
-            size,
-            variant: 'secondary',
-            animation: isLoading ? 'pulse' : undefined,
-            className: cn('transition-all duration-200 text-feature-users', renderFilled && 'fill-current stroke-current'),
-          })}
+        <Icon
+          name="Heart"
+          size={size}
+          variant="secondary"
+          animation={isLoading ? 'pulse' : 'none'}
+          className={cn('transition-all duration-200 text-feature-users', renderFilled && 'fill-current stroke-current')}
           aria-label={isInWishlist ? 'إزالة من المفضلة' : 'إضافة إلى المفضلة'}
           suppressHydrationWarning
         />

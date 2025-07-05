@@ -2,20 +2,6 @@
 
 import { useState } from 'react';
 
-import {
-  Filter,
-  Map,
-  MapPin,
-  PhoneCall,
-  Search,
-  Truck,
-  User,
-  DollarSign,
-  FileText,
-  Calendar,
-  Navigation,
-} from 'lucide-react';
-
 import Link from '@/components/link';
 import { Button } from '@/components/ui/button';
 import {
@@ -27,6 +13,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Icon } from '@/components/icons/Icon';
 import { cn } from '@/lib/utils';
 import { Order } from '@/types/databaseTypes';
 import { formatDistanceToNow } from 'date-fns';
@@ -57,7 +44,7 @@ function ViewModeToggle({ viewMode, onViewModeChange }: ViewModeToggleProps) {
           onClick={() => onViewModeChange('list')}
           className="transition-all duration-150"
         >
-          <Filter className="h-4 w-4 ml-2 icon-enhanced" />
+          <Icon name="Filter" className="h-4 w-4 ml-2 icon-enhanced" />
           قائمة
         </Button>
         <Button
@@ -66,7 +53,7 @@ function ViewModeToggle({ viewMode, onViewModeChange }: ViewModeToggleProps) {
           onClick={() => onViewModeChange('map')}
           className="transition-all duration-150"
         >
-          <Map className="h-4 w-4 ml-2 icon-enhanced" />
+          <Icon name="Map" className="h-4 w-4 ml-2 icon-enhanced" />
           خريطة
         </Button>
       </div>
@@ -86,7 +73,7 @@ function SortControls({ driverSort, onDriverSortChange }: SortControlsProps) {
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-feature-analytics" />
+            <Icon name="Filter" className="h-4 w-4 text-feature-analytics" />
             <span className="text-sm font-semibold">ترتيب حسب السائق:</span>
           </div>
           <Button
@@ -95,7 +82,7 @@ function SortControls({ driverSort, onDriverSortChange }: SortControlsProps) {
             onClick={() => onDriverSortChange(driverSort === 'asc' ? 'desc' : 'asc')}
             className="gap-2 transition-all duration-150"
           >
-            <Truck className="h-4 w-4 text-feature-commerce" />
+            <Icon name="Truck" className="h-4 w-4 text-feature-commerce" />
             {driverSort === 'asc' ? 'أ إلى ي' : 'ي إلى أ'}
             <span className="transition-transform duration-150 text-xs">{driverSort === 'asc' ? '▲' : '▼'}</span>
           </Button>
@@ -123,7 +110,7 @@ function OrderCard({ order }: OrderCardProps) {
       <CardHeader className="pb-3 bg-card border-b">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <CardTitle className="flex items-center gap-2 text-base">
-            <FileText className="h-4 w-4 text-muted-foreground icon-enhanced" />
+            <Icon name="FileText" className="h-4 w-4 text-muted-foreground icon-enhanced" />
             <Link
               href={`/dashboard/show-invoice/${order.id}`}
               className="text-primary hover:text-primary/90 font-semibold hover:underline transition-colors duration-150"
@@ -134,19 +121,19 @@ function OrderCard({ order }: OrderCardProps) {
           <div className="flex flex-wrap items-center gap-2">
             {order.status !== OrderStatus.IN_TRANSIT && (
               <Badge variant="outline" className="bg-amber-100 text-amber-700 border-amber-500 gap-1 shadow-sm text-xs">
-                <MapPin className="h-3 w-3 animate-pulse" />
+                <Icon name="MapPin" className="h-3 w-3 animate-pulse" />
                 لم يبدأ الرحلة
               </Badge>
             )}
             {order.status === OrderStatus.IN_TRANSIT && (
               <Badge className="bg-feature-commerce text-white gap-1 shadow-sm text-xs">
-                <Truck className="h-3 w-3" />
+                <Icon name="Truck" className="h-3 w-3" />
                 في الطريق
               </Badge>
             )}
             {isHighValue && (
               <Badge className="bg-status-high-value text-white gap-1 shadow-sm text-xs">
-                <DollarSign className="h-3 w-3" />
+                <Icon name="DollarSign" className="h-3 w-3" />
                 قيمة عالية
               </Badge>
             )}
@@ -159,7 +146,7 @@ function OrderCard({ order }: OrderCardProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-3">
             <h4 className="font-bold text-sm text-foreground flex items-center gap-2 border-b pb-2">
-              <User className="h-4 w-4 text-feature-users" />
+              <Icon name="User" className="h-4 w-4 text-feature-users" />
               معلومات العميل
             </h4>
             <div className="space-y-2 pr-4">
@@ -168,7 +155,7 @@ function OrderCard({ order }: OrderCardProps) {
                 <span className="text-sm text-foreground font-medium">{order.customer.name || 'غير معروف'}</span>
               </div>
               <div className="flex items-center gap-2">
-                <PhoneCall className="h-3 w-3 text-feature-users" />
+                <Icon name="PhoneCall" className="h-3 w-3 text-feature-users" />
                 <span className="text-sm text-foreground font-medium">{order.customer.phone || 'غير متوفر'}</span>
               </div>
             </div>
@@ -176,7 +163,7 @@ function OrderCard({ order }: OrderCardProps) {
 
           <div className="space-y-3">
             <h4 className="font-bold text-sm text-foreground flex items-center gap-2 border-b pb-2">
-              <Truck className="h-4 w-4 text-feature-commerce" />
+              <Icon name="Truck" className="h-4 w-4 text-feature-commerce" />
               معلومات السائق
             </h4>
             <div className="space-y-2 pr-4">
@@ -188,15 +175,15 @@ function OrderCard({ order }: OrderCardProps) {
                     : "bg-amber-100 border-amber-500"
                 )}>
                   {order.status === OrderStatus.IN_TRANSIT ? (
-                    <Truck className="h-4 w-4 text-feature-commerce" />
+                    <Icon name="Truck" className="h-4 w-4 text-feature-commerce" />
                   ) : (
-                    <MapPin className="h-4 w-4 text-amber-600 animate-pulse" />
+                    <Icon name="MapPin" className="h-4 w-4 text-amber-600 animate-pulse" />
                   )}
                 </div>
                 <span className="text-sm font-medium">{order.driver?.name || 'لم يتم تعيين'}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Calendar className="h-3 w-3 text-muted-foreground" />
+                <Icon name="Calendar" className="h-3 w-3 text-muted-foreground" />
                 <span className="text-xs text-muted-foreground">
                   منذ {formatDistanceToNow(new Date(order.createdAt), { addSuffix: false, locale: ar })}
                 </span>
@@ -210,7 +197,7 @@ function OrderCard({ order }: OrderCardProps) {
         {/* Order Details */}
         <div className="grid grid-cols-2 gap-4">
           <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg border">
-            <DollarSign className="h-4 w-4 text-status-high-value" />
+            <Icon name="DollarSign" className="h-4 w-4 text-status-high-value" />
             <div>
               <p className="text-xs font-semibold text-muted-foreground">المبلغ الإجمالي</p>
               <p className="text-lg font-bold text-status-high-value">{order.amount} ر.س</p>
@@ -218,7 +205,7 @@ function OrderCard({ order }: OrderCardProps) {
           </div>
 
           <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg border">
-            <Navigation className={cn(
+            <Icon name="Navigation" className={cn(
               "h-4 w-4",
               order.status === OrderStatus.IN_TRANSIT ? "text-feature-commerce" : "text-amber-600"
             )} />
@@ -240,7 +227,7 @@ function OrderCard({ order }: OrderCardProps) {
           href={`/dashboard/show-invoice/${order.id}`}
           className="inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors duration-150 bg-primary text-primary-foreground hover:bg-primary/90 shadow-md gap-2 flex-1"
         >
-          <Search className="h-4 w-4" />
+          <Icon name="Search" className="h-4 w-4" />
           عرض التفاصيل
         </Link>
 
@@ -252,7 +239,7 @@ function OrderCard({ order }: OrderCardProps) {
               title={`اتصل بالسائق: ${order.driverId}`}
               style={{ direction: 'ltr' }}
             >
-              <PhoneCall className="h-4 w-4" />
+              <Icon name="PhoneCall" className="h-4 w-4" />
             </a>
           ) : (
             <Button
@@ -262,7 +249,7 @@ function OrderCard({ order }: OrderCardProps) {
               title="لا يوجد رقم سائق"
               disabled
             >
-              <PhoneCall className="h-4 w-4" />
+              <Icon name="PhoneCall" className="h-4 w-4" />
             </Button>
           )}
 
@@ -274,7 +261,7 @@ function OrderCard({ order }: OrderCardProps) {
             )}
             title="تتبع الطلب"
           >
-            <MapPin className="h-4 w-4" />
+            <Icon name="MapPin" className="h-4 w-4" />
           </Link>
         </div>
       </CardFooter>
@@ -326,14 +313,14 @@ function MapView() {
       <CardContent className="p-4 h-full">
         <div className="flex h-full items-center justify-center bg-muted/30 rounded-lg hover:bg-muted/40 transition-colors duration-200">
           <div className="text-center">
-            <Map className="h-12 w-12 mx-auto text-feature-commerce icon-enhanced" />
+            <Icon name="Map" className="h-12 w-12 mx-auto text-feature-commerce icon-enhanced" />
             <h3 className="mt-2 text-lg font-medium text-foreground">خريطة تتبع الطلبات</h3>
             <p className="text-sm text-muted-foreground max-w-md mx-auto mt-2">
               هنا ستظهر خريطة تفاعلية تعرض مواقع جميع الطلبات قيد التوصيل في الوقت الفعلي.
             </p>
             <div className="mt-4">
               <span className="inline-flex items-center gap-2 px-3 py-1 bg-feature-commerce-soft text-feature-commerce text-xs font-semibold rounded-full border border-feature-commerce">
-                <Truck className="h-3 w-3" />
+                <Icon name="Truck" className="h-3 w-3" />
                 قريباً
               </span>
             </div>
@@ -350,7 +337,7 @@ function EmptyState() {
     <Card className="card-hover-effect shadow-lg border border-dashed border-feature-commerce">
       <CardContent className="flex flex-col items-center justify-center py-10">
         <div className="relative">
-          <Truck className="h-16 w-16 text-feature-commerce icon-enhanced" />
+          <Icon name="Truck" className="h-16 w-16 text-feature-commerce icon-enhanced" />
           <div className="absolute -top-1 -right-1 h-4 w-4 bg-feature-commerce-soft border border-feature-commerce rounded-full animate-pulse"></div>
         </div>
         <h3 className="mt-4 text-lg font-medium text-foreground">لا توجد طلبات في الطريق</h3>
@@ -358,7 +345,7 @@ function EmptyState() {
           لا توجد طلبات قيد التوصيل حالياً. سيتم عرض الطلبات هنا عندما يبدأ السائقون رحلاتهم.
         </p>
         <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
-          <MapPin className="h-3 w-3" />
+          <Icon name="MapPin" className="h-3 w-3" />
           <span>تحديث تلقائي كل 30 ثانية</span>
         </div>
       </CardContent>

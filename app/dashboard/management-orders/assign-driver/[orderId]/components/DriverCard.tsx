@@ -1,16 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-    Star,
-    Truck,
-    Phone,
-    CheckCircle,
-    Loader2,
-    AlertTriangle,
-    Package,
-    XCircle
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -225,7 +216,7 @@ export default function DriverCard({
         if (rating === 0) {
             return (
                 <div className="flex items-center gap-1">
-                    <AlertTriangle className="h-3 w-3 text-yellow-500" />
+                    <Icon name="AlertTriangle" className="h-3 w-3 text-yellow-500" />
                     <span className="text-xs text-muted-foreground">لا يوجد تقييم</span>
                 </div>
             );
@@ -237,8 +228,9 @@ export default function DriverCard({
         return (
             <div className="flex items-center gap-1">
                 {Array.from({ length: 5 }, (_, i) => (
-                    <Star
+                    <Icon
                         key={i}
+                        name="Star"
                         className={`h-3 w-3 ${i < fullStars
                             ? 'fill-yellow-400 text-yellow-400'
                             : i === fullStars && hasHalfStar
@@ -264,7 +256,7 @@ export default function DriverCard({
                     <DialogHeader>
                         <DialogTitle className="flex items-center gap-3 text-xl">
                             <div className="p-2 rounded-lg bg-status-delivered/10">
-                                <Package className="h-6 w-6 text-status-delivered" />
+                                <Icon name="Package" className="h-6 w-6 text-status-delivered" />
                             </div>
                             <div>
                                 <span>الطلبات المُسلمة - {driver.name}</span>
@@ -284,7 +276,7 @@ export default function DriverCard({
                                 >
                                     <div className="flex items-center gap-4">
                                         <div className="p-2 rounded-lg bg-status-delivered/10">
-                                            <Package className="h-4 w-4 text-status-delivered" />
+                                            <Icon name="Package" className="h-4 w-4 text-status-delivered" />
                                         </div>
 
                                         <div>
@@ -308,7 +300,7 @@ export default function DriverCard({
                             ))
                         ) : (
                             <div className="text-center py-8 text-muted-foreground">
-                                <Package className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                                <Icon name="Package" className="h-12 w-12 mx-auto mb-4 opacity-50" />
                                 <p>لا توجد طلبات مُسلمة</p>
                             </div>
                         )}
@@ -328,7 +320,7 @@ export default function DriverCard({
                     <DialogHeader>
                         <DialogTitle className="flex items-center gap-3 text-xl">
                             <div className="p-2 rounded-lg bg-status-canceled/10">
-                                <XCircle className="h-6 w-6 text-status-canceled" />
+                                <Icon name="XCircle" className="h-6 w-6 text-status-canceled" />
                             </div>
                             <div>
                                 <span>الطلبات الملغاة - {driver.name}</span>
@@ -348,7 +340,7 @@ export default function DriverCard({
                                 >
                                     <div className="flex items-center gap-4">
                                         <div className="p-2 rounded-lg bg-status-canceled/10">
-                                            <XCircle className="h-4 w-4 text-status-canceled" />
+                                            <Icon name="XCircle" className="h-4 w-4 text-status-canceled" />
                                         </div>
 
                                         <div>
@@ -377,7 +369,7 @@ export default function DriverCard({
                             ))
                         ) : (
                             <div className="text-center py-8 text-muted-foreground">
-                                <XCircle className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                                <Icon name="XCircle" className="h-12 w-12 mx-auto mb-4 opacity-50" />
                                 <p>لا توجد طلبات ملغاة</p>
                             </div>
                         )}
@@ -442,12 +434,12 @@ export default function DriverCard({
                             >
                                 {isAssigning ? (
                                     <>
-                                        <Loader2 className="h-4 w-4 ml-2 animate-spin" />
+                                        <Icon name="Loader2" className="h-4 w-4 ml-2 animate-spin" />
                                         جاري التعيين...
                                     </>
                                 ) : (
                                     <>
-                                        <CheckCircle className="h-4 w-4 ml-2" />
+                                        <Icon name="CheckCircle" className="h-4 w-4 ml-2" />
                                         تعيين
                                     </>
                                 )}
@@ -501,12 +493,12 @@ export default function DriverCard({
                     {/* Contact Info */}
                     <div className="space-y-3 bg-muted/10 rounded-lg p-3">
                         <div className="flex items-center gap-3 text-sm">
-                            <Phone className="h-4 w-4 text-muted-foreground" />
+                            <Icon name="Phone" className="h-4 w-4 text-muted-foreground" />
                             <span className="font-mono" dir="ltr">{driver.phone}</span>
                         </div>
 
                         <div className="flex items-center gap-3 text-sm">
-                            <Truck className="h-4 w-4 text-muted-foreground" />
+                            <Icon name="Truck" className="h-4 w-4 text-muted-foreground" />
                             <span>{driver.vehicle.type}</span>
                             {driver.vehicle.plateNumber && (
                                 <span className="text-muted-foreground">• {driver.vehicle.plateNumber}</span>
@@ -521,7 +513,7 @@ export default function DriverCard({
                             className="h-16 flex flex-col items-center justify-center bg-status-delivered/5 border border-status-delivered/20 rounded-lg transition-colors duration-150 hover:bg-status-delivered/10 focus:outline-none focus:ring-2 focus:ring-status-delivered/30"
                         >
                             <div className="flex items-center gap-2">
-                                <Package className="h-4 w-4 text-status-delivered" />
+                                <Icon name="Package" className="h-4 w-4 text-status-delivered" />
                                 <span className="font-bold text-status-delivered text-lg">
                                     {orderStats.deliveredOrders}
                                 </span>
@@ -534,7 +526,7 @@ export default function DriverCard({
                             className="h-16 flex flex-col items-center justify-center bg-status-canceled/5 border border-status-canceled/20 rounded-lg transition-colors duration-150 hover:bg-status-canceled/10 focus:outline-none focus:ring-2 focus:ring-status-canceled/30"
                         >
                             <div className="flex items-center gap-2">
-                                <XCircle className="h-4 w-4 text-status-canceled" />
+                                <Icon name="XCircle" className="h-4 w-4 text-status-canceled" />
                                 <span className="font-bold text-status-canceled text-lg">
                                     {orderStats.cancelledOrders}
                                 </span>
@@ -557,17 +549,17 @@ export default function DriverCard({
                     >
                         {isAssigning ? (
                             <>
-                                <Loader2 className="h-4 w-4 ml-2 animate-spin" />
+                                <Icon name="Loader2" className="h-4 w-4 ml-2 animate-spin" />
                                 جاري...
                             </>
                         ) : driver.status !== 'available' ? (
                             <>
-                                <AlertTriangle className="h-4 w-4 ml-2" />
+                                <Icon name="AlertTriangle" className="h-4 w-4 ml-2" />
                                 غير متاح
                             </>
                         ) : (
                             <>
-                                <CheckCircle className="h-4 w-4 ml-2" />
+                                <Icon name="CheckCircle" className="h-4 w-4 ml-2" />
                                 تعيين
                             </>
                         )}

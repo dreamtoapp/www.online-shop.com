@@ -1,8 +1,8 @@
-import { AlertTriangle, RefreshCw, Settings, Tag, Building2, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Icon } from '@/components/icons/Icon';
 
 interface ProductFormFallbackProps {
     errorMessage: string;
@@ -19,7 +19,7 @@ export default function ProductFormFallback({
         <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in-50 duration-500">
             {/* Error Alert */}
             <Alert variant="destructive" className="card-hover-effect">
-                <AlertTriangle className="h-4 w-4 icon-enhanced" />
+                <Icon name="AlertTriangle" className="h-4 w-4 icon-enhanced" />
                 <AlertTitle>لا يمكن إنشاء منتج جديد</AlertTitle>
                 <AlertDescription className="mt-2 animate-in slide-in-from-left-2 duration-300">
                     {errorMessage}
@@ -34,7 +34,7 @@ export default function ProductFormFallback({
                     }`}>
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-lg">
-                            <Tag className={`h-5 w-5 icon-enhanced ${hasCategories ? 'text-feature-products' : 'text-destructive'
+                            <Icon name="Tag" className={`h-5 w-5 icon-enhanced ${hasCategories ? 'text-feature-products' : 'text-destructive'
                                 }`} />
                             <span>فئات المنتجات</span>
                             <div className={`w-3 h-3 rounded-full animate-pulse ${hasCategories ? 'bg-feature-products' : 'bg-destructive'
@@ -51,7 +51,7 @@ export default function ProductFormFallback({
                         <CardContent>
                             <Button asChild variant="outline" size="sm" className="btn-edit-outline btn-professional">
                                 <Link href="/dashboard/management-categories">
-                                    <Settings className="w-4 h-4 me-2 icon-enhanced" />
+                                    <Icon name="Settings" className="w-4 h-4 me-2 icon-enhanced" />
                                     إدارة الفئات
                                 </Link>
                             </Button>
@@ -66,7 +66,7 @@ export default function ProductFormFallback({
                     }`}>
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-lg">
-                            <Building2 className={`h-5 w-5 icon-enhanced ${hasSuppliers ? 'text-feature-suppliers' : 'text-feature-settings'
+                            <Icon name="Building2" className={`h-5 w-5 icon-enhanced ${hasSuppliers ? 'text-feature-suppliers' : 'text-feature-settings'
                                 }`} />
                             <span>الموردين</span>
                             <div className={`w-3 h-3 rounded-full animate-pulse ${hasSuppliers ? 'bg-feature-suppliers' : 'bg-feature-settings'
@@ -83,7 +83,7 @@ export default function ProductFormFallback({
                         <CardContent>
                             <Button asChild variant="outline" size="sm" className="btn-edit-outline btn-professional">
                                 <Link href="/dashboard/management-suppliers">
-                                    <Settings className="w-4 h-4 me-2 icon-enhanced" />
+                                    <Icon name="Settings" className="w-4 h-4 me-2 icon-enhanced" />
                                     إدارة الموردين
                                 </Link>
                             </Button>
@@ -99,7 +99,7 @@ export default function ProductFormFallback({
                     variant="outline"
                     className="flex items-center gap-2 btn-view-outline btn-professional"
                 >
-                    <RefreshCw className="w-4 h-4 icon-enhanced" />
+                    <Icon name="RefreshCw" className="w-4 h-4 icon-enhanced" />
                     إعادة المحاولة
                 </Button>
 
@@ -114,7 +114,7 @@ export default function ProductFormFallback({
             <Card className="shadow-lg border-l-4 border-l-feature-analytics card-hover-effect">
                 <CardHeader className="pb-4">
                     <CardTitle className="flex items-center gap-2 text-lg">
-                        <HelpCircle className="h-5 w-5 text-feature-analytics icon-enhanced" />
+                        <Icon name="HelpCircle" className="h-5 w-5 text-feature-analytics icon-enhanced" />
                         تحتاج مساعدة؟
                     </CardTitle>
                 </CardHeader>
@@ -124,19 +124,19 @@ export default function ProductFormFallback({
                     </p>
                     <div className="grid gap-3">
                         <div className="flex items-center gap-3 p-3 rounded-lg border bg-card card-hover-effect">
-                            <Tag className="h-4 w-4 text-feature-products icon-enhanced" />
+                            <Icon name="Tag" className="h-4 w-4 text-feature-products icon-enhanced" />
                             <span className="text-sm">فئة واحدة على الأقل (مطلوبة)</span>
                             <div className={`ml-auto w-2 h-2 rounded-full ${hasCategories ? 'bg-feature-products' : 'bg-destructive'}`} />
                         </div>
 
                         <div className="flex items-center gap-3 p-3 rounded-lg border bg-card card-hover-effect">
-                            <Building2 className="h-4 w-4 text-feature-suppliers icon-enhanced" />
+                            <Icon name="Building2" className="h-4 w-4 text-feature-suppliers icon-enhanced" />
                             <span className="text-sm">مورد واحد على الأقل (مُستحسن)</span>
                             <div className={`ml-auto w-2 h-2 rounded-full ${hasSuppliers ? 'bg-feature-suppliers' : 'bg-feature-settings'}`} />
                         </div>
 
                         <div className="flex items-center gap-3 p-3 rounded-lg border bg-card card-hover-effect">
-                            <Settings className="h-4 w-4 text-feature-settings icon-enhanced" />
+                            <Icon name="Settings" className="h-4 w-4 text-feature-settings icon-enhanced" />
                             <span className="text-sm">اتصال فعال بقاعدة البيانات</span>
                             <div className="ml-auto w-2 h-2 rounded-full bg-feature-products" />
                         </div>

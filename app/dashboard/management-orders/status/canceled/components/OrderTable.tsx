@@ -3,11 +3,6 @@
 
 import { formatDistanceToNow } from 'date-fns';
 import { ar } from 'date-fns/locale';
-import {
-  ChevronLeft,
-  ChevronRight,
-  Search,
-} from 'lucide-react';
 
 import Link from '@/components/link';
 import { Badge } from '@/components/ui/badge';
@@ -25,6 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { Icon } from '@/components/icons/Icon';
 import { cn } from '@/lib/utils';
 import { Order } from '@/types/databaseTypes';
 
@@ -79,7 +75,7 @@ export default function OrderTable({
           disabled={currentPage === 1}
           className="h-8 w-8 p-0"
         >
-          <ChevronRight className="h-4 w-4" />
+          <Icon name="ChevronRight" className="h-4 w-4" />
         </Button>
 
         {pages}
@@ -91,7 +87,7 @@ export default function OrderTable({
           disabled={currentPage === totalPages}
           className="h-8 w-8 p-0"
         >
-          <ChevronLeft className="h-4 w-4" />
+          <Icon name="ChevronLeft" className="h-4 w-4" />
         </Button>
       </div>
     );
@@ -150,7 +146,7 @@ export default function OrderTable({
                         "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                       )}
                     >
-                      <Search className="h-4 w-4" />
+                      <Icon name="Search" className="h-4 w-4" />
                     </Link>
                   </div>
                 </TableCell>

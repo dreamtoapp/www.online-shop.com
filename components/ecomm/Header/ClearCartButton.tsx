@@ -1,10 +1,10 @@
 'use client';
 
-import { Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useOptimisticCart } from '@/lib/hooks/useOptimisticCart';
 import { toast } from 'sonner';
+import { Icon } from '@/components/icons/Icon';
 
 export default function ClearCartButton() {
     const router = useRouter();
@@ -28,7 +28,7 @@ export default function ClearCartButton() {
             className="btn-delete"
             onClick={handleClick}
         >
-            <Trash2 className="h-4 w-4 mr-1 icon-enhanced" />
+            <Icon name="Trash2" className="h-4 w-4 mr-1 icon-enhanced" />
             Clear Cart
         </Button>
     );

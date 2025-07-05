@@ -1,15 +1,12 @@
 'use client';
 
-import { useState } from 'react'; // Keep only one import
+import { useState } from 'react';
 
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, Expand, X } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
+import { iconVariants } from '@/lib/utils';
+import { Icon } from '@/components/icons/Icon';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-
 import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog';
 
 interface ProductImageGalleryProps {
@@ -54,7 +51,7 @@ export default function ProductImageGallery({
               className='absolute left-2 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full bg-background/80 shadow-sm'
               onClick={handlePrevious}
             >
-              <ChevronLeft className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+              <Icon name="ChevronLeft" size="xs" className={iconVariants({ size: 'xs' })} />
               <span className='sr-only'>السابق</span>
             </Button>
 
@@ -64,7 +61,7 @@ export default function ProductImageGallery({
               className='absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full bg-background/80 shadow-sm'
               onClick={handleNext}
             >
-              <ChevronRight className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+              <Icon name="ChevronRight" size="xs" className={iconVariants({ size: 'xs' })} />
               <span className='sr-only'>التالي</span>
             </Button>
           </>
@@ -76,7 +73,7 @@ export default function ProductImageGallery({
           className='absolute bottom-2 right-2 h-8 w-8 rounded-full bg-background/80 shadow-sm'
           onClick={() => setIsFullscreen(true)}
         >
-          <Expand className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+          <Icon name="Expand" size="xs" className={iconVariants({ size: 'xs' })} />
           <span className='sr-only'>تكبير</span>
         </Button>
       </div>
@@ -123,7 +120,7 @@ export default function ProductImageGallery({
                   className='absolute left-4 top-1/2 h-10 w-10 -translate-y-1/2 rounded-full bg-white/20 text-white hover:bg-white/30'
                   onClick={handlePrevious}
                 >
-                  <ChevronLeft className={iconVariants({ size: 'md' })} /> {/* Use direct import + CVA */}
+                  <Icon name="ChevronLeft" size="md" className={iconVariants({ size: 'md' })} />
                   <span className='sr-only'>السابق</span>
                 </Button>
 
@@ -133,14 +130,14 @@ export default function ProductImageGallery({
                   className='absolute right-4 top-1/2 h-10 w-10 -translate-y-1/2 rounded-full bg-white/20 text-white hover:bg-white/30'
                   onClick={handleNext}
                 >
-                  <ChevronRight className={iconVariants({ size: 'md' })} /> {/* Use direct import + CVA */}
+                  <Icon name="ChevronRight" size="md" className={iconVariants({ size: 'md' })} />
                   <span className='sr-only'>التالي</span>
                 </Button>
               </>
             )}
 
             <DialogClose className='absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30'>
-              <X className={iconVariants({ size: 'xs' })} /> {/* Use direct import + CVA */}
+              <Icon name="X" size="xs" className={iconVariants({ size: 'xs' })} />
               <span className='sr-only'>إغلاق</span>
             </DialogClose>
           </div>

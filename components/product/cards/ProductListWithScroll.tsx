@@ -7,7 +7,7 @@ import { fetchProductsPage } from '@/app/(e-comm)/homepage/actions/fetchProducts
 import ProductCardSkeleton from '@/components/product/cards/ProductCardSkeleton';
 import { ProductCardAdapter } from '@/components/product/cards';
 import { Button } from '@/components/ui/button';
-import { RefreshCw, AlertCircle } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { getCart } from '@/app/(e-comm)/cart/actions/cartServerActions';
 import { CartWithItems } from '@/app/(e-comm)/cart/actions/cartServerActions';
 
@@ -192,7 +192,7 @@ export default function ProductListWithScroll({
                         <div className="w-full">
                             <div className="mb-4 text-center">
                                 <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-6 py-3 text-blue-600 shadow-sm">
-                                    <RefreshCw className="h-4 w-4 animate-spin" />
+                                    <Icon name="RefreshCw" size="sm" animation="spin" />
                                     جاري تحميل المزيد من المنتجات...
                                 </div>
                             </div>
@@ -207,7 +207,7 @@ export default function ProductListWithScroll({
                     {error && (
                         <div className="flex flex-col items-center gap-4 rounded-xl bg-red-50 p-6 text-center shadow-sm">
                             <div className="flex items-center gap-2 text-red-600">
-                                <AlertCircle className="h-5 w-5" />
+                                <Icon name="AlertCircle" size="sm" />
                                 <span className="font-medium">{error}</span>
                             </div>
                             {retryCount < MAX_RETRY_ATTEMPTS ? (
@@ -221,7 +221,7 @@ export default function ProductListWithScroll({
                                     size="sm"
                                     className="border-red-200 text-red-600 hover:bg-red-50"
                                 >
-                                    <RefreshCw className="mr-2 h-4 w-4" />
+                                    <Icon name="RefreshCw" size="sm" />
                                     إعادة المحاولة
                                 </Button>
                             )}
@@ -253,7 +253,7 @@ export default function ProductListWithScroll({
                     {!hasMore && products.length === 0 && !loading && !error && (
                         <div className="flex flex-col items-center gap-4 rounded-xl bg-gray-50 p-8 text-center">
                             <div className="rounded-full bg-gray-100 p-4">
-                                <AlertCircle className="h-8 w-8 text-gray-400" />
+                                <Icon name="AlertCircle" size="lg" />
                             </div>
                             <div>
                                 <h3 className="text-lg font-medium text-gray-900">لا توجد منتجات</h3>

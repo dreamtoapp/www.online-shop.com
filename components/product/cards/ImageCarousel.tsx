@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface ImageCarouselProps {
@@ -42,7 +42,7 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
                         className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-1.5 text-white hover:bg-black/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         aria-label="الصورة السابقة"
                     >
-                        <ChevronLeft className="h-5 w-5" />
+                        <Icon name="ChevronLeft" size="sm" />
                         <span className="sr-only">الصورة السابقة</span>
                     </button>
                     <button
@@ -50,7 +50,7 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
                         className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-1.5 text-white hover:bg-black/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         aria-label="الصورة التالية"
                     >
-                        <ChevronRight className="h-5 w-5" />
+                        <Icon name="ChevronRight" size="sm" />
                         <span className="sr-only">الصورة التالية</span>
                     </button>
                 </>
@@ -62,7 +62,7 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
                 className="absolute bottom-2 right-2 rounded-full bg-black/60 p-1.5 text-white hover:bg-black/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label="تكبير الصورة"
             >
-                <Maximize2 className="h-4 w-4" />
+                <Icon name="Maximize2" size="sm" />
                 <span className="sr-only">تكبير</span>
             </button>
 
@@ -79,7 +79,7 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
                             className="absolute top-2 right-2 rounded-full bg-white/80 p-1 text-black hover:bg-white"
                             aria-label="إغلاق"
                         >
-                            <X className="h-4 w-4" />
+                            <Icon name="X" size="sm" />
                         </button>
                     </div>
                 </DialogContent>

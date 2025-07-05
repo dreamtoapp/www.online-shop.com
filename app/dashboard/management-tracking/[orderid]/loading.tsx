@@ -4,16 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import {
-    MapPin,
-    User,
-    Package,
-    DollarSign,
-    Clock,
-    Truck,
-    RefreshCw,
-    PlayCircle
-} from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 export default function Loading() {
     return (
@@ -24,11 +15,11 @@ export default function Loading() {
                     <BackButton variant="gradient" />
                     <div className="flex items-center gap-3">
                         <Badge variant="secondary" className="animate-pulse">
-                            <PlayCircle className="h-3 w-3 mr-1" />
+                            <Icon name="PlayCircle" className="h-3 w-3 mr-1" />
                             <Skeleton className="h-4 w-16" />
                         </Badge>
                         <Button variant="outline" size="sm" className="btn-view-outline" disabled>
-                            <RefreshCw className="h-4 w-4 mr-1" />
+                            <Icon name="RefreshCw" className="h-4 w-4 mr-1" />
                             تحديث
                         </Button>
                     </div>
@@ -38,14 +29,14 @@ export default function Loading() {
                 <Card className="shadow-lg border-l-4 border-l-feature-commerce card-hover-effect">
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-xl">
-                            <Package className="h-5 w-5 text-feature-commerce/50 animate-pulse icon-enhanced" />
+                            <Icon name="Package" className="h-5 w-5 text-feature-commerce/50 animate-pulse icon-enhanced" />
                             <Skeleton className="h-6 w-48" />
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="flex items-center gap-3 p-3 rounded-lg bg-feature-users-soft/50">
-                                <User className="h-5 w-5 text-feature-users/50 animate-pulse" />
+                                <Icon name="User" className="h-5 w-5 text-feature-users/50 animate-pulse" />
                                 <div className="space-y-2">
                                     <p className="text-xs text-muted-foreground font-medium">العميل</p>
                                     <Skeleton className="h-5 w-24" />
@@ -53,7 +44,7 @@ export default function Loading() {
                             </div>
 
                             <div className="flex items-center gap-3 p-3 rounded-lg bg-feature-commerce-soft/50">
-                                <DollarSign className="h-5 w-5 text-feature-commerce/50 animate-pulse" />
+                                <Icon name="DollarSign" className="h-5 w-5 text-feature-commerce/50 animate-pulse" />
                                 <div className="space-y-2">
                                     <p className="text-xs text-muted-foreground font-medium">إجمالي المبلغ</p>
                                     <Skeleton className="h-5 w-20" />
@@ -61,7 +52,7 @@ export default function Loading() {
                             </div>
 
                             <div className="flex items-center gap-3 p-3 rounded-lg bg-feature-suppliers-soft/50">
-                                <Truck className="h-5 w-5 text-feature-suppliers/50 animate-pulse" />
+                                <Icon name="Truck" className="h-5 w-5 text-feature-suppliers/50 animate-pulse" />
                                 <div className="space-y-2">
                                     <p className="text-xs text-muted-foreground font-medium">السائق</p>
                                     <Skeleton className="h-5 w-28" />
@@ -76,7 +67,7 @@ export default function Loading() {
                     <Card className="shadow-lg border-l-4 border-l-feature-suppliers card-hover-effect">
                         <CardHeader className="pb-4">
                             <CardTitle className="flex items-center gap-2 text-xl">
-                                <Truck className="h-5 w-5 text-feature-suppliers/50 animate-pulse icon-enhanced" />
+                                <Icon name="Truck" className="h-5 w-5 text-feature-suppliers/50 animate-pulse icon-enhanced" />
                                 معلومات السائق
                             </CardTitle>
                         </CardHeader>
@@ -96,7 +87,7 @@ export default function Loading() {
 
                             <div className="flex items-center justify-center">
                                 <Badge variant="secondary" className="px-4 py-2 animate-pulse">
-                                    <Clock className="h-4 w-4 mr-2" />
+                                    <Icon name="Clock" className="h-4 w-4 mr-2" />
                                     <Skeleton className="h-4 w-20" />
                                 </Badge>
                             </div>
@@ -107,7 +98,7 @@ export default function Loading() {
                     <Card className="shadow-lg border-l-4 border-l-feature-analytics card-hover-effect">
                         <CardHeader className="pb-4">
                             <CardTitle className="flex items-center gap-2 text-xl">
-                                <Clock className="h-5 w-5 text-feature-analytics/50 animate-pulse icon-enhanced" />
+                                <Icon name="Clock" className="h-5 w-5 text-feature-analytics/50 animate-pulse icon-enhanced" />
                                 مراحل الطلبية
                             </CardTitle>
                         </CardHeader>
@@ -131,7 +122,7 @@ export default function Loading() {
                 <Card className="shadow-lg border-l-4 border-l-feature-analytics card-hover-effect">
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-xl">
-                            <MapPin className="h-5 w-5 text-feature-analytics/50 animate-pulse icon-enhanced" />
+                            <Icon name="MapPin" className="h-5 w-5 text-feature-analytics/50 animate-pulse icon-enhanced" />
                             موقع التوصيل المباشر
                         </CardTitle>
                     </CardHeader>
@@ -139,7 +130,7 @@ export default function Loading() {
                         <div className="space-y-4">
                             <div className="relative h-96 w-full overflow-hidden rounded-lg border-2 border-border">
                                 <div className="flex flex-col items-center justify-center h-full bg-muted/50">
-                                    <MapPin className="h-12 w-12 text-muted-foreground/50 mb-4 animate-pulse" />
+                                    <Icon name="MapPin" className="h-12 w-12 text-muted-foreground/50 mb-4 animate-pulse" />
                                     <Skeleton className="h-4 w-32 mb-2" />
                                     <Skeleton className="h-3 w-48" />
                                 </div>
@@ -169,7 +160,7 @@ export default function Loading() {
                 <Card className="shadow-lg border-l-4 border-l-feature-products card-hover-effect">
                     <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2 text-xl">
-                            <Package className="h-5 w-5 text-feature-products/50 animate-pulse icon-enhanced" />
+                            <Icon name="Package" className="h-5 w-5 text-feature-products/50 animate-pulse icon-enhanced" />
                             <span>محتويات الطلبية</span>
                             <Skeleton className="h-6 w-16" />
                         </CardTitle>

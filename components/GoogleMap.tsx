@@ -1,12 +1,8 @@
 'use client';
 import { useState } from 'react';
 
-import {
-  Map,
-  MapPinOff,
-} from 'lucide-react'; // Import directly
+import { Icon } from '@/components/icons/Icon';
 
-// Removed Icon import: import { Icon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -15,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
+
 
 interface MapProps {
   latitude?: string | '';
@@ -49,9 +45,9 @@ const GoogleMap = ({ latitude, longitude, }: MapProps) => {
             className='flex items-center gap-2'
           >
             {hasValidCoordinates ? (
-              <Map className={iconVariants({ size: 'sm' })} /> // Use direct import + CVA
+              <Icon name="Map" size="sm" />
             ) : (
-              <MapPinOff className={iconVariants({ size: 'sm' })} /> // Use direct import + CVA
+              <Icon name="MapPinOff" size="sm" />
             )}
           </Button>
         </DialogTrigger>

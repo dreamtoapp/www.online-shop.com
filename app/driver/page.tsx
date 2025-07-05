@@ -5,10 +5,6 @@ import React, {
 } from 'react';
 
 import { useRouter } from 'next/navigation';
-import { Loader2 } from 'lucide-react'; // Import directly
-import { iconVariants } from '@/lib/utils'; // Import CVA variants
-
-// Removed Icon import: import { Icon } from '@/components/icons';
 import {
   Alert,
   AlertDescription,
@@ -17,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Icon } from '@/components/icons/Icon';
 
 import { authenticateDriver } from './actions/actions';
 
@@ -105,7 +102,7 @@ export default function DriverTrip() {
           )}
 
           <Button type='submit' className='w-full gap-2' disabled={isPending}>
-            {isPending && <Loader2 className={iconVariants({ size: 'xs', animation: 'spin' })} />} {/* Use direct import + CVA */}
+            {isPending && <Icon name="Loader2" size="xs" className="animate-spin" />}
             {isPending ? 'جاري التحقق...' : 'تسجيل الدخول'}
           </Button>
         </form>
