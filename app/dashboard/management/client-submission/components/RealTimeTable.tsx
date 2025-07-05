@@ -64,10 +64,10 @@ export default function RealTimeTable({ initialSubmissions }: RealTimeTableProps
     formData.append('submissionId', selectedSubmission.id);
     formData.append('content', reply);
     const res = await createReplyAction(formData);
-    if (res.success) {
+    if (res.success && res.reply && res.reply.content) {
       setSubmissions(submissions => submissions.map(s =>
         s.id === selectedSubmission.id
-          ? { ...s, replies: [...(s.replies || []), res.reply] }
+          ? { ...s, replies: [...(s.replies || []), res.reply.content] }
           : s
       ));
     }

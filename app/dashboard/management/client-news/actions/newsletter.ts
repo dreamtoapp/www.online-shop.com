@@ -1,8 +1,9 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import db from '../../../../lib/prisma';
+ 
 import { NewLetter } from '@/types/databaseTypes';
+import db from '@/lib/prisma';
 
 // Fetch all subscribers
 export async function fetchSubscribers(): Promise<NewLetter[]> {

@@ -1,5 +1,5 @@
 // app/dashboard/contact/page.tsx
-import { Suspense } from 'react';
+// import { Suspense } from 'react';
 import { fetchSubmissions } from './actions/fetchSubmissions';
 import { fetchReplies } from './actions/fetchReplies';
 import ClientSubmissionTabs from './components/ClientSubmissionTabs';
