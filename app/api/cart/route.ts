@@ -1,4 +1,4 @@
-import { addItem, getCart } from '@/app/(e-comm)/cart/actions/cartServerActions';
+import { addItem, getCart } from '@/app/(e-comm)/(cart-flow)/cart/actions/cartServerActions';
 import { NextResponse } from 'next/server';
 
 export async function GET() {

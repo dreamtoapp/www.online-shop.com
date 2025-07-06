@@ -28,9 +28,20 @@ export async function GET(request: NextRequest) {
     const [products, totalCount] = await Promise.all([
       db.product.findMany({
         where,
-        include: {
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          price: true,
+          compareAtPrice: true,
+          imageUrl: true,
+          rating: true,
+          reviewCount: true,
+          previewCount: true,
+          outOfStock: true,
+          details: true,
           categoryAssignments: {
-            include: {
+            select: {
               category: {
                 select: {
                   id: true,
@@ -38,11 +49,6 @@ export async function GET(request: NextRequest) {
                   slug: true,
                 },
               },
-            },
-          },
-          _count: {
-            select: {
-              reviews: true,
             },
           },
         },

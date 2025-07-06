@@ -92,6 +92,7 @@ export async function fetchFilteredProducts( // Update return type
       features: p.features,
       createdAt: p.createdAt,
       updatedAt: p.updatedAt,
+      previewCount: 0,
     };
   });
 

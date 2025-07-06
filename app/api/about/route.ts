@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getAboutPageContent } from '@/app/(e-comm)/about/actions/getAboutPageContent';
+import { getAboutPageContent } from '@/app/(e-comm)/(adminPage)/about/actions/getAboutPageContent';
 import { updateAboutPageContent } from '@/app/dashboard/management/about/actions/updateAboutPageContent';
 
 export async function GET() {

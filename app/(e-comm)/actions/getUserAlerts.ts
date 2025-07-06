@@ -2,13 +2,8 @@
 
 import db from '@/lib/prisma';
 
-// -----------------------------------------------------------------------------
-// getUserAlerts
-// -----------------------------------------------------------------------------
-// Returns the latest alerts / notifications for the given user. This is called
-// from client components via the Next.js Server-Actions bridge (no REST route
-// required). The query is intentionally limited to keep payloads small.
-// -----------------------------------------------------------------------------
+// Fetches the latest alerts/notifications for a user (for NotificationDropdown, etc.)
+// Returns up to `limit` records, ordered by newest first.
 
 export interface UserAlert {
   id: string;
@@ -21,15 +16,12 @@ export interface UserAlert {
 }
 
 /**
- * Fetches the most recent alerts for a user.
- *
- * @param userId  MongoDB/UUID string of the user               (required)
- * @param limit   Max number of records to return (default 20)  (optional)
+ * Get recent alerts for a user.
+ * @param userId User's ID (required)
+ * @param limit  Max records to return (default 20)
  */
 export async function getUserAlerts(userId: string, limit = 20): Promise<UserAlert[]> {
   if (!userId) return [];
-
-  // NOTE: adjust the model name if your Prisma schema differs
   const alerts = await db.userNotification.findMany({
     where: { userId },
     orderBy: { createdAt: 'desc' },
@@ -44,6 +36,5 @@ export async function getUserAlerts(userId: string, limit = 20): Promise<UserAle
       actionUrl: true,
     },
   });
-
   return alerts as UserAlert[];
 } 

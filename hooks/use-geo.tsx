@@ -24,29 +24,15 @@ export type GeolocationResult = Readonly<{
 }>;
 
 const useGeolocation = (options: GeolocationOptions = {}): GeolocationResult => {
-  // SSR safety
-  if (typeof window === 'undefined' || typeof navigator === 'undefined') {
-    return {
-      latitude: null,
-      longitude: null,
-      accuracy: null,
-      googleMapsLink: null,
-      loading: false,
-      statusMessage: 'الموقع غير متاح في هذا السياق',
-      errorMessage: null,
-    };
-  }
+  // SSR safety flag
+  const isSSR = typeof window === 'undefined' || typeof navigator === 'undefined';
 
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
   const [accuracy, setAccuracy] = useState<number | null>(null);
-
-  // ✅ Make sure skeleton sees these right away
   const [loading, setLoading] = useState<boolean>(true);
   const [statusMessage, setStatusMessage] = useState<string | null>('جارٍ تحديد الموقع...');
-
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
   const retryCountRef = useRef(0);
   const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
   const bestCoordsRef = useRef<Omit<GeolocationResult, 'loading' | 'statusMessage' | 'errorMessage'>>({
@@ -56,7 +42,6 @@ const useGeolocation = (options: GeolocationOptions = {}): GeolocationResult => 
     googleMapsLink: null,
   });
 
-  // Destructure and apply defaults for safe deps
   const {
     enableHighAccuracy = true,
     timeout = 30000,
@@ -66,6 +51,7 @@ const useGeolocation = (options: GeolocationOptions = {}): GeolocationResult => 
   } = options;
 
   useEffect(() => {
+    if (isSSR) return;
     retryCountRef.current = 0;
     setLoading(true);
     setStatusMessage('جارٍ تحديد الموقع...');
@@ -141,7 +127,19 @@ const useGeolocation = (options: GeolocationOptions = {}): GeolocationResult => 
 
     tryGetLocation();
     return () => clearTimer();
-  }, [enableHighAccuracy, timeout, maximumAge, accuracyThreshold, maxRetries]);
+  }, [isSSR, enableHighAccuracy, timeout, maximumAge, accuracyThreshold, maxRetries]);
+
+  if (isSSR) {
+    return {
+      latitude: null,
+      longitude: null,
+      accuracy: null,
+      googleMapsLink: null,
+      loading: false,
+      statusMessage: 'الموقع غير متاح في هذا السياق',
+      errorMessage: null,
+    };
+  }
 
   return {
     latitude,

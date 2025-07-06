@@ -4,7 +4,7 @@ import {
   updateItemQuantityByProduct,
   removeItemByProduct,
   clearCart,
-} from '@/app/(e-comm)/cart/actions/cartServerActions';
+} from '@/app/(e-comm)/(cart-flow)/cart/actions/cartServerActions';
 import { emitCartChanged, onCartChanged } from '@/lib/cart-events';
 
 interface Deltas {

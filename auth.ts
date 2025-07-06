@@ -3,7 +3,7 @@ import { Adapter } from 'next-auth/adapters';
 
 import { PrismaAdapter } from '@auth/prisma-adapter';
 
-import { getAccountById, getUserById } from './app/(e-comm)/auth/action';
+import { getAccountById, getUserById } from './app/(e-comm)/(adminPage)/auth/action';
 import authConfig from './auth.config';
 import db from './lib/prisma';
 import { getNextAuthURL } from './lib/auth-dynamic-config';

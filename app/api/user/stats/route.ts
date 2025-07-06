@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getUserStats } from '@/app/(e-comm)/user/profile/action/getUserStats';
+import { getUserStats } from '@/app/(e-comm)/(adminPage)/user/profile/action/getUserStats';
 
 export async function GET() {
   try {

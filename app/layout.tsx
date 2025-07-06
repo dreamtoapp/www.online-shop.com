@@ -6,8 +6,8 @@ import { cairo } from './font';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 import { Directions } from '../constant/enums';
-import NextAuthSessionProvider from '../provider/session-provider';
-import { ThemeProvider } from '../provider/theme-provider';
+import NextAuthSessionProvider from '../providers/session-provider';
+import { ThemeProvider } from '../providers/theme-provider';
 import WebVitalsCollector from '@/components/seo/WebVitalsCollector';
 import { TooltipProvider } from '@/components/ui/tooltip';
 

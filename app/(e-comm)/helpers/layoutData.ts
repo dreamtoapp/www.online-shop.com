@@ -1,8 +1,8 @@
 import getSession from '@/lib/getSession';
 import db from '@/lib/prisma';
-import { companyInfo } from '../homepage/actions/companyDetail';
-import { userProfile } from '../user/profile/action/action';
-import { getUnreadNotificationCount } from '../user/notifications/actions/getUserNotifications';
+import { companyInfo } from '../actions/companyDetail';
+import { userProfile } from '../(adminPage)/user/profile/action/action';
+import { getUnreadNotificationCount } from '../(adminPage)/user/notifications/actions/getUserNotifications';
 
 // Fetch and prepare all layout data in parallel
 export async function fetchEcommLayoutData() {

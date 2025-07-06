@@ -94,6 +94,7 @@ export async function fetchProductsPage(
         },
         createdAt: true,
         updatedAt: true,
+        previewCount: true,
       },
       orderBy: [
         { outOfStock: 'asc' }, // Show in-stock items first

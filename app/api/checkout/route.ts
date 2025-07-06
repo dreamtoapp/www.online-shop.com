@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createDraftOrder } from "@/app/(e-comm)/checkout/actions/orderActions";
+import { createDraftOrder } from "@/app/(e-comm)/(cart-flow)/checkout/actions/orderActions";
 
 export async function POST(req: NextRequest) {
   try {

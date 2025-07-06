@@ -95,6 +95,7 @@ model Product {
   rating      Float?  // Average rating (1-5 stars)
   reviewCount Int     @default(0) // Number of reviews
   reviews     Review[] // Relation to reviews
+  previewCount Int     @default(0) // Number of times the product page was viewed
 
   // Wishlist relation
   wishlistedBy WishlistItem[] // Users who have wishlisted this product

@@ -7,6 +7,8 @@ import db from '../lib/prisma';
 import { UserRole, OrderStatus, NotificationType } from '@prisma/client';
 import type { User, Supplier, Category, Product, Shift, Address, Order } from '@prisma/client';
 import { Slugify } from '../utils/slug';
+import readline from 'node:readline/promises';
+import { stdin as input, stdout as output } from 'node:process';
 
 // Import fashion data
 import { FASHION_CATEGORIES } from '../utils/fashionData/categories';
@@ -70,11 +72,10 @@ async function seedShifts() {
   return shifts;
 }
 
-async function seedUsers() {
+async function seedUsers(count: number) {
   logStep('Seeding users');
   const users = [];
-  const total = 27;
-  for (let i = 0; i < total; i++) {
+  for (let i = 0; i < count; i++) {
     let user;
     if (i === 0) {
       user = await db.user.create({ data: { name: 'Admin', phone: '0500000000', password: 'admin123', role: UserRole.ADMIN, email: 'admin@example.com' } });
@@ -87,7 +88,7 @@ async function seedUsers() {
     }
     users.push(user);
     console.log(`👤 User created: ${user.name} (${user.role}) [${user.id}]`);
-    logProgress(i, total, 'Users', '👤');
+    logProgress(i, count, 'Users', '👤');
   }
   logDone('Users', users.length);
   return users;
@@ -122,11 +123,20 @@ async function seedAddresses(users: User[]): Promise<Address[]> {
   return addresses;
 }
 
-async function seedFashionSuppliers(): Promise<Supplier[]> {
+async function seedFashionSuppliers(count: number): Promise<Supplier[]> {
   logStep('Seeding fashion suppliers');
   const suppliers = [];
-  for (let i = 0; i < FASHION_SUPPLIERS.length; i++) {
+  const maxSuppliers = FASHION_SUPPLIERS.length;
+  if (count > maxSuppliers) {
+    console.warn(`⚠️  Requested ${count} suppliers, but only ${maxSuppliers} available. Seeding ${maxSuppliers} suppliers.`);
+    count = maxSuppliers;
+  }
+  for (let i = 0; i < count; i++) {
     const supplierData = FASHION_SUPPLIERS[i];
+    if (!supplierData) {
+      console.warn(`⚠️  No supplier data for index ${i}, skipping.`);
+      continue;
+    }
     const supplier = await db.supplier.create({
       data: {
         name: supplierData.name,
@@ -140,17 +150,20 @@ async function seedFashionSuppliers(): Promise<Supplier[]> {
     });
     suppliers.push(supplier);
     console.log(`🏢 Supplier created: ${supplier.name} [${supplier.id}]`);
-    logProgress(i, FASHION_SUPPLIERS.length, 'Suppliers', '🏢');
+    logProgress(i, count, 'Suppliers', '🏢');
   }
   logDone('Suppliers', suppliers.length);
   return suppliers;
 }
 
-async function seedFashionCategories(): Promise<Category[]> {
+async function seedFashionCategories(count: number): Promise<Category[]> {
   logStep('Seeding fashion categories');
+  // Randomly select count categories from FASHION_CATEGORIES
+  const shuffled = [...FASHION_CATEGORIES].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, count);
   const categories = [];
-  for (let i = 0; i < FASHION_CATEGORIES.length; i++) {
-    const categoryData = FASHION_CATEGORIES[i];
+  for (let i = 0; i < selected.length; i++) {
+    const categoryData = selected[i];
     const category = await db.category.create({
       data: {
         name: categoryData.name,
@@ -161,42 +174,40 @@ async function seedFashionCategories(): Promise<Category[]> {
     });
     categories.push(category);
     console.log(`🏷️  Category created: ${category.name} [${category.id}]`);
-    logProgress(i, FASHION_CATEGORIES.length, 'Categories', '🏷️');
+    logProgress(i, selected.length, 'Categories', '🏷️');
   }
   logDone('Categories', categories.length);
   return categories;
 }
 
-async function seedFashionProducts(suppliers: Supplier[], categories: Category[]): Promise<Product[]> {
+async function seedFashionProducts(suppliers: Supplier[], categories: Category[], count: number): Promise<Product[]> {
   logStep('Seeding fashion products');
-  const products = [];
+  const products: Product[] = [];
+  if (count === 0) {
+    console.warn('⚠️  Product count is 0. No products will be seeded.');
+    return products;
+  }
+  if (categories.length === 0) {
+    console.warn('⚠️  No categories provided. No products will be seeded.');
+    return products;
+  }
+  const perCategory = Math.floor(count / categories.length);
   let productIndex = 0;
-  
-  for (const template of FASHION_PRODUCT_TEMPLATES) {
-    const category = categories.find(c => c.slug === template.categorySlug);
-    if (!category) {
-      console.warn(`⚠️  Category not found for template: ${template.categorySlug}`);
-      continue;
-    }
-    
-    const supplier = faker.helpers.arrayElement(suppliers);
-    const productCount = Math.floor(template.productCount * 0.8); // Generate 80% of suggested count
-    
-    for (let i = 0; i < productCount; i++) {
+  for (const category of categories) {
+    // Use the first template as a default for all categories
+    const template = FASHION_PRODUCT_TEMPLATES[0];
+    for (let i = 0; i < perCategory; i++) {
       const name = faker.helpers.arrayElement(template.names);
       const price = faker.number.int({ min: template.priceRange.min, max: template.priceRange.max });
       const compareAtPrice = template.compareAtPriceRange 
         ? faker.number.int({ min: template.compareAtPriceRange.min, max: template.compareAtPriceRange.max })
         : undefined;
-      
-      // Smart stock management - some products out of stock
       const inStock = Math.random() < template.stockChance;
       const stockQuantity = inStock ? faker.number.int({ min: 5, max: 50 }) : 0;
-      
-      // Create unique slug using the existing Slugify helper
       const baseSlug = Slugify(name);
       const uniqueSlug = `${baseSlug}-${Date.now()}-${faker.string.alphanumeric(4).toLowerCase()}`;
-      
+      const previewCount = faker.number.int({ min: 0, max: 100 });
+      const supplier = faker.helpers.arrayElement(suppliers);
       const product = await db.product.create({
         data: {
           name,
@@ -204,7 +215,7 @@ async function seedFashionProducts(suppliers: Supplier[], categories: Category[]
           slug: uniqueSlug,
           price,
           compareAtPrice,
-          costPrice: price * 0.6, // 60% of selling price
+          costPrice: price * 0.6,
           size: faker.helpers.arrayElement(template.sizes),
           details: faker.helpers.arrayElement(template.features),
           imageUrl: faker.helpers.arrayElement(template.imageUrls),
@@ -228,26 +239,32 @@ async function seedFashionProducts(suppliers: Supplier[], categories: Category[]
           manageInventory: true,
           stockQuantity,
           rating: faker.number.float({ min: 3.5, max: 5.0, fractionDigits: 1 }),
-          reviewCount: faker.number.int({ min: 0, max: 25 }),
+          reviewCount: 0, // Will update after reviews are seeded
+          previewCount,
           categoryAssignments: { create: [{ categoryId: category.id }] },
         },
       });
-      
       products.push(product);
       logStockStatus(product.name, inStock);
-      logProgress(productIndex, FASHION_PRODUCT_TEMPLATES.length * 20, 'Products', '📦');
+      logProgress(productIndex, count, 'Products', '📦');
       productIndex++;
     }
   }
-  
   logDone('Products', products.length);
   return products;
 }
 
-async function seedFashionOffers(products: Product[]): Promise<void> {
+async function seedFashionOffers(products: Product[], offerCount: number): Promise<void> {
   logStep('Seeding fashion offers');
-  for (let i = 0; i < FASHION_OFFERS.length; i++) {
-    const offerData = FASHION_OFFERS[i];
+  if (offerCount === 0) {
+    console.warn('⚠️  Offer count is 0. No offers will be seeded.');
+    return;
+  }
+  // Randomly select offerCount offers from FASHION_OFFERS
+  const shuffled = [...FASHION_OFFERS].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, offerCount);
+  for (let i = 0; i < selected.length; i++) {
+    const offerData = selected[i];
     const offer = await db.offer.create({
       data: {
         name: offerData.name,
@@ -262,24 +279,26 @@ async function seedFashionOffers(products: Product[]): Promise<void> {
         subheader: offerData.subheader,
       },
     });
-    
     // Assign products to offer based on category
     const offerProducts = faker.helpers.arrayElements(products, offerData.productCount);
     for (const product of offerProducts) {
       await db.offerProduct.create({ data: { offerId: offer.id, productId: product.id } });
     }
-    
     console.log(`💸 Offer created: ${offer.name} [${offer.id}]`);
-    logProgress(i, FASHION_OFFERS.length, 'Offers', '💸');
+    logProgress(i, selected.length, 'Offers', '💸');
   }
-  logDone('Offers', FASHION_OFFERS.length);
+  logDone('Offers', selected.length);
 }
 
-async function seedOrders(users: User[], addresses: Address[], shifts: Shift[], products: Product[]): Promise<Order[]> {
+async function seedOrders(users: User[], addresses: Address[], shifts: Shift[], products: Product[], count: number): Promise<Order[]> {
   logStep('Seeding orders');
+  if (!users.length || !addresses.length || !shifts.length || !products.length) {
+    console.warn('⚠️  Skipping order seeding: missing users, addresses, shifts, or products.');
+    return [];
+  }
   const orders = [];
   const customers = users.filter(u => u.role === 'CUSTOMER');
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < count; i++) {
     const customer = faker.helpers.arrayElement(customers);
     const customerAddresses = addresses.filter(a => a.userId === customer.id);
     if (!customerAddresses.length) {
@@ -317,18 +336,22 @@ async function seedOrders(users: User[], addresses: Address[], shifts: Shift[], 
     }
     orders.push(order);
     console.log(`📝 Order created: ${order.orderNumber} [${order.id}]`);
-    logProgress(i, 30, 'Orders', '📝');
+    logProgress(i, count, 'Orders', '📝');
   }
   logDone('Orders', orders.length);
   return orders;
 }
 
-async function seedReviews(users: User[], products: Product[]): Promise<void> {
+async function seedReviews(users: User[], products: Product[], reviewCount: number): Promise<void> {
   logStep('Seeding reviews');
-  let reviewCount = 0;
+  if (reviewCount === 0) {
+    console.warn('⚠️  Review count is 0. No reviews will be seeded.');
+    return;
+  }
+  let totalReviews = 0;
   for (let p = 0; p < products.length; p++) {
     const product = products[p];
-    const count = faker.number.int({ min: 0, max: 5 });
+    const count = faker.number.int({ min: 0, max: reviewCount });
     for (let i = 0; i < count; i++) {
       const user = faker.helpers.arrayElement(users);
       const review = await db.review.create({
@@ -341,12 +364,22 @@ async function seedReviews(users: User[], products: Product[]): Promise<void> {
           createdAt: faker.date.past(),
         },
       });
-      reviewCount++;
+      totalReviews++;
       console.log(`⭐ Review created for product ${product.name} by user ${user.name} [${review.id}]`);
-      logProgress(reviewCount - 1, products.length * 5, 'Reviews', '⭐');
+      logProgress(totalReviews - 1, products.length * reviewCount, 'Reviews', '⭐');
     }
   }
-  logDone('Reviews', reviewCount);
+  logDone('Reviews', totalReviews);
+}
+
+async function updateProductReviewCounts() {
+  logStep('Updating product reviewCount fields');
+  const allProducts = await db.product.findMany({ select: { id: true } });
+  for (const product of allProducts) {
+    const count = await db.review.count({ where: { productId: product.id } });
+    await db.product.update({ where: { id: product.id }, data: { reviewCount: count } });
+  }
+  logDone('Updated reviewCount for products', allProducts.length);
 }
 
 async function seedWishlistItems(users: User[], products: Product[]): Promise<void> {
@@ -420,10 +453,34 @@ async function seedCarts(users: User[], products: Product[]): Promise<void> {
   logDone('Cart items', count);
 }
 
+async function getSeedConfig() {
+  const rl = readline.createInterface({ input, output });
+  const categories = parseInt(await rl.question('How many categories to seed? (default 3): '), 10) || 3;
+  const products = parseInt(await rl.question('How many products to seed? (default 20): '), 10) || 20;
+  const offers = parseInt(await rl.question('How many offers to seed? (default 3): '), 10) || 3;
+  const orders = parseInt(await rl.question('How many orders to seed? (default 20): '), 10) || 20;
+  const users = parseInt(await rl.question('How many users to seed? (default 27): '), 10) || 27;
+  const suppliers = parseInt(await rl.question('How many suppliers to seed? (default 10): '), 10) || 10;
+  const reviews = parseInt(await rl.question('How many reviews per product? (default 5): '), 10) || 5;
+  await rl.close();
+  // Print summary before seeding
+  console.log('\n--- SEED CONFIG SUMMARY ---');
+  console.log(`Categories: ${categories}`);
+  console.log(`Products:   ${products}`);
+  console.log(`Offers:     ${offers}`);
+  console.log(`Orders:     ${orders}`);
+  console.log(`Users:      ${users}`);
+  console.log(`Suppliers:  ${suppliers}`);
+  console.log(`Reviews:    ${reviews}`);
+  console.log('---------------------------\n');
+  return { categories, products, offers, orders, users, suppliers, reviews };
+}
+
 // --- Main Seed Function ---
 async function main() {
   const start = Date.now();
   logBanner('🌱 Starting Enhanced Fashion Database Seed');
+  const config = await getSeedConfig();
   try {
     await clearAllData();
   } catch (e) {
@@ -440,7 +497,7 @@ async function main() {
   }
 
   try {
-    users = await seedUsers();
+    users = await seedUsers(config.users);
   } catch (e) {
     console.error('❌ Error seeding users:', e);
     throw e;
@@ -454,44 +511,51 @@ async function main() {
   }
 
   try {
-    suppliers = await seedFashionSuppliers();
+    suppliers = await seedFashionSuppliers(config.suppliers);
   } catch (e) {
     console.error('❌ Error seeding suppliers:', e);
     throw e;
   }
 
   try {
-    categories = await seedFashionCategories();
+    categories = await seedFashionCategories(config.categories);
   } catch (e) {
     console.error('❌ Error seeding categories:', e);
     throw e;
   }
 
   try {
-    products = await seedFashionProducts(suppliers, categories);
+    products = await seedFashionProducts(suppliers, categories, config.products);
   } catch (e) {
     console.error('❌ Error seeding products:', e);
     throw e;
   }
 
   try {
-    await seedFashionOffers(products);
+    await seedFashionOffers(products, config.offers);
   } catch (e) {
     console.error('❌ Error seeding offers:', e);
     throw e;
   }
 
   try {
-    await seedOrders(users, addresses, shifts, products);
+    await seedOrders(users, addresses, shifts, products, config.orders);
   } catch (e) {
     console.error('❌ Error seeding orders:', e);
     throw e;
   }
 
   try {
-    await seedReviews(users, products);
+    await seedReviews(users, products, config.reviews);
   } catch (e) {
     console.error('❌ Error seeding reviews:', e);
+    throw e;
+  }
+
+  try {
+    await updateProductReviewCounts();
+  } catch (e) {
+    console.error('❌ Error updating product reviewCount:', e);
     throw e;
   }
 

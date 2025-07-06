@@ -1,15 +1,18 @@
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-import BackToTopButton from '@/components/ecomm/BackToTopButton';
-
-import ProductsSection from '@/components/product/cards/ProductsSection';
+import BackToTopButton from '@/components/BackToTopButton';
+import HomepageProductSection from './homepage/component/HomepageProductSection';
+import CategoryList from './homepage/component/category/CategoryList';
+import FeaturedPromotions from './homepage/component/offer/FeaturedPromotions';
 
 const CriticalCSS = dynamic(() => import('./homepage/component/CriticalCSS'), { ssr: true });
 const PreloadScript = dynamic(() => import('./homepage/component/PreloadScript'), { ssr: true });
 
-export default async function HomePage(props: { searchParams: Promise<{ slug?: string }> }) {
+export default async function HomePage(props: { searchParams: Promise<{ slug?: string; page?: string }> }) {
   const searchParams = await props.searchParams;
   const slug = searchParams?.slug || '';
+  const page = parseInt(searchParams?.page || '1', 10);
+  const filters = { categorySlug: slug };
 
   return (
     <>
@@ -17,12 +20,12 @@ export default async function HomePage(props: { searchParams: Promise<{ slug?: s
       <div className='container mx-auto flex flex-col gap-8 bg-background text-foreground px-4 sm:px-6 lg:px-8'>
         <PreloadScript />
         {/* <HomepageHeroSection /> */}
-        {/* <section className="space-y-6" aria-label="Product categories">
+        <section className="space-y-6" aria-label="Product categories">
           <CategoryList />
         </section>
         <section className="space-y-6" aria-label="Featured promotions">
           <FeaturedPromotions />
-        </section> */}
+        </section>
         <section className="space-y-6" aria-label="Featured products">
           <Suspense
             fallback={
@@ -46,7 +49,7 @@ export default async function HomePage(props: { searchParams: Promise<{ slug?: s
               </div>
             }
           >
-            <ProductsSection slug={slug} />
+            <HomepageProductSection filters={filters} page={page} />
           </Suspense>
         </section>
         <BackToTopButton />
