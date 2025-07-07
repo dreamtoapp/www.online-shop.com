@@ -6,6 +6,7 @@ import { auth } from '@/auth';
 import db from '@/lib/prisma';
 import { pusherServer } from '@/lib/pusherServer';
 // import { pusherServer } from '@/lib/pusherSetting';
+import { checkNewsletterExists, addNewsletter } from '@/helpers/newsletterHelpers';
 
 export async function subscribeToNewsletter(formData: FormData) {
   const email = formData.get('email') as string;
@@ -17,18 +18,12 @@ export async function subscribeToNewsletter(formData: FormData) {
 
   try {
     // Check if email already exists
-    const existingEmail = await db.newLetter.findUnique({
-      where: { email },
-    });
-
+    const existingEmail = await checkNewsletterExists(email);
     if (existingEmail) {
       return { error: 'هذا البريد الإلكتروني مسجل بالفعل.' };
     }
-
     // Save email to the database
-    await db.newLetter.create({
-      data: { email },
-    });
+    await addNewsletter(email);
 
     const session = await auth();
 

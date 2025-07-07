@@ -4,8 +4,8 @@ import db from "@/lib/prisma";
 import { checkIsLogin } from "@/lib/check-is-login";
 import { getCart } from "@/app/(e-comm)/(cart-flow)/cart/actions/cartServerActions";
 import { redirect } from "next/navigation";
-import { revalidateTag } from "next/cache";
 import { z } from "zod";
+import { pusherServer } from '@/lib/pusherServer';
 
 // Updated validation schema for AddressBook system
 const checkoutSchema = z.object({
@@ -139,6 +139,19 @@ export async function createDraftOrder(formData: FormData) {
         address: true // Include address details
       }
     });
+
+    // Pusher: Notify dashboard of new order
+    try {
+      await pusherServer.trigger('orders', 'new-order', {
+        orderId: order.orderNumber,
+        customer: validatedData.fullName,
+        total,
+        createdAt: order.createdAt,
+      });
+    } catch (err) {
+      console.error('Pusher trigger failed:', err);
+      // Optionally: fallback to DB notification or alert admin
+    }
 
     // Clear cart after successful order creation
     // for (const item of cart.items) {

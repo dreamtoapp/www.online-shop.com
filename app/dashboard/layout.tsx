@@ -12,6 +12,7 @@ import { UserRole } from '@prisma/client';
 import EnhancedBreadcrumb from './management-dashboard/components/EnhancedBreadcrumb';
 import QuickActions from './management-dashboard/components/QuickActions';
 import PusherNotify from '@/app/dashboard/management/PusherNotify';
+import NotificationPortal from '@/components/ui/NotificationPortal';
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   // This layout is used for the dashboard pages
@@ -45,6 +46,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
           <main className='w-full flex-1 bg-background p-6'>{children}</main>
         </div>
       </div>
+      <NotificationPortal />
     </SidebarProvider>
   );
 }

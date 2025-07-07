@@ -54,6 +54,13 @@ export default function PlaceOrderButton({ cart, user, selectedAddress, shiftId,
     const handlePlaceOrder = async () => {
         setLoading(true);
         setError(null);
+
+        // Frontend validation for shiftId
+        if (!shiftId) {
+            setError('يرجى اختيار وقت التوصيل');
+            setLoading(false);
+            return;
+        }
         try {
             const formData = new FormData();
             formData.append('fullName', user.name || '');
@@ -105,7 +112,7 @@ export default function PlaceOrderButton({ cart, user, selectedAddress, shiftId,
             </div>
             {error && (
                 <div className="text-center text-red-600 text-sm mt-2">
-                    {error}
+                    {Array.isArray(error) ? error.join('، ') : error}
                 </div>
             )}
         </div>

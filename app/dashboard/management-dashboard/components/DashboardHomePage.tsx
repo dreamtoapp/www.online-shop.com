@@ -57,9 +57,32 @@ const statusLabels: Record<string, string> = {
   PENDING: 'قيد الانتظار',
 };
 
-export default function DashboardHomePage({ summary }: DashboardHomePageProps) {
+export default function DashboardHomePage({ summary: initialSummary }: DashboardHomePageProps) {
+  const [summary, setSummary] = useState(initialSummary);
   const [pieChartColors, setPieChartColors] = useState<string[]>([]);
   const [barChartFillColor, setBarChartFillColor] = useState<string>('');
+
+  // Fetch summary from API
+  const fetchSummary = async () => {
+    try {
+      const res = await fetch('/api/dashboard-summary');
+      if (!res.ok) throw new Error('Failed to fetch');
+      const data = await res.json();
+      setSummary(data);
+    } catch (e) {
+      // Optionally handle error
+    }
+  };
+
+  useEffect(() => {
+    // Listen for custom event to refresh summary
+    const refreshListener = () => fetchSummary();
+    window.addEventListener('order-data-refresh', refreshListener);
+    return () => window.removeEventListener('order-data-refresh', refreshListener);
+  }, []);
+
+  // Optionally, fetch on mount for freshest data
+  useEffect(() => { fetchSummary(); }, []);
 
   useEffect(() => {
     const resolvedPieColors = [

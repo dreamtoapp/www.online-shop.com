@@ -12,6 +12,7 @@ export const pusherServer = new PusherServer({
   key: NEXT_PUBLIC_PUSHER_KEY,
   secret: PUSHER_SECRET,
   cluster: NEXT_PUBLIC_PUSHER_CLUSTER,
+  useTLS: true,
 });
 
 // import PusherServer from 'pusher';
