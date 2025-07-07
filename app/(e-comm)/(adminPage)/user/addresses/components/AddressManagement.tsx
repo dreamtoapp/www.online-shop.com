@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, MapPin, Edit, Trash2, Star, Home, Building, Loader2 } from 'lucide-react';
@@ -36,6 +36,7 @@ interface AddressManagementProps {
 
 export default function AddressManagement({ userId }: AddressManagementProps) {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const [addresses, setAddresses] = useState<Address[]>([]);
     const [loading, setLoading] = useState(true);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -123,7 +124,12 @@ export default function AddressManagement({ userId }: AddressManagementProps) {
     const handleFormSubmit = () => {
         setIsDialogOpen(false);
         setEditingAddress(null);
-        loadAddresses();
+        const redirectTo = searchParams.get('redirect');
+        if (redirectTo) {
+            router.push(redirectTo);
+        } else {
+            loadAddresses();
+        }
     };
 
     const handleFormCancel = () => {

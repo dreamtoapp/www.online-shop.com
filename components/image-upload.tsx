@@ -19,6 +19,7 @@ import {
 import {
   cn,
 } from '@/lib/utils';
+import { Input } from '@/components/ui/input';
 
 // import fallbackImage from '@/public/fallback/fallback.avif';
 
@@ -475,7 +476,7 @@ const ImageUpload = ({
 
   return (
     <div className={cn('flex w-full flex-col items-start justify-start gap-2', className)}>
-      <input {...getInputProps()} name={name} />
+      <Input {...getInputProps()} name={name} />
 
       <div className='relative w-full'>
         {multiple ? (

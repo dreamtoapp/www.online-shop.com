@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 interface DownloadDataButtonProps {
   targetRef: React.RefObject<HTMLElement>;
@@ -14,15 +15,15 @@ const DownloadDataButton: React.FC<DownloadDataButtonProps> = ({
   className = '',
 }) => {
   return (
-    <button
+    <Button
       type='button'
-      className={`cursor-not-allowed rounded-lg bg-gray-400 px-4 py-2 font-bold text-white opacity-60 shadow ${className}`}
+      className={`cursor-not-allowed bg-gray-400 opacity-60 shadow ${className}`}
       aria-label='تصدير البيانات'
       disabled
       title='ميزة تصدير البيانات غير مفعلة حالياً'
     >
       {buttonText}
-    </button>
+    </Button>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Input } from '@/components/ui/input';
 
 interface InputFieldProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -25,15 +26,10 @@ export default function InputField({
         {required && <span className="ml-0.5 text-red-500">*</span>}
         {labelSuffix && <span className="ml-1">{labelSuffix}</span>} {/* Render suffix */}
       </label>
-      <input
+      <Input
         id={name}
         name={name}
-        className={`
-          mt-1 block w-full border px-3 py-2 rounded-md shadow-sm sm:text-sm
-          focus:border-blue-500 focus:outline-none focus:ring-blue-500
-          ${error ? 'border-red-500' : 'border-gray-300'}
-          ${className || ''}
-        `}
+        className={className}
         {...inputProps}
       />
       {error && <p className='mt-1 text-sm text-red-500'>{error}</p>}
@@ -59,15 +55,10 @@ export function InputWithValidation({
         {required && <span className="ml-0.5 text-red-500">*</span>}
         {labelSuffix && <span className="ml-1">{labelSuffix}</span>} {/* Render suffix here too if applicable */}
       </label>
-      <input
+      <Input
         id={name}
         name={name}
-        className={`
-          mt-1 block w-full border px-3 py-2 rounded-md shadow-sm sm:text-sm
-          focus:border-blue-500 focus:outline-none focus:ring-blue-500
-          ${error ? 'border-red-500' : 'border-gray-300'}
-          ${className || ''}
-        `}
+        className={className}
         onInvalid={(e) => {
           if (error) {
             e.currentTarget.setCustomValidity(error);

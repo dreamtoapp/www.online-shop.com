@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus, X, Loader2 } from "lucide-react";
@@ -14,14 +15,16 @@ interface CartItemControlsProps {
     isServerItem: boolean;
     currentQuantity: number;
     productName: string;
+    onRemoved?: () => void;
 }
 
-export default function CartItemQuantityControls({
+const CartItemQuantityControls = function CartItemQuantityControls({
     itemId,
     productId,
     isServerItem,
     currentQuantity,
-    productName
+    productName,
+    onRemoved
 }: CartItemControlsProps) {
     const [isPending, startTransition] = useTransition();
     const [isRemoving, setIsRemoving] = useState(false);
@@ -57,6 +60,7 @@ export default function CartItemQuantityControls({
             try {
                 if (isServerItem && itemId) {
                     await removeItem(itemId);
+                    if (onRemoved) onRemoved();
                 } else {
                     await removeLocalItem(productId, false);
                 }
@@ -99,7 +103,11 @@ export default function CartItemQuantityControls({
                     size="icon"
                     variant="ghost"
                     className="h-11 w-11 sm:h-9 sm:w-9 hover:bg-feature-commerce/20 rounded-none border-r border-feature-commerce/20 active:scale-95 transition-all text-feature-commerce"
-                    onClick={() => handleQuantityUpdate(optimisticQuantity - 1)}
+                    throttle={1000}
+                    onClick={() => {
+                        console.log('Decrement clicked at', new Date().toISOString());
+                        handleQuantityUpdate(optimisticQuantity - 1);
+                    }}
                     disabled={isPending || optimisticQuantity <= 1}
                     aria-label="تقليل الكمية"
                 >
@@ -125,7 +133,11 @@ export default function CartItemQuantityControls({
                     size="icon"
                     variant="ghost"
                     className="h-11 w-11 sm:h-9 sm:w-9 hover:bg-feature-commerce/20 rounded-none border-l border-feature-commerce/20 active:scale-95 transition-all text-feature-commerce"
-                    onClick={() => handleQuantityUpdate(optimisticQuantity + 1)}
+                    throttle={1000}
+                    onClick={() => {
+                        console.log('Increment clicked at', new Date().toISOString());
+                        handleQuantityUpdate(optimisticQuantity + 1);
+                    }}
                     disabled={isPending || optimisticQuantity >= 99}
                     aria-label="زيادة الكمية"
                 >
@@ -155,4 +167,6 @@ export default function CartItemQuantityControls({
             </Button>
         </div>
     );
-} 
+};
+
+export default React.memo(CartItemQuantityControls); 

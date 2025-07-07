@@ -95,7 +95,7 @@ function CartPageSkeleton() {
 
 export default function CartPageView() {
     const { isAuthenticated, isLoading } = useCheckIsLogin();
-    const { cart } = useCartStore();
+    const { cart, fetchServerCart } = useCartStore();
     const [serverCart, setServerCart] = useState<any>(null);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
@@ -117,6 +117,14 @@ export default function CartPageView() {
     const shipping = subtotal > 200 ? 0 : 25;
     const tax = subtotal * 0.15;
     const total = subtotal + shipping + tax;
+
+    const handleRemoved = async () => {
+        setLoading(true);
+        const data = await getCart();
+        setServerCart(data);
+        await fetchServerCart();
+        setLoading(false);
+    };
 
     if (isLoading || loading) {
         return <CartPageSkeleton />;
@@ -219,11 +227,12 @@ export default function CartPageView() {
                                         {/* Controls */}
                                         <div className="flex justify-end sm:justify-center sm:items-start">
                                             <CartItemQuantityControls
-                                                itemId={isServerItem(item) ? item.id : undefined}
-                                                productId={item.product.id}
+                                                itemId={isServerItem(item) ? item.id : item.product?.id}
+                                                productId={item.product?.id}
                                                 isServerItem={isServerItem(item)}
-                                                currentQuantity={item.quantity || 1}
-                                                productName={item.product?.name || ''}
+                                                currentQuantity={item.quantity}
+                                                productName={item.product?.name}
+                                                onRemoved={isAuthenticated ? handleRemoved : undefined}
                                             />
                                         </div>
                                     </div>

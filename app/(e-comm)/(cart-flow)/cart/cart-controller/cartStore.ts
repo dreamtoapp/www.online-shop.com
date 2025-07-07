@@ -117,7 +117,7 @@ export const useCartStore = create<CartState>()(
         try {
           const { getCart } = await import('@/app/(e-comm)/(cart-flow)/cart/actions/cartServerActions');
           const serverCart = await getCart();
-          if (serverCart?.items) {
+          if (serverCart?.items && serverCart.items.length > 0) {
             const zustandCart: Record<string, CartItem> = {};
             serverCart.items.forEach((item: any) => {
               if (item.product) {
@@ -128,6 +128,8 @@ export const useCartStore = create<CartState>()(
               }
             });
             set({ cart: zustandCart, lastSyncTime: Date.now(), isSyncing: false });
+          } else {
+            set({ cart: {}, lastSyncTime: Date.now(), isSyncing: false });
           }
         } catch {
           set({ isSyncing: false });

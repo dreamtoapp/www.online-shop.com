@@ -1,13 +1,16 @@
 "use client";
-import { useState } from "react";
 import { ShiftSelector } from "./ShiftSelector";
 
-export default function ShiftSelectorWrapper() {
-    const [selectedShiftId, setSelectedShiftId] = useState("");
+interface ShiftSelectorWrapperProps {
+    selectedShiftId: string;
+    onShiftSelect: (id: string) => void;
+}
+
+export default function ShiftSelectorWrapper({ selectedShiftId, onShiftSelect }: ShiftSelectorWrapperProps) {
     return (
         <ShiftSelector
             selectedShiftId={selectedShiftId}
-            onShiftSelect={setSelectedShiftId}
+            onShiftSelect={onShiftSelect}
         />
     );
 } 

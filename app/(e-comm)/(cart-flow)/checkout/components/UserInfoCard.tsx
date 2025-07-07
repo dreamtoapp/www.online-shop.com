@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { User, Phone, AlertTriangle, CheckCircle, Edit2, Shield, Lock } from "lucide-react";
 import Link from "next/link";
 
-interface UserProfile {
+export interface UserProfile {
     id: string;
     name?: string | null;
     phone?: string | null;
@@ -82,11 +82,18 @@ export default function UserInfoCard({ user }: UserInfoCardProps) {
                     <div className="mt-4">
                         {!isValid ? (
                             <div className="space-y-3">
-                                <Badge variant="destructive" className="w-full justify-center">
-                                    <AlertTriangle className="h-4 w-4 mr-2" />
-                                    يجب إكمال البيانات الأساسية
+                                <Badge
+                                    variant="outline"
+                                    className="w-full justify-center border-yellow-400 text-yellow-800 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-200"
+                                >
+                                    <AlertTriangle className="h-4 w-4 mr-2 inline" />
+                                    من الأفضل إكمال بياناتك الشخصية لتحسين تجربة التوصيل.
                                 </Badge>
-                                <Button asChild className="w-full btn-edit">
+                                <Button
+                                    asChild
+                                    variant="outline"
+                                    className="w-full btn-edit border-yellow-400 text-yellow-800 hover:bg-yellow-100 dark:text-yellow-200 dark:border-yellow-600 dark:hover:bg-yellow-900 mt-2"
+                                >
                                     <Link href="/user/profile?redirect=/checkout">
                                         <Edit2 className="h-4 w-4 mr-2" />
                                         إكمال الملف الشخصي

@@ -178,4 +178,10 @@
 
 ---
 
-*This unified roadmap is your single source of truth for all dashboard and platform enhancements. Update as you complete tasks or add new priorities!* 
+*This unified roadmap is your single source of truth for all dashboard and platform enhancements. Update as you complete tasks or add new priorities!*
+
+# TODO
+
+- [ ] Audit all button usages and determine which ones would benefit from throttle (debounce) to prevent rapid double-clicks or accidental multiple submissions. Mark for later implementation.
+- [ ] Optimize CartItemQuantityControls and CartPageView to prevent unnecessary re-renders (memoize handlers/props). This optimization was reverted for now and should be revisited later for better cart performance.
+- [ ] Optimize CartItemQuantityControls and CartPageView to prevent unnecessary re-renders (memoize handlers/props). This optimization was reverted for now and should be revisited later for better cart performance. 

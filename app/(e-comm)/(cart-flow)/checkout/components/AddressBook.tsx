@@ -1,19 +1,30 @@
+'use client';
+
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { MapPin, CheckCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import AddressListDialog from "./client/AddressListDialog";
 import { Address as PrismaAddress } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 export type AddressWithDefault = PrismaAddress & { isDefault?: boolean };
 
 interface AddressBookProps {
     addresses: AddressWithDefault[];
+    selectedAddressId: string;
+    onSelectAddress: (id: string) => void;
 }
 
-export default function AddressBook({ addresses }: AddressBookProps) {
+export default function AddressBook({ addresses, selectedAddressId, onSelectAddress }: AddressBookProps) {
+    const router = useRouter();
+
     // Safe check for undefined addresses
     const safeAddresses = addresses || [];
     const defaultAddress = safeAddresses.find(addr => addr.isDefault) || safeAddresses[0];
+
+    const handleAddAddress = () => {
+        router.push('/user/addresses?redirect=/checkout');
+    };
 
     if (!safeAddresses || safeAddresses.length === 0) {
         return (
@@ -32,7 +43,7 @@ export default function AddressBook({ addresses }: AddressBookProps) {
                         </p>
                         <div className="space-y-2">
                             <button
-                                onClick={() => window.location.href = '/user/addresses?redirect=/checkout'}
+                                onClick={handleAddAddress}
                                 className="w-full bg-feature-suppliers hover:bg-feature-suppliers/90 text-white py-2 px-4 rounded-lg transition-colors"
                             >
                                 إضافة عنوان جديد
@@ -58,50 +69,22 @@ export default function AddressBook({ addresses }: AddressBookProps) {
                 </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-                {/* Default Address Display */}
-                {defaultAddress && (
-                    <div className="p-4 bg-feature-commerce-soft rounded-lg">
-                        <div className="flex items-center justify-between mb-2">
-                            <h4 className="font-semibold text-feature-commerce">
-                                {defaultAddress.label || 'العنوان الافتراضي'}
-                            </h4>
-                            <Badge className="bg-feature-commerce text-white">
-                                افتراضي
-                            </Badge>
+                {/* Address List with selection */}
+                {safeAddresses.map(addr => (
+                    <div key={addr.id} className={`p-4 rounded-lg border flex items-center gap-3 mb-2 ${selectedAddressId === addr.id ? 'border-feature-commerce bg-feature-commerce-soft' : 'border-muted'}`}>
+                        <input
+                            type="radio"
+                            checked={selectedAddressId === addr.id}
+                            onChange={() => onSelectAddress(addr.id)}
+                            className="accent-feature-commerce"
+                        />
+                        <div className="flex-1">
+                            <div className="font-medium">{addr.label || 'عنوان'}</div>
+                            <div className="text-sm text-muted-foreground">{addr.district}, {addr.street}, مبنى {addr.buildingNumber}</div>
                         </div>
-
-                        <div className="space-y-1 text-sm">
-                            <div className="font-medium">{defaultAddress.district}</div>
-                            <div>{defaultAddress.street}, مبنى {defaultAddress.buildingNumber}</div>
-                            {defaultAddress.floor && <div>دور: {defaultAddress.floor}</div>}
-                            {defaultAddress.apartmentNumber && <div>شقة: {defaultAddress.apartmentNumber}</div>}
-                            {defaultAddress.landmark && (
-                                <div className="text-feature-commerce">
-                                    📍 {defaultAddress.landmark}
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Location Status */}
-                        <div className="mt-3">
-                            {defaultAddress.latitude && defaultAddress.longitude ? (
-                                <Badge variant="outline" className="border-green-600 text-green-700">
-                                    ✅ موقع محدد
-                                </Badge>
-                            ) : (
-                                <div className="space-y-2">
-                                    <Badge variant="outline" className="border-red-600 text-red-700 bg-red-50">
-                                        🚫 موقع مطلوب للتوصيل
-                                    </Badge>
-                                    <p className="text-xs text-red-600">
-                                        يجب تحديد موقع دقيق لهذا العنوان قبل المتابعة في عملية الشراء
-                                    </p>
-                                </div>
-                            )}
-                        </div>
+                        {addr.isDefault && <Badge className="bg-feature-commerce text-white">افتراضي</Badge>}
                     </div>
-                )}
-
+                ))}
                 {/* Address Management */}
                 <AddressListDialog addresses={safeAddresses} />
             </CardContent>

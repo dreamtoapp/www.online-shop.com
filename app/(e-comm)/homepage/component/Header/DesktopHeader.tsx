@@ -26,7 +26,7 @@ export default function Header({ user, logo, logoAlt, userId, unreadCount = 0, d
   const totalCount = (unreadCount ?? 0) + (defaultAlerts?.length ?? 0);
 
   return (
-    <header data-dev-header="desktop" className='sticky top-0 z-50 bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/90 border-b border-border/50 shadow-lg shadow-black/5 dark:shadow-black/20 relative'>
+    <header data-dev-header="desktop" className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-lg border-b border-border/60 shadow-xl shadow-black/10 dark:shadow-black/30 transition-all duration-300 supports-[backdrop-filter]:bg-background/80 relative">
       {process.env.NODE_ENV !== 'production' && (
         <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-orange-600 text-orange-50 text-[10px] px-2 py-0.5 rounded-t-md shadow-md select-none">
           DESKTOP HEADER
