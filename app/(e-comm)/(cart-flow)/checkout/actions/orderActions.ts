@@ -6,6 +6,7 @@ import { getCart } from "@/app/(e-comm)/(cart-flow)/cart/actions/cartServerActio
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { pusherServer } from '@/lib/pusherServer';
+import { OrderNumberGenerator } from "@/helpers/orderNumberGenerator";
 
 // Updated validation schema for AddressBook system
 const checkoutSchema = z.object({
@@ -109,10 +110,13 @@ export async function createDraftOrder(formData: FormData) {
       throw new Error("وقت التوصيل المحدد غير متاح");
     }
 
+    // Generate unique order number
+    const orderNumber = await OrderNumberGenerator.generateOrderNumber();
+
     // Create order with new AddressBook system
     const order = await db.order.create({
       data: {
-        orderNumber: `ORD-${Date.now()}`,
+        orderNumber,
         customerId: user.id,
         addressId: validatedData.addressId, // Use addressId from AddressBook
         status: "PENDING",
