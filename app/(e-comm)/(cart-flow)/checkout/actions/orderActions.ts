@@ -141,10 +141,10 @@ export async function createDraftOrder(formData: FormData) {
     });
 
     // Clear cart after successful order creation
-    for (const item of cart.items) {
-      await db.cartItem.delete({ where: { id: item.id } });
-    }
-    revalidateTag("cart");
+    // for (const item of cart.items) {
+    //   await db.cartItem.delete({ where: { id: item.id } });
+    // }
+    // revalidateTag("cart");
 
     // Create notification for admin
     await db.userNotification.create({
