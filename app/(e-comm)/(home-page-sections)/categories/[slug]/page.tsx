@@ -2,16 +2,15 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getCategoryBySlug, getProductsByCategorySlug } from '../action/actions';
+import { getCategoryPageData } from '../action/actions';
 import { Separator } from '@/components/ui/separator';
 
-import { getCategories } from '../../../homepage/actions/getCategories';
 import { PageProps } from '@/types/commonTypes';
-import { ProductsSection } from '@/app/(e-comm)/(home-page-sections)/product/cards';
+import { ProductCardAdapter } from '@/app/(e-comm)/(home-page-sections)/product/cards';
 
 export async function generateMetadata({ params }: PageProps<{ slug: string }>): Promise<Metadata> {
   const { slug } = await params;
-  const categoryResult = await getCategoryBySlug(slug);
+  const categoryResult = await getCategoryPageData(slug, 1, 1); // Assuming 1 page, 1 product for metadata
 
   if (!categoryResult.success || !categoryResult.category) {
     return {
@@ -37,29 +36,25 @@ export default async function CategoryPage({ params, searchParams }: PageProps<{
   const resolvedSearchParams = await searchParams;
   const { slug } = resolvedParams;
   const pageParam = resolvedSearchParams?.page;
-
+  const decodedSlug = decodeURIComponent(slug);
   const currentPage = pageParam ? parseInt(pageParam, 10) : 1;
   const pageSize = PRODUCTS_PER_PAGE;
 
-  // Fetch data in parallel for better performance
-  const [categoryDataResult, allCategories] = await Promise.all([
-    getCategoryBySlug(slug),
-    getCategories() // Get all categories for related categories section
-  ]);
+  // Use the new aggregated action
+  const data = await getCategoryPageData(decodedSlug, currentPage, pageSize);
 
-  if (!categoryDataResult.success || !categoryDataResult.category) {
+  if (!data.success || !data.category) {
     notFound();
   }
-  const category = categoryDataResult.category;
-
-  // Fetch products for the current category
-  const productsResult = await getProductsByCategorySlug(slug, currentPage, pageSize);
-
-  // Handle products result with enhanced type safety
-  if (!productsResult.success) {
-    console.error('Error fetching products:', productsResult.error);
-    return notFound();
-  }
+  const category = data.category;
+  const productsResult = {
+    success: true,
+    products: data.products,
+    totalPages: data.totalPages,
+    currentPage: data.currentPage,
+    totalProducts: data.totalProducts,
+  };
+  const allCategories = data.allCategories;
 
   // Get related categories (excluding current one)
   const relatedCategories = allCategories
@@ -117,7 +112,13 @@ export default async function CategoryPage({ params, searchParams }: PageProps<{
 
       {/* Products grid */}
       <h2 className="mb-6 text-2xl font-bold">منتجات {category.name}</h2>
-      <ProductsSection slug={slug} />
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {data.products.map((product, idx) => (
+          <div key={product.id} className="product-card">
+            <ProductCardAdapter product={product} className="h-full w-full" index={idx} />
+          </div>
+        ))}
+      </div>
 
       {/* Pagination */}
       {/* Pagination logic can be handled inside ProductsSection if needed */}

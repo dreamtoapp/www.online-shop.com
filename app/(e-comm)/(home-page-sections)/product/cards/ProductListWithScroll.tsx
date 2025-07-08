@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState, useRef, useMemo } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Product } from '@/types/databaseTypes';
 import { fetchProductsPage } from '@/app/(e-comm)/homepage/actions/fetchProductsPage';
@@ -13,12 +13,14 @@ interface ProductListWithScrollProps {
     firstPageProducts: Product[];
     categorySlug: string;
     pageSize?: number;
+    totalProducts: number;
 }
 
 export default function ProductListWithScroll({
     firstPageProducts,
     categorySlug,
     pageSize = 8,
+    totalProducts,
 }: ProductListWithScrollProps) {
     const [products, setProducts] = useState<Product[]>(firstPageProducts);
     const [page, setPage] = useState(2);
@@ -44,9 +46,6 @@ export default function ProductListWithScroll({
         initialInView: false,
     });
 
-    // Memoized product IDs for efficient duplicate checking
-    const productIds = useMemo(() => new Set(products.map(p => p.id)), [products]);
-
     // --- Load More pattern state ---
     const [autoLoadCount, setAutoLoadCount] = useState(0); // Track auto-loads
     const AUTO_LOAD_LIMIT = 3; // Max auto-loads before showing button
@@ -71,12 +70,15 @@ export default function ProductListWithScroll({
             const result = await fetchProductsPage(categorySlug, page, pageSize);
             if (result.products && result.products.length > 0) {
                 setProducts((prev) => {
-                    const uniqueNewProducts = result.products.filter((p) => !productIds.has(p.id));
-                    if (uniqueNewProducts.length === 0) {
+                    // Always deduplicate against latest state
+                    const prevIds = new Set(prev.map(p => p.id));
+                    const uniqueNewProducts = result.products.filter((p) => !prevIds.has(p.id));
+                    const next = [...prev, ...uniqueNewProducts];
+                    // Stop fetching if we've loaded all products
+                    if (next.length >= totalProducts) {
                         setHasMore(false);
-                        return prev;
                     }
-                    return [...prev, ...uniqueNewProducts];
+                    return next;
                 });
                 setPage((prev) => prev + 1);
                 setRetryCount(0); // Reset retry count on success
@@ -85,7 +87,8 @@ export default function ProductListWithScroll({
             } else {
                 setHasMore(false);
             }
-            setHasMore(result.hasMore);
+            // Also check after fetch if we've loaded all products
+            setHasMore(products.length + (result.products?.length || 0) < totalProducts);
         } catch (err: any) {
             console.error('Failed to fetch products:', err);
             if (err.name === 'AbortError') return;
@@ -103,7 +106,7 @@ export default function ProductListWithScroll({
             setLoading(false);
             abortControllerRef.current = null;
         }
-    }, [loading, categorySlug, page, pageSize, productIds, retryCount]);
+    }, [loading, categorySlug, page, pageSize, retryCount, totalProducts, products.length]);
 
     // Manual retry function
     const handleRetry = useCallback(() => {

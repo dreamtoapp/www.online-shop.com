@@ -130,7 +130,6 @@ export default function RegisterForm({ redirect = '/' }: RegisterFormProps) {
         password: result.password,
         redirect: false,
       });
-      console.log('signInResult', signInResult);
       if (signInResult && signInResult.ok) {
         // Optional: small delay to allow session propagation
         await new Promise(res => setTimeout(res, 400));

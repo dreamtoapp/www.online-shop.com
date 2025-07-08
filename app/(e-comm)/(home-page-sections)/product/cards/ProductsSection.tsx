@@ -8,5 +8,5 @@ interface ProductsSectionProps {
 export default async function ProductsSection({ slug }: ProductsSectionProps) {
     // Fetch the first page of products for the given category slug
     const { products } = await fetchProductsPage(slug, 1);
-    return <ProductListWithScroll firstPageProducts={products} categorySlug={slug} />;
+    return <ProductListWithScroll firstPageProducts={products} categorySlug={slug} totalProducts={products.length} />;
 } 

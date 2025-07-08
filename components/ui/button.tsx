@@ -58,7 +58,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         onClick(...args);
       }, throttle, { immediate: true })
     }, [onClick, throttle])
-    console.log('Button rendered', { throttle, hasOnClick: !!onClick });
+    // console.log('Button rendered', { throttle, hasOnClick: !!onClick });
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}

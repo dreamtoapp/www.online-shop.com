@@ -7,6 +7,7 @@ import { getCategories } from '../../actions/getCategories';
 
 export default async function CategoryList() {
     const categories = await getCategories();
+    console.log('khalid categories from category list', categories);
 
     return (
         <Card className="mx-auto w-full bg-transparent shadow-sm">

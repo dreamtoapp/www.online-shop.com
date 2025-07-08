@@ -4,26 +4,25 @@ import { notFound } from 'next/navigation';
 import { ShoppingCart } from 'lucide-react';
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import BackButton from '@/components/BackButton';
 import { ProductCardAdapter } from '@/app/(e-comm)/(home-page-sections)/product/cards';
 
-import db from '@/lib/prisma';
+import { getOfferWithProducts } from '../actions/getOfferWithProducts';
 import { PageProps } from '@/types/commonTypes';
 
 export async function generateMetadata({ params }: PageProps<{ slug: string }>): Promise<Metadata> {
     const resolvedParams = await params;
     const { slug } = resolvedParams;
-    const offer = await db.offer.findUnique({ where: { slug } });
-    if (!offer) {
+    const offer = await getOfferWithProducts(slug);
+    if (!offer || !offer.offer) {
         return { title: 'العرض غير موجود' };
     }
     return {
-        title: offer.name,
-        description: offer.description || `تصفح المنتجات ضمن عرض ${offer.name}`,
+        title: offer.offer.name,
+        description: offer.offer.description || `تصفح المنتجات ضمن عرض ${offer.offer.name}`,
         openGraph: {
-            title: offer.name,
-            description: offer.description || `تصفح المنتجات ضمن عرض ${offer.name}`,
-            images: offer.bannerImage ? [{ url: offer.bannerImage, alt: offer.name }] : [],
+            title: offer.offer.name,
+            description: offer.offer.description || `تصفح المنتجات ضمن عرض ${offer.offer.name}`,
+            images: offer.offer.bannerImage ? [{ url: offer.offer.bannerImage, alt: offer.offer.name }] : [],
         },
     };
 }
@@ -31,21 +30,12 @@ export async function generateMetadata({ params }: PageProps<{ slug: string }>):
 export default async function OfferPage({ params }: PageProps<{ slug: string }>) {
     const resolvedParams = await params;
     const { slug } = resolvedParams;
-    const offer = await db.offer.findUnique({
-        where: { slug },
-        include: {
-            productAssignments: {
-                include: { product: true },
-            },
-        },
-    });
-    if (!offer) notFound();
-
-    const products = offer.productAssignments.map((op: any) => op.product);
+    const data = await getOfferWithProducts(slug);
+    if (!data || !data.offer) notFound();
+    const { offer, products } = data;
 
     return (
         <div className="container mx-auto bg-background px-4 py-8 text-foreground">
-            <BackButton variant="default" />
             <Card className="shadow-lg border-l-4 border-feature-commerce card-hover-effect card-border-glow mt-6">
                 <CardHeader className="pb-4">
                     <CardTitle className="flex items-center gap-2 text-xl">
@@ -92,13 +82,15 @@ export default async function OfferPage({ params }: PageProps<{ slug: string }>)
             <h2 className="mt-12 mb-2 text-2xl font-bold">المنتجات ضمن العرض</h2>
             <div className="mb-6 text-muted-foreground text-sm font-medium">عدد المنتجات: {products.length}</div>
             {products.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {products.map((product: any) => (
-                        <ProductCardAdapter
-                            key={product.id}
-                            product={product}
-                            discountPercentage={offer.hasDiscount && offer.discountPercentage !== null ? offer.discountPercentage : undefined}
-                        />
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {products.map((product: any, idx: number) => (
+                        <div key={product.id} className="product-card">
+                            <ProductCardAdapter
+                                product={product}
+                                discountPercentage={offer.hasDiscount && offer.discountPercentage !== null ? offer.discountPercentage : undefined}
+                                index={idx}
+                            />
+                        </div>
                     ))}
                 </div>
             ) : (
